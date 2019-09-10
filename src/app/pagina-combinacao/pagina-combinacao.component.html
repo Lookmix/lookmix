@@ -1,0 +1,64 @@
+<h1>Roupas de cima</h1>
+<button type="button" mat-button (click)="campoImagemRoupaCima.click()">
+  Adicionar roupas de cima 
+</button>
+
+<input #campoImagemRoupaCima (change)="readURL($event, 'roupaCima');" type="file" 
+    style="display: none">
+
+<img *ngFor="let roupaCima of roupasCima" [src]="roupaCima.file"
+    style="max-width: 100px; min-width: 100px;">
+
+<br/>
+<br/>
+
+
+
+<h1>Roupas de baixo</h1>
+<button type="button" mat-button (click)="campoImagemRoupaBaixo.click()">
+  Adicionar roupas de baixo 
+</button>
+
+<input #campoImagemRoupaBaixo (change)="readURL($event, 'roupaBaixo');" type="file" 
+    style="display: none">
+
+<img *ngFor="let roupaBaixo of roupasBaixo" [src]="roupaBaixo.file" 
+    style="max-width: 100px; min-width: 100px;">
+
+<br/>
+<br/>
+
+
+
+<h1>Calcados</h1>
+<button type="button" mat-button (click)="campoImagemCalcado.click()">
+  Adicionar calçados 
+</button>
+
+<input #campoImagemCalcado (change)="readURL($event, 'calcado');" type="file" style="display: none">
+
+<img *ngFor="let calcado of calcados" [src]="calcado.file" 
+    style="max-width: 100px; min-width: 100px;">
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h1>Combinações</h1>
+<button type="button" mat-raised-button (click)="gerarCombinacoes()">
+  Gerar combinações 
+</button>
+
+<div style="display: flex; flex-wrap: wrap">
+  <ng-container *ngFor="let combinacao of combinacoes">
+    <div style="display: flex; flex-direction: column" style="margin: 10px">
+      <img [src]="combinacao.roupaCima.file" style="max-width: 100px; min-width: 100px;">
+      <img [src]="combinacao.roupaBaixo.file" style="max-width: 100px; min-width: 100px;">
+      <img [src]="combinacao.calcado.file" style="max-width: 100px; min-width: 100px;">
+    </div>
+  </ng-container>
+</div>
+
+<br/>
+<br/>
