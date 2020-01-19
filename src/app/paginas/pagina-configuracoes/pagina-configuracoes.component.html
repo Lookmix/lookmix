@@ -1,0 +1,14 @@
+<div style="margin: 10px 10px">
+  <mat-card>
+    <mat-card-title>Estilo do guarda-roupa</mat-card-title>
+    <mat-radio-group id="radio-group" [value]="shareDataService.estiloRoupa" 
+        (change)="shareDataService.estiloRoupa = estiloRoupa" [(ngModel)]="estiloRoupa">
+      <mat-radio-button value="f" class="radio-button">
+        Feminino
+      </mat-radio-button>
+      <mat-radio-button value="m" class="radio-button">
+        Masculino
+      </mat-radio-button>
+    </mat-radio-group>
+  </mat-card>
+</div>

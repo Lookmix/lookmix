@@ -1,0 +1,68 @@
+.container-cards {
+  display: flex; 
+  flex-wrap: wrap;
+}
+
+.div-imagem {
+  border-radius: 3px;
+  display: flex;
+  justify-content: flex-end;
+  border: 1px solid white;
+  max-width: 130px;
+  min-width: 130px; 
+  height: 231px; 
+  margin: 10px;
+}
+
+.div-icone-remocao {
+  background: #ffffff;
+  position: absolute;
+  z-index:3;
+  width: 24px; 
+  height: 24px; 
+  cursor: pointer;
+  border-radius: 50px; 
+  margin: 5px 5px 5px -5px;
+  float: right; 
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.imagem {
+  border-radius: 3px; 
+  max-width: 130px; 
+  min-width: 130px; 
+  z-index: 1;
+  height: 231px;
+}
+
+.backdrop {
+  background: #00000091; height: 100%; border-radius: 3px; 
+  height: 231px;
+  width: 130px;
+  position: absolute;
+  z-index: 2;
+}
+
+.div-checkbox-imagem {
+  display: flex; 
+  flex-direction:column; 
+  z-index: 3; 
+  margin: 30px 15px 15px 15px;
+}
+
+.div-botao-add {
+  background: transparent; 
+  border-radius: 3px; 
+  border: 1px solid lightgray;
+  max-width: 130px; 
+  min-width: 130px; 
+  height: 231px; 
+  margin: 10px; 
+  display: flex;
+  justify-content: center;
+}

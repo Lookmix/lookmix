@@ -1,0 +1,75 @@
+<mat-tab-group id="tabGroupGuardaRoupa" backgroundColor="primary" color="accent">
+  <mat-tab label="CASUAL">
+    <div style="margin: 10px 10px">
+      <mat-card>
+        <h1 *ngIf="shareDataService.estiloRoupa === 'm'">Manga-curta (Camisetas / Polos / Regatas)</h1> <!--Roupas de cima-->
+        <h1 *ngIf="shareDataService.estiloRoupa === 'f'">Manga-curta (Blusas)</h1>
+
+        <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'mangaCurta')"></app-card-roupa>
+    
+        <br/>
+        <br/>
+        
+        <h1>Manga-longa (Blusas / Casacos / Jaquetas / Moletons)</h1>
+
+        <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'mangaLonga')"></app-card-roupa>
+
+        <br/>
+        <br/>
+
+        <ng-container *ngIf="shareDataService.estiloRoupa === 'f'">
+          <h1>Peças únicas (Vestidos / Macacões / Sobretudos)</h1>
+
+          <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'pecasUnicas')"></app-card-roupa>
+
+          <br/>
+          <br/>
+        </ng-container>
+
+        <h1 *ngIf="shareDataService.estiloRoupa === 'm'">Calças / Bermudas</h1><!--Pernas-->
+        <h1 *ngIf="shareDataService.estiloRoupa === 'f'">Calças / Shorts / Saias</h1>
+    
+        <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'roupasBaixo')"></app-card-roupa>
+        
+        <br/>
+        <br/>
+        
+        <h1>Calçados</h1>
+    
+        <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'calcados')"></app-card-roupa>
+        
+        <br/>
+        <br/>
+
+        <h1>Acessórios</h1>
+        <p>bolsas, bonés, óculos de sol, pulseiras, colares, relógios, cachecóis, luvas</p>
+
+        <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'acessorios')"></app-card-roupa>
+        * dividir em categorias, ex: acessório cabeça, braço, etc
+        <br/>
+        <br/>
+        
+        <!-- <h1>Combinações</h1>
+        <button type="button" mat-flat-button (click)="gerarCombinacoes()" color="accent">
+          Gerar combinações 
+        </button>
+        
+        <div style="display: flex; flex-wrap: wrap">
+          <ng-container *ngFor="let combinacao of combinacoes">
+            <div style="display: flex; flex-direction: row" style="margin: 10px">
+              <img [src]="combinacao.roupaCima.file" style="max-width: 100px; min-width: 100px;">
+              <img [src]="combinacao.roupaBaixo.file" style="max-width: 100px; min-width: 100px;">
+              <img [src]="combinacao.calcado.file" style="max-width: 100px; min-width: 100px;">
+            </div>
+          </ng-container>
+        </div> -->
+        
+        <br/>
+        <br/>
+      </mat-card>
+    </div>
+  </mat-tab>
+  <mat-tab label="SOCIAL">
+
+  </mat-tab>
+</mat-tab-group>

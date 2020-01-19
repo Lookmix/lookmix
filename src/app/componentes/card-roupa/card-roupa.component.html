@@ -1,0 +1,39 @@
+<div class="container-cards">
+  <input #campoImagem (change)="readURL($event); campoImagem.value=''" type="file" 
+      style="display: none">
+
+  <div *ngFor="let roupa of roupas; let i = index" class="div-imagem">
+
+    <!--ÍCONE DE REMOÇÃO-->
+    <!--background: #212121;-->
+    <div class="div-icone-remocao"
+        (click)="excluirImagem(i)">
+    
+      <mat-icon style="color: #212121;">close</mat-icon>
+    </div>
+    
+    <!--IMAGEM-->
+    <div [ngStyle]="{'background': url(roupa.file)}" class="imagem"> <!--'filter': 'blur(2px)',-->
+    </div>
+
+    <!--BACKDROP-->
+    <div class="backdrop">
+      <div class="div-checkbox-imagem">
+        <span style="margin: 20px 0 3px 0;">Clima</span>
+        <mat-checkbox>Quente</mat-checkbox>
+        <mat-checkbox>Frio</mat-checkbox>
+      </div>
+    </div>
+  </div>
+
+  <!--BOTÃO ADICIONAR-->
+  <div class="div-botao-add">
+    <div style="display: flex; justify-content: center; flex-direction: column;">
+      <button type="button" style="margin: 0px auto;" mat-fab (click)="campoImagem.click()">
+        <mat-icon style="margin-bottom: 3px;">add</mat-icon> 
+      </button>
+
+      <span style="margin-top: 10px">Adicionar</span>
+    </div>
+  </div>
+</div>

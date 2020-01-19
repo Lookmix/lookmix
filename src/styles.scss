@@ -1,4 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$default-app-primary: mat-palette($mat-indigo);
+$default-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$default-app-warn:    mat-palette($mat-red);
+
+$default-app-theme: mat-dark-theme($default-app-primary, $default-app-accent, $default-app-warn);
+
+@include angular-material-theme($default-app-theme);
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+#tabGroupGuardaRoupa > .mat-tab-header {
+  position: fixed !important;
+  width: 100% !important;
+  z-index: 2 !important;
+  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 
+    0px 3px 4px 0px rgba(0, 0, 0, 0.14), 
+    0px 4px 8px 0px rgba(0, 0, 0, 0.12);
+}
+
+#tabGroupGuardaRoupa > div.mat-tab-body-wrapper {
+  margin-top: 48px;
+}
