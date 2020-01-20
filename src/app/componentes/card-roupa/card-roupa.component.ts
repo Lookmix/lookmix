@@ -10,6 +10,7 @@ import { UploadService } from 'src/app/services/upload.service';
 export class CardRoupaComponent implements OnInit 
 {
   roupas: Imagem[] = [];
+  filesFormData: Set<File>;
   @Output() atualizouGuardaRoupa: EventEmitter<Imagem[]> = new EventEmitter();
 
   constructor(private uploadService: UploadService) { }
@@ -19,29 +20,34 @@ export class CardRoupaComponent implements OnInit
 
   readURL(event) 
   {
-    const inputFile = event.target.files[0];
+    const inputFiles = event.target.files;
 
-    if (event.target.files && inputFile) 
+    if (event.target.files && inputFiles) 
     {
-      const id = uuid();
+      this.filesFormData = new Set<File>();
 
-      const file = new File([inputFile.slice(0, inputFile.size, inputFile.type)], id, {type: inputFile.type});
-
-      const reader = new FileReader();
-      
-      const imagem: Imagem = {id: id};
-
-      reader.onload = (e => 
+      for (let inputFile of inputFiles)
       {
-        imagem.file = reader.result;
-
-        this.roupas.push(imagem);
-
-        this.atualizouGuardaRoupa.emit(this.roupas);
-      });
-      reader.readAsDataURL(file);
-
-      this.uploadService.uploadFile(inputFile).subscribe(response => {
+        const id = uuid();
+  
+        const file = new File([inputFile.slice(0, inputFile.size, inputFile.type)], id, {type: inputFile.type});
+  
+        const reader = new FileReader();
+        
+        const imagem: Imagem = {id: id};
+  
+        reader.onload = (e => 
+        {
+          imagem.file = reader.result;
+  
+          this.roupas.push(imagem);
+  
+          this.atualizouGuardaRoupa.emit(this.roupas);
+        });
+        reader.readAsDataURL(file);
+        this.filesFormData.add(inputFile);
+      }
+      this.uploadService.uploadFile(this.filesFormData).subscribe(response => {
         console.log(response);
       })
     }

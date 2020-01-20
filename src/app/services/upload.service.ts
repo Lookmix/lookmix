@@ -9,11 +9,17 @@ export class UploadService {
 
   constructor(private httpCliet: HttpClient) { }
 
-  uploadFile(file: File)
+  uploadFile(files: Set<File>)
   {
     const formData = new FormData();
 
-    formData.set('file', file, file.name)
+    let i = 0;
+    for (let file of files)
+    {
+      formData.append('file'+i, file, file.name);
+      i++;
+    }
+    // formData.set('files', files, file.name)
 
     return this.httpCliet.post(environment.API_URL + 'upload', formData);
   }

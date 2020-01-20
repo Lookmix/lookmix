@@ -1,6 +1,11 @@
 @import '~@angular/material/theming';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Rubik&display=swap');
 
-@include mat-core();
+$custom-typography: mat-typography-config(
+  $font-family: 'Rubik, sans-serif',
+);
+
+@include mat-core($custom-typography);
 
 $default-app-primary: mat-palette($mat-indigo);
 $default-app-accent:  mat-palette($mat-pink, A200, A100, A400);
@@ -9,11 +14,15 @@ $default-app-warn:    mat-palette($mat-red);
 $default-app-theme: mat-dark-theme($default-app-primary, $default-app-accent, $default-app-warn);
 
 @include angular-material-theme($default-app-theme);
+/**
+font-family: 'Rubik', sans-serif;
+font-family: 'Roboto', sans-serif;
+font-family: 'Open Sans', sans-serif;
+*/ 
 
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+html, body { height: 100%; font-family: 'Rubik', sans-serif !important; }
+body { margin: 0; }
+body, h1, h2, h3, h4, h5, span, p, a, button { font-family: 'Rubik', sans-serif !important; }
 
 #tabGroupGuardaRoupa > .mat-tab-header {
   position: fixed !important;

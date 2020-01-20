@@ -18,7 +18,12 @@ export class PaginaGuardaRoupaComponent implements OnInit {
     pecasUnicas: [],
     roupasBaixo: [],
     calcados: [],
-    acessorios: []
+    acessorios: {
+      cabeca: [],
+      pescoco: [],
+      bracos: [],
+      pernas: []
+    }
   }
   
   combinacoes = [];
@@ -58,9 +63,16 @@ export class PaginaGuardaRoupaComponent implements OnInit {
     });
   }
 
-  atualizarGuardaRoupa(roupas, nomeArray)
+  atualizarGuardaRoupa(pecas, categoriaPeca, tipoAcessorio?)
   {
-    this.guardaRoupa[nomeArray] = roupas;
+    if (tipoAcessorio)
+    {
+      this.guardaRoupa[categoriaPeca][tipoAcessorio] = pecas;      
+    }
+    else
+    {
+      this.guardaRoupa[categoriaPeca] = pecas;
+    }
   }
 }
 
