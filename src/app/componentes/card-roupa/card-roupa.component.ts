@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { v4 as uuid } from 'uuid';
 import { UploadService } from 'src/app/services/upload.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-card-roupa',
@@ -13,13 +15,20 @@ export class CardRoupaComponent implements OnInit
   filesFormData: Set<File>;
   @Output() atualizouGuardaRoupa: EventEmitter<Imagem[]> = new EventEmitter();
 
-  constructor(private uploadService: UploadService) { }
+  constructor(private uploadService: UploadService, 
+      private dialog: MatDialog) { }
 
   ngOnInit() 
   { }
 
   readURL(event) 
   {
+    const dialogRef = this.dialog.open(SpinnerComponent, {
+      disableClose: true,
+      data: {
+        titulo: "Fazendo upload..."
+      }
+    });
     const inputFiles = event.target.files;
 
     if (event.target.files && inputFiles) 
@@ -47,9 +56,18 @@ export class CardRoupaComponent implements OnInit
         reader.readAsDataURL(file);
         this.filesFormData.add(inputFile);
       }
-      this.uploadService.uploadFile(this.filesFormData).subscribe(response => {
-        console.log(response);
-      })
+      this.uploadService.uploadFile(this.filesFormData).subscribe(
+          dados => {
+            if (dados) 
+            {
+              dialogRef.close();
+            }
+            console.log(dados);
+          },
+          erro => {
+            console.log(erro)
+            dialogRef.close();
+          })
     }
   }
 
