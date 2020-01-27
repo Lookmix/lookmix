@@ -1,6 +1,6 @@
 <div class="container-cards">
-  <input #campoImagem (change)="readURL($event); campoImagem.value=''" type="file" 
-      style="display: none" multiple>
+  <input #campoImagem (change)="readFile($event); campoImagem.value=''" type="file" 
+      style="display: none" multiple accept="image/*">
 
   <div *ngFor="let roupa of roupas; let i = index" class="div-imagem">
 
