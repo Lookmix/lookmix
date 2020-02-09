@@ -17,6 +17,6 @@ export class PaginaConfiguracoesComponent implements OnInit
     this.shareDataService.tituloBarraSuperior = "Configurações";
     this.estiloRoupa = this.shareDataService.estiloRoupa;
     // this.estiloRoupa = this.shareDataService.estiloRoupa;
-    console.log(this.shareDataService.estiloRoupa);
+    // console.log(this.shareDataService.estiloRoupa);
   }
 }

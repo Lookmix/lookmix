@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { v4 as uuid } from 'uuid';
 import { UploadService } from 'src/app/services/upload.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -13,11 +13,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class CardRoupaComponent implements OnInit 
 {
   roupas: Imagem[] = [];
-  filesFormData: Set<File>;
+  dialogRef: MatDialogRef<SpinnerComponent>;
+  // filesFormData: Set<File>;
   @Output() atualizouGuardaRoupa: EventEmitter<Imagem[]> = new EventEmitter();
 
   constructor(private uploadService: UploadService, 
-      private dialog: MatDialog, private snackBar: MatSnackBar) { }
+      private snackBar: MatSnackBar, private dialog: MatDialog,) { }
 
   ngOnInit() 
   { }
@@ -30,15 +31,16 @@ export class CardRoupaComponent implements OnInit
     {
       if (this.isTipoArquivoValido(inputFiles))
       {
-        const dialogRef = this.dialog.open(SpinnerComponent, {
-          disableClose: true,
-          data: {
-            titulo: "Fazendo upload..."
-          }
-        });
-        this.prepararImagensRequest(inputFiles);
-  
-        this.uploadFiles(dialogRef);
+        if (inputFiles.length > 2)
+        {
+          this.dialogRef = this.dialog.open(SpinnerComponent, {
+            disableClose: true,
+            data: {
+              titulo: "Carregando imagens..."
+            }
+          });
+        }
+        this.prepararImagens(inputFiles);
       }
       else
       {
@@ -59,60 +61,80 @@ export class CardRoupaComponent implements OnInit
     return 'url('+file+') bottom center / cover no-repeat rgb(60, 60, 60)';
   }
 
-  private uploadFiles(dialogRef)
+  private prepararImagens(inputFiles: File[])
   {
-    this.uploadService.uploadFile(this.filesFormData).subscribe(
-      dados => 
-      {
-        if (dados) 
-        {
-          dialogRef.close();
-        }
-        console.log(dados);
-      },
-      erro => 
-      {
-        console.log(erro)
-        dialogRef.close();
-      });
-  }
-
-  private prepararImagensRequest(inputFiles: any[])
-  {
-    this.filesFormData = new Set<File>();
-
     for (let inputFile of inputFiles)
     {
       const id = uuid();
-
+      
       const file = new File([inputFile.slice(0, inputFile.size, inputFile.type)], id, {type: inputFile.type});
+      
+      const imagem: Imagem = {id: id, uploadCompleto: false, falhaUpload: false, 
+          fileFormData: inputFile};
 
       const reader = new FileReader();
-      
-      const imagem: Imagem = {id: id};
 
       reader.onload = (e => 
       {
-        imagem.file = reader.result;
+        let fileFormData = {inputFile: inputFile, id: id};
 
+        imagem.inputFile = reader.result;
+        
         this.roupas.push(imagem);
 
+        this.uploadFile(fileFormData);
+
         this.atualizouGuardaRoupa.emit(this.roupas);
+
+        if (this.dialogRef)
+        {
+          this.dialogRef.close();
+        }
       });
       reader.readAsDataURL(file);
-      this.filesFormData.add(inputFile);
     }
+  }
+
+  public uploadFile(fileFormData, refresh?: boolean)
+  {
+    const roupa = this.roupas.filter(roupa => roupa.id === fileFormData.id)[0];
+    
+    let fileToUpload;
+
+    if (refresh)
+    {
+      fileToUpload = fileFormData.fileFormData;
+      roupa.falhaUpload = false;
+      roupa.uploadCompleto = false;
+    }
+    else
+    {
+      fileToUpload = fileFormData.inputFile;
+    }
+    this.uploadService.uploadFile(fileToUpload).subscribe(
+      dados => 
+      {
+        roupa.uploadCompleto = true;
+        roupa.falhaUpload = false;
+      },
+      erro => 
+      {
+        roupa.falhaUpload = true;
+        roupa.uploadCompleto = false;
+
+        console.log(erro)
+      });
   }
 
   private isTipoArquivoValido(inputFiles: any[])
   {
     for (let file of inputFiles)
-    {//console.log(file.type)
+    {
       if (!(file.type as string).includes('image'))
-      {//console.log('INVÁLIDO')
+      {
         return false;
       }
-    }//console.log('VÁLIDO')
+    }
     return true;
   }
 }
@@ -120,5 +142,8 @@ export class CardRoupaComponent implements OnInit
 export interface Imagem
 {
   id: any;
-  file?: string|ArrayBuffer;
+  inputFile?: string|ArrayBuffer;
+  fileFormData: File;
+  uploadCompleto: boolean;
+  falhaUpload: boolean;
 }
