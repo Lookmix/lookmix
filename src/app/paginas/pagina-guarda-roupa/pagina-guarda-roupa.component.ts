@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { SpinnerComponent } from '../../componentes/spinner/spinner.component';
 import { ShareDataService } from '../../services/share-data.service';
 import { UploadService } from 'src/app/services/upload.service';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-pagina-guarda-roupa',
@@ -28,12 +29,28 @@ export class PaginaGuardaRoupaComponent implements OnInit {
   
   combinacoes = [];
 
+  isMobile: boolean;
+
   constructor
     (
+      private breakPointObserver: BreakpointObserver,
       public dialog: MatDialog, 
       public shareDataService: ShareDataService
     ) 
   {
+    this.breakPointObserver.observe([
+      Breakpoints.XSmall
+    ])
+    .subscribe(result => {
+      if (result.matches)
+      {
+        this.isMobile = true;
+      }
+      else
+      {
+        this.isMobile = false;
+      }
+    });
     this.shareDataService.tituloBarraSuperior = "Guarda-roupa";
   }
 

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PaginaGuardaRoupaComponent } from './paginas/pagina-guarda-roupa/pagina-guarda-roupa.component';
 import { PaginaConfiguracoesComponent } from './paginas/pagina-configuracoes/pagina-configuracoes.component';
 import { PaginaLooksSemanaisComponent } from './paginas/pagina-looks-semanais/pagina-looks-semanais.component';
+import { LoginComponent } from './paginas/login/login.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'look-semanal',
     component: PaginaLooksSemanaisComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   // {
   //   path: 'look-aleatorio',

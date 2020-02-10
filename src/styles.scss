@@ -10,10 +10,22 @@ $custom-typography: mat-typography-config(
 $default-app-primary: mat-palette($mat-indigo);
 $default-app-accent:  mat-palette($mat-pink, A200, A100, A400);
 $default-app-warn:    mat-palette($mat-red);
-
-$default-app-theme: mat-dark-theme($default-app-primary, $default-app-accent, $default-app-warn);
+$default-app-theme:   mat-light-theme($default-app-primary, $default-app-accent, $default-app-warn);
 
 @include angular-material-theme($default-app-theme);
+
+
+
+$dark-app-primary: mat-palette($mat-gray, 50);
+$dark-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$dark-app-warn:    mat-palette($mat-red);
+$dark-app-theme:   mat-dark-theme($dark-app-primary, $dark-app-accent, $dark-app-warn);
+
+.dark-theme {
+  @include angular-material-theme($dark-app-theme);
+}
+
+
 /**
 font-family: 'Rubik', sans-serif;
 font-family: 'Roboto', sans-serif;
@@ -40,4 +52,32 @@ body, h1, h2, h3, h4, h5, span, p, a, button { font-family: 'Rubik', sans-serif 
 .snack-bar-error {
   color: white;
   background-color: #F44336;
+}
+
+button {
+  border-radius: 50px !important;
+  font-weight: bold !important;
+}
+
+.mat-card {
+  border-radius: 20px !important;
+}
+
+.ocultar-efeito-padrao-clique {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dark-checkbox {
+  @include mat-core-theme($dark-app-theme);
+}
+
+mat-dialog-container.mat-dialog-container {
+  padding: 0px;
+  background: #424242;
+  border-radius: 20px;
 }

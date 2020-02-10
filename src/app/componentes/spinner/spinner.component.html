@@ -1,4 +1,7 @@
-<h2 mat-dialog-title>{{data.titulo}}</h2> <!--Gerando combinações...-->
-<mat-dialog-content>
-  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-</mat-dialog-content>
+<div [class.dark-theme]="shareDataService.temaNoturno" 
+    class="mat-app-background" style="padding: 24px; border-radius: 20px;">
+  <h2 mat-dialog-title>{{data.titulo}}</h2> <!--Gerando combinações...-->
+  <mat-dialog-content>
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </mat-dialog-content>
+</div>

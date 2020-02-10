@@ -1,27 +1,27 @@
-<mat-tab-group id="tabGroupGuardaRoupa" backgroundColor="primary" color="accent">
-  <mat-tab label="CASUAL">
-    <div style="margin: 10px 10px">
-      <mat-card>
-        <h1 *ngIf="shareDataService.estiloRoupa === 'm'">Camisetas, polos e regatas</h1> <!-- Manga-curta ()  Roupas de cima-->
-        <h1 *ngIf="shareDataService.estiloRoupa === 'f'">Blusas</h1> <!--Manga-curta ()-->
+<!-- <mat-tab-group id="tabGroupGuardaRoupa" backgroundColor="primary" color="accent">
+  <mat-tab label="CASUAL"> -->
+    <div style="padding: 20px 10px;background: #0000000f;"> <!--margin: 10px 10px-->
+      <mat-card [ngStyle]="{'padding': isMobile ? '16px 10px' : '16px'}">
+        <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'm'">Camisas, camisetas, polos e regatas</h1> <!-- Manga-curta ()  Roupas de cima-->
+        <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'f'">Camisas e blusas</h1> <!--Manga-curta ()-->
 
         <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'mangaCurta')"></app-card-roupa>
     
         <br/>
         <br/>
         
-        <h1>Casacos, jaquetas e moletons</h1> <!--Manga-longa ()-->
+        <h1>Casacos, jaquetas, moletons e sobretudos</h1> <!--Manga-longa ()-->
 
         <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'mangaLonga')"></app-card-roupa>
 
         <br/>
         <br/>
 
-        <ng-container>
+        <ng-container *ngIf="shareDataService.estiloGuardaRoupa === 'f'">
           <h1>Peças únicas</h1>
           
-          <h3 *ngIf="shareDataService.estiloRoupa === 'm'">Macacões e sobretudos</h3>
-          <h3 *ngIf="shareDataService.estiloRoupa === 'f'">Vestidos, macacões e sobretudos</h3>
+          <!-- <h3 *ngIf="shareDataService.estiloGuardaRoupa === 'm'">Macacões</h3> -->
+          <h3>Vestidos</h3>
 
           <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'pecasUnicas')"></app-card-roupa>
 
@@ -29,8 +29,8 @@
           <br/>
         </ng-container>
 
-        <h1 *ngIf="shareDataService.estiloRoupa === 'm'">Calças e bermudas</h1><!--Pernas-->
-        <h1 *ngIf="shareDataService.estiloRoupa === 'f'">Calças, shorts e saias</h1>
+        <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'm'">Calças e bermudas</h1><!--Pernas-->
+        <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'f'">Calças, shorts e saias</h1>
     
         <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'roupasBaixo')"></app-card-roupa>
         
@@ -46,23 +46,23 @@
 
         <h1>Acessórios</h1>
 
-        <h3>Cabeça</h3>
-        <p>Bonés, óculos e brincos</p>
+        <h3 class="subtitulo-acessorios">Cabeça</h3>
+        <p>Bonés, chapéus, óculos, brincos e laços</p>
 
         <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'acessorios', 'cabeca')"></app-card-roupa>
 
-        <h3>Pescoço</h3>
-        <p>Colares e cachecóis</p>
+        <h3 class="subtitulo-acessorios">Pescoço</h3>
+        <p>Colares, correntes, gravatas e cachecóis</p>
 
         <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'acessorios', 'pescoco')"></app-card-roupa>
 
-        <h3>Braços</h3>
+        <h3 class="subtitulo-acessorios">Braços</h3>
         <p>Bolsas, pulseiras, relógios, luvas e anéis</p>
 
         <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'acessorios', 'bracos')"></app-card-roupa>
 
-        <h3>Pernas</h3>
-        <p>Meias</p>
+        <h3 class="subtitulo-acessorios">Cintura e Pernas</h3>
+        <p>Cintos e meias</p>
 
         <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'acessorios', 'pernas')"></app-card-roupa>
 
@@ -88,8 +88,8 @@
         <br/>
       </mat-card>
     </div>
-  </mat-tab>
+  <!-- </mat-tab>
   <mat-tab label="SOCIAL">
 
-  </mat-tab>
-</mat-tab-group>
+  </mat-tab> -->
+<!-- </mat-tab-group> -->

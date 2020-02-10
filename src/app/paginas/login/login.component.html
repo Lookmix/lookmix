@@ -1,0 +1,69 @@
+<div [ngStyle]="{'background': shareDataService.temaNoturno ? 'unset' : 'lightpink', 
+    'display': 'flex', 'height': '100%', 'flexDirection': 'column'}"> <!--background: indigo-->
+
+  <div [ngStyle]="{'display': 'flex', 'margin': isMobile ? '10px 0 15px 0px' : '20px', 'height': '117px'}">
+    <img (click)="router.navigate(['/'])" 
+        class="ocultar-efeito-padrao-clique"
+        style="width: 117px; margin: auto; cursor: pointer;" 
+        src="../../../assets/hanger.svg">
+  </div>
+
+  <mat-card [ngStyle]="{'margin': '0 auto', 'height': '375px', 
+      'width': isMobile ? '260px' : '300px'}">
+
+    <h2 style="margin: 11px 0 17px 0; text-align: center;">
+      Entre na sua conta
+    </h2>
+
+    <!-- <div style="display: flex; margin-bottom: 20px;">
+      <img style="width: 117px; margin: auto;" src="../../../assets/hanger.svg">
+    </div> -->
+
+    <form [formGroup]="form">
+      <div style="display: flex; flex-direction: column; justify-content: space-around;">
+        <mat-form-field appearance="fill" style="margin-bottom: 20px;">
+
+          <mat-label>E-mail, telefone ou nome de usuário</mat-label>
+          
+          <input formControlName="username" matInput required
+              placeholder="E-mail, telefone ou nome de usuário">
+
+          <mat-error *ngIf="form.get('username').touched && 
+              form.get('username').hasError('required')">
+            Este campo deve ser preenchido
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" style="margin-bottom: 10px;">
+
+          <mat-label>Senha</mat-label>
+
+          <input formControlName="password" matInput placeholder="Digite sua senha" 
+              [type]="tipoCampoSenha" required>
+
+          <mat-icon matSuffix style="cursor: pointer;"
+              class="ocultar-efeito-padrao-clique"
+              (click)="tipoCampoSenha === 'password' ? tipoCampoSenha = 'text' : 
+                  tipoCampoSenha = 'password'">
+            {{tipoCampoSenha === 'password' ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+
+          <mat-error *ngIf="form.get('password').touched && 
+              form.get('password').hasError('required')">
+            Este campo deve ser preenchido
+          </mat-error>        
+        </mat-form-field>
+  
+        <button [color]="shareDataService.temaNoturno ? 'accent' : 'primary'" 
+            mat-raised-button type="button" class="botao-entrar">
+          ENTRAR
+        </button>
+
+        <button mat-button [color]="shareDataService.temaNoturno ? 'primary' : 'accent'" 
+            type="button" style="width: 175px; margin: 20px auto;">
+            Criar uma conta
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>

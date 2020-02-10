@@ -8,14 +8,14 @@
 }
 
 .div-imagem {
-  border-radius: 3px;
+  border-radius: 20px;
+  margin: 10px 4px;
   display: flex;
   justify-content: flex-end;
   border: 1px solid white;
   max-width: 130px;
   min-width: 130px; 
   height: 231px; 
-  margin: 10px;
 }
 
 .div-icone-remocao {
@@ -41,7 +41,7 @@
 }
 
 .imagem {
-  border-radius: 3px; 
+  border-radius: 20px; 
   max-width: 130px; 
   min-width: 130px; 
   z-index: 1;
@@ -49,21 +49,30 @@
 }
 
 .backdrop {
-  background: #00000091; height: 100%; border-radius: 3px; 
+  background: #00000070; //#00000047; light
+  height: 100%; 
+  border-radius: 20px; 
   height: 231px;
   width: 130px;
   position: absolute;
   z-index: 2;
 }
 
-.div-checkbox-imagem {
+.div-opcoes-imagem {
   display: flex; 
   flex-direction:column; 
   z-index: 3; 
-  margin: 30px 15px 15px 15px;
+  margin: 25px 15px 15px 15px;
+  color: white;
 
   span {
+    color: white;
     margin: 20px 0 3px 0;
+  }
+
+  span.clima {
+    color: white;
+    margin-top: 5px;
   }
 }
 
@@ -74,13 +83,13 @@
 }
 
 .div-botao-add {
-  background: transparent; 
-  border-radius: 3px; 
+  background: #4b00821a;//transparent; 
+  border-radius: 20px; 
   border: 1px solid lightgray;
   max-width: 130px; 
   min-width: 130px; 
   height: 231px; 
-  margin: 10px; 
+  margin: 10px 4px; 
   display: flex;
   justify-content: center;
 
@@ -98,7 +107,8 @@
     }
 
     span {
-      margin-top: 10px
+      margin-top: 10px;
+      font-weight: bold;
     }
   }
 }

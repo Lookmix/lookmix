@@ -3,10 +3,15 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class ShareDataService 
+export class ShareDataService
 {
   tituloBarraSuperior: string;
-  estiloRoupa: string = "m";
+  estiloGuardaRoupa: string;
+  temaNoturno: boolean;
 
-  constructor() { }
+  constructor() 
+  {
+    this.estiloGuardaRoupa = localStorage.getItem('estiloGuardaRoupa');
+    this.temaNoturno = localStorage.getItem('temaNoturno') === 'true';
+  }
 }

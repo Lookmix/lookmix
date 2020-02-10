@@ -1,4 +1,5 @@
-<div class="container-cards">
+<div class="container-cards" 
+    [ngStyle]="{'justifyContent': isMobile && roupas.length > 0 ? 'space-between' : 'unset'}">
   <input #campoImagem (change)="readFile($event); campoImagem.value=''" type="file" 
       multiple accept="image/*">
 
@@ -15,11 +16,15 @@
 
     <!--BACKDROP-->
     <div class="backdrop">
-      <div class="div-checkbox-imagem" *ngIf="roupa.uploadCompleto">
-        <span>Clima</span>
+      <div class="div-opcoes-imagem dark-theme" *ngIf="roupa.uploadCompleto">
+        <span class="clima">Clima</span>
         <mat-checkbox>Quente</mat-checkbox>
         <mat-checkbox>Frio</mat-checkbox>
         <mat-checkbox>Ambiente</mat-checkbox>
+
+        <span>Ocasião</span>
+        <mat-checkbox>Casual</mat-checkbox>
+        <mat-checkbox>Social</mat-checkbox>
       </div>
 
       <div class="div-spinner" *ngIf="!roupa.uploadCompleto && !roupa.falhaUpload">
