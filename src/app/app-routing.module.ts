@@ -1,23 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PaginaGuardaRoupaComponent } from './paginas/pagina-guarda-roupa/pagina-guarda-roupa.component';
-import { PaginaConfiguracoesComponent } from './paginas/pagina-configuracoes/pagina-configuracoes.component';
-import { PaginaLooksSemanaisComponent } from './paginas/pagina-looks-semanais/pagina-looks-semanais.component';
-import { LoginComponent } from './paginas/login/login.component';
+import { GuardaRoupaComponent } from './usuarios/comum/guarda-roupa/guarda-roupa.component';
+import { LooksSemanaisComponent } from './usuarios/comum/looks-semanais/looks-semanais.component';
+import { LoginComponent } from './seguranca/login/login.component';
+import { ConfiguracoesComponent } from './usuarios/comum/configuracoes/configuracoes.component';
+
 
 
 const routes: Routes = [
   {
     path: '',
-    component: PaginaGuardaRoupaComponent,
+    component: GuardaRoupaComponent,
   },
   {
     path: 'guarda-roupa',
-    component: PaginaGuardaRoupaComponent,
+    component: GuardaRoupaComponent,
   },
   {
     path: 'look-semanal',
-    component: PaginaLooksSemanaisComponent
+    component: LooksSemanaisComponent
   },
   {
     path: 'login',
@@ -29,7 +30,7 @@ const routes: Routes = [
   // },
   {
     path: 'configuracoes',
-    component: PaginaConfiguracoesComponent
+    component: ConfiguracoesComponent
   }
 ];
 
