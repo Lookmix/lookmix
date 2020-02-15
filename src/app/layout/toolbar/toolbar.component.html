@@ -22,8 +22,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar class="mat-elevation-z3" *ngIf="router.url !== '/login'"
-        style="position: fixed; z-index: 5;">
+    <mat-toolbar class="mat-elevation-z3 fixed-toolbar" *ngIf="router.url !== '/login'">
       <button
           type="button"
           aria-label="Toggle sidenav"
@@ -32,10 +31,11 @@
           *ngIf="true">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span style="margin-left: 15px">{{shareDataService.tituloBarraSuperior}}</span>
+      <span class="titulo-toolbar">{{shareDataService.tituloBarraSuperior}}</span>
     </mat-toolbar>
 
-    <div [ngStyle]="{'height': '100%', 'marginTop': router.url !== '/login' ? '56px' : '0px'}">
+    <div [ngStyle]="{'marginTop': router.url !== '/login' ? '56px' : '0px'}"
+        class="div-router-outlet">
       <router-outlet></router-outlet>
     </div>
 

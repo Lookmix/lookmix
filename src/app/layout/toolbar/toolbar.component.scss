@@ -15,3 +15,16 @@
   top: 0;
   z-index: 999;
 }
+
+.fixed-toolbar {
+  position: fixed; 
+  z-index: 5
+}
+
+.titulo-toolbar {
+  margin-left: 15px;
+}
+
+.div-router-outlet {
+  height: '100%';
+}

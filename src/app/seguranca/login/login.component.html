@@ -1,17 +1,17 @@
-<div [ngStyle]="{'background': shareDataService.temaNoturno ? 'unset' : 'lightpink', 
-    'display': 'flex', 'height': '100%', 'flexDirection': 'column'}"> <!--background: indigo-->
+<div class="container-login" [ngStyle]="{'background': shareDataService.temaNoturno ? 
+    'unset' : 'lightpink'}"> <!--background: indigo-->
 
-  <div [ngStyle]="{'display': 'flex', 'margin': isMobile ? '10px 0 15px 0px' : '20px', 'height': '117px'}">
+  <div [ngStyle]="{'margin': isMobile ? '10px 0 15px 0px' : '20px'}"
+      class="div-logo">
     <img (click)="router.navigate(['/'])" 
-        class="ocultar-efeito-padrao-clique"
-        style="width: 117px; margin: auto; cursor: pointer;" 
+        class="ocultar-efeito-padrao-clique logo-login" 
         src="../../../assets/hanger.svg">
   </div>
 
-  <mat-card [ngStyle]="{'margin': '0 auto', 'height': '375px', 
-      'width': isMobile ? '260px' : '300px'}">
+  <mat-card [ngStyle]="{'width': isMobile ? '260px' : '300px'}"
+      class="card-login">
 
-    <h2 style="margin: 11px 0 17px 0; text-align: center;">
+    <h2 class="titulo-login">
       Entre na sua conta
     </h2>
 
@@ -20,8 +20,8 @@
     </div> -->
 
     <form [formGroup]="form">
-      <div style="display: flex; flex-direction: column; justify-content: space-around;">
-        <mat-form-field appearance="fill" style="margin-bottom: 20px;">
+      <div class="div-campos-botoes">
+        <mat-form-field appearance="fill" class="campo-username">
 
           <mat-label>E-mail, telefone ou nome de usuário</mat-label>
           
@@ -34,17 +34,16 @@
           </mat-error>
         </mat-form-field>
   
-        <mat-form-field appearance="fill" style="margin-bottom: 10px;">
+        <mat-form-field appearance="fill" class="campo-senha">
 
           <mat-label>Senha</mat-label>
 
           <input formControlName="password" matInput placeholder="Digite sua senha" 
               [type]="tipoCampoSenha" required>
 
-          <mat-icon matSuffix style="cursor: pointer;"
-              class="ocultar-efeito-padrao-clique"
+          <mat-icon class="ocultar-efeito-padrao-clique icone-exibir-senha"
               (click)="tipoCampoSenha === 'password' ? tipoCampoSenha = 'text' : 
-                  tipoCampoSenha = 'password'">
+                  tipoCampoSenha = 'password'" matSuffix>
             {{tipoCampoSenha === 'password' ? 'visibility' : 'visibility_off'}}
           </mat-icon>
 
@@ -59,9 +58,9 @@
           ENTRAR
         </button>
 
-        <button mat-button [color]="shareDataService.temaNoturno ? 'primary' : 'accent'" 
-            type="button" style="width: 175px; margin: 20px auto;">
-            Criar uma conta
+        <button [color]="shareDataService.temaNoturno ? 'primary' : 'accent'" 
+            type="button" class="botao-criar-conta" mat-button>
+          Criar uma conta
         </button>
       </div>
     </form>

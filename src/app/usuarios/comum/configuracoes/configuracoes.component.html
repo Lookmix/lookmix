@@ -1,5 +1,5 @@
-<div style="margin: 10px 10px; padding-top: 25px;">
-  <mat-card style="margin-bottom: 20px;">
+<div class="container-configuracoes">
+  <mat-card class="card-configuracoes">
     <mat-card-title>Estilo do guarda-roupa</mat-card-title>
     <mat-radio-group id="radio-group" [value]="shareDataService.estiloGuardaRoupa" 
         (change)="setEstiloGuardaRoupa($event)">
@@ -15,8 +15,8 @@
   <mat-card>
     <mat-card-title>Tema noturno</mat-card-title>
 
-    <mat-slide-toggle [checked]="shareDataService.temaNoturno" style="margin: 20px 0;"
-        (change)="setTemaNoturno($event)">
+    <mat-slide-toggle [checked]="shareDataService.temaNoturno" 
+        class="toggle-tema" (change)="setTemaNoturno($event)">
       {{temaNoturno ? 'Ligado' : 'Desligado'}}
     </mat-slide-toggle>
   </mat-card>

@@ -23,24 +23,28 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ToolbarComponent } from './componentes/toolbar/toolbar.component';
-import { SpinnerComponent } from './componentes/spinner/spinner.component';
-import { PaginaGuardaRoupaComponent } from './paginas/pagina-guarda-roupa/pagina-guarda-roupa.component';
-import { PaginaConfiguracoesComponent } from './paginas/pagina-configuracoes/pagina-configuracoes.component';
-import { PaginaLooksSemanaisComponent } from './paginas/pagina-looks-semanais/pagina-looks-semanais.component';
-import { CardRoupaComponent } from './componentes/card-roupa/card-roupa.component';
-import { LoginComponent } from './paginas/login/login.component';
+import { ToolbarComponent } from './layout/toolbar/toolbar.component';
+import { SpinnerComponent } from './layout/spinner/spinner.component';
+import { GuardaRoupaComponent } from './usuarios/comum/guarda-roupa/guarda-roupa.component';
+import { ConfiguracoesComponent } from './usuarios/comum/configuracoes/configuracoes.component';
+import { LooksSemanaisComponent } from './usuarios/comum/looks-semanais/looks-semanais.component';
+import { CardRoupaComponent } from './layout/card-roupa/card-roupa.component';
+import { LoginComponent } from './seguranca/login/login.component';
+import { DashboardComponent } from './usuarios/admin/dashboard/dashboard.component';
+import { CadastroUsuarioComponent } from './usuarios/comum/cadastro-usuario/cadastro-usuario.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     SpinnerComponent,
-    PaginaGuardaRoupaComponent,
-    PaginaConfiguracoesComponent,
-    PaginaLooksSemanaisComponent,
+    GuardaRoupaComponent,
+    ConfiguracoesComponent,
+    LooksSemanaisComponent,
     CardRoupaComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent,
+    CadastroUsuarioComponent
   ],
   imports: [
     BrowserModule,

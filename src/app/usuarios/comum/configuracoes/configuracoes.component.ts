@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ShareDataService } from './../../services/share-data.service';
+import { ShareDataService } from '../../../services/share-data.service';
 
 @Component({
   selector: 'app-pagina-configuracoes',
-  templateUrl: './pagina-configuracoes.component.html',
-  styleUrls: ['./pagina-configuracoes.component.scss']
+  templateUrl: './configuracoes.component.html',
+  styleUrls: ['./configuracoes.component.scss']
 })
-export class PaginaConfiguracoesComponent implements OnInit 
+export class ConfiguracoesComponent implements OnInit 
 {
   estiloGuardaRoupa: string;
   temaNoturno: boolean;

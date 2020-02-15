@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { v4 as uuid } from 'uuid';
 import { MatDialog } from '@angular/material/dialog';
-import { SpinnerComponent } from '../../componentes/spinner/spinner.component';
-import { ShareDataService } from '../../services/share-data.service';
-import { UploadService } from 'src/app/services/upload.service';
+import { SpinnerComponent } from '../../../layout/spinner/spinner.component';
+import { ShareDataService } from '../../../services/share-data.service';
+import { UploadService } from '../../../services/upload.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'app-pagina-guarda-roupa',
-  templateUrl: './pagina-guarda-roupa.component.html',
-  styleUrls: ['./pagina-guarda-roupa.component.scss']
+  selector: 'app-guarda-roupa',
+  templateUrl: './guarda-roupa.component.html',
+  styleUrls: ['./guarda-roupa.component.scss']
 })
-export class PaginaGuardaRoupaComponent implements OnInit {
+export class GuardaRoupaComponent implements OnInit {
 
   guardaRoupa = {
     mangaCurta: [],
