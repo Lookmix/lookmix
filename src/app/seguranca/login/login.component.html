@@ -1,14 +1,18 @@
-<div class="container-login" [ngStyle]="{'background': shareDataService.temaNoturno ? 
-    'unset' : 'lightpink'}"> <!--background: indigo-->
+<div class="container-login"> <!--background: indigo-->
 
-  <div [ngStyle]="{'margin': isMobile ? '10px 0 15px 0px' : '20px'}"
+  <!-- 
+    [ngStyle]="{'background': shareDataService.temaNoturno ? 
+    'unset' : 'lightpink'}"
+    
+    <div [ngStyle]="{'margin': shareDataService.isXSmall ? '10px 0 15px 0px' : '20px'}"
       class="div-logo">
     <img (click)="router.navigate(['/'])" 
         class="ocultar-efeito-padrao-clique logo-login" 
         src="../../../assets/hanger.svg">
-  </div>
+  </div> -->
+  <app-logo></app-logo>
 
-  <mat-card [ngStyle]="{'width': isMobile ? '260px' : '300px'}"
+  <mat-card [ngStyle]="{'width': shareDataService.isXSmall ? '260px' : '300px'}"
       class="card-login">
 
     <h2 class="titulo-login">
@@ -20,10 +24,10 @@
     </div> -->
 
     <form [formGroup]="form">
-      <div class="div-campos-botoes">
+      <div class="div-form-login">
         <mat-form-field appearance="fill" class="campo-username">
 
-          <mat-label>E-mail, telefone ou nome de usuário</mat-label>
+          <mat-label>Telefone ou nome de usuário</mat-label>
           
           <input formControlName="username" matInput required
               placeholder="E-mail, telefone ou nome de usuário">
@@ -59,7 +63,8 @@
         </button>
 
         <button [color]="shareDataService.temaNoturno ? 'primary' : 'accent'" 
-            type="button" class="botao-criar-conta" mat-button>
+            type="button" class="botao-criar-conta" mat-button
+            (click)="router.navigate(['nova-conta'])">
           Criar uma conta
         </button>
       </div>

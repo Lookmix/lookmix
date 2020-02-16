@@ -1,0 +1,31 @@
+.container-nova-conta {
+  display: flex;
+  // margin: 0px 10px 10px 10px;
+  flex-direction: column;
+}
+
+.card-nova-conta {
+  max-width: 300px;
+  text-align: center;
+  max-height: 432px;
+
+  h2 {
+    margin: 11px 0 17px 0 !important;
+  }
+}
+
+.div-formulario {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0px;
+
+  mat-form-field {
+    flex: 1;
+    margin: 0px 0px 15px 0px;
+  }
+}
+
+.div-botoes-nova-conta {
+  display: flex;
+  justify-content: space-between;
+}

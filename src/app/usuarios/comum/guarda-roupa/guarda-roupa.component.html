@@ -1,7 +1,7 @@
 <!-- <mat-tab-group id="tabGroupGuardaRoupa" backgroundColor="primary" color="accent">
   <mat-tab label="CASUAL"> -->
     <div class="container-guarda-roupa"> <!--margin: 10px 10px-->
-      <mat-card [ngStyle]="{'padding': isMobile ? '16px 10px' : '16px'}">
+      <mat-card [ngStyle]="{'padding': shareDataService.isXSmall ? '16px 10px' : '16px'}">
         <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'm'">Camisas, camisetas, polos e regatas</h1> <!-- Manga-curta ()  Roupas de cima-->
         <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'f'">Camisas e blusas</h1> <!--Manga-curta ()-->
 

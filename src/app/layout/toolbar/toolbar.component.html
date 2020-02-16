@@ -1,28 +1,29 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
-      opened="false" autoFocus="false"
+      [opened]="exibirMenu()" autoFocus="false"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"> <!--[opened]="false" *ngIf="router.url !== '/login'"-->
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item (click)="drawer.toggle()" [routerLink]="['login']">
         Entrar
       </a>
-      <a mat-list-item (click)="isMobile ? drawer.toggle() : false" [routerLink]="['look-semanal']">
+      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" [routerLink]="['look-semanal']">
         Looks da semana
       </a>
-      <a mat-list-item (click)="isMobile ? drawer.toggle() : false">
+      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false">
         Look aleatório
       </a>
-      <a mat-list-item (click)="isMobile ? drawer.toggle() : false" [routerLink]="['guarda-roupa']">
+      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" [routerLink]="['guarda-roupa']">
         Meu guarda-roupa
       </a>
-      <a mat-list-item (click)="isMobile ? drawer.toggle() : false" [routerLink]="['configuracoes']">
+      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" [routerLink]="['configuracoes']">
         Configurações
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar class="mat-elevation-z3 fixed-toolbar" *ngIf="router.url !== '/login'">
+  <mat-sidenav-content [ngStyle]="{'background': setBackground()}">
+    <mat-toolbar class="mat-elevation-z3 fixed-toolbar" 
+        *ngIf="router.url !== '/login' && router.url !== '/nova-conta'">
       <button
           type="button"
           aria-label="Toggle sidenav"
@@ -34,7 +35,8 @@
       <span class="titulo-toolbar">{{shareDataService.tituloBarraSuperior}}</span>
     </mat-toolbar>
 
-    <div [ngStyle]="{'marginTop': router.url !== '/login' ? '56px' : '0px'}"
+    <div [ngStyle]="{'marginTop': router.url !== '/login' && 
+            router.url !== '/nova-conta' ? '56px' : '0px'}"
         class="div-router-outlet">
       <router-outlet></router-outlet>
     </div>

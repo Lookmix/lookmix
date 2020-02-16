@@ -4,13 +4,15 @@ import { GuardaRoupaComponent } from './usuarios/comum/guarda-roupa/guarda-roupa
 import { LooksSemanaisComponent } from './usuarios/comum/looks-semanais/looks-semanais.component';
 import { LoginComponent } from './seguranca/login/login.component';
 import { ConfiguracoesComponent } from './usuarios/comum/configuracoes/configuracoes.component';
+import { CadastroUsuarioComponent } from './usuarios/comum/cadastro-usuario/cadastro-usuario.component';
 
 
 
 const routes: Routes = [
   {
     path: '',
-    component: GuardaRoupaComponent,
+    pathMatch: 'prefix',
+    redirectTo: 'guarda-roupa'
   },
   {
     path: 'guarda-roupa',
@@ -31,6 +33,10 @@ const routes: Routes = [
   {
     path: 'configuracoes',
     component: ConfiguracoesComponent
+  },
+  {
+    path: 'nova-conta',
+    component: CadastroUsuarioComponent
   }
 ];
 

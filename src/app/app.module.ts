@@ -32,6 +32,7 @@ import { CardRoupaComponent } from './layout/card-roupa/card-roupa.component';
 import { LoginComponent } from './seguranca/login/login.component';
 import { DashboardComponent } from './usuarios/admin/dashboard/dashboard.component';
 import { CadastroUsuarioComponent } from './usuarios/comum/cadastro-usuario/cadastro-usuario.component';
+import { LogoComponent } from './layout/logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { CadastroUsuarioComponent } from './usuarios/comum/cadastro-usuario/cada
     CardRoupaComponent,
     LoginComponent,
     DashboardComponent,
-    CadastroUsuarioComponent
+    CadastroUsuarioComponent,
+    LogoComponent
   ],
   imports: [
     BrowserModule,

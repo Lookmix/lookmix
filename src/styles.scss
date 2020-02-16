@@ -22,6 +22,15 @@ $dark-app-warn:    mat-palette($mat-red);
 $dark-app-theme:   mat-dark-theme($dark-app-primary, $dark-app-accent, $dark-app-warn);
 
 .dark-theme {
+  .mat-error {
+    color: white !important;
+  }
+  .mat-form-field-invalid .mat-input-element {
+    caret-color: white !important;
+  }
+  .mat-form-field.mat-form-field-invalid .mat-form-field-label {
+    color: rgba(255, 255, 255, 0.7) !important;
+  }
   @include angular-material-theme($dark-app-theme);
 }
 
@@ -34,7 +43,9 @@ font-family: 'Open Sans', sans-serif;
 
 html, body { height: 100%; font-family: 'Rubik', sans-serif !important; }
 body { margin: 0; }
-body, h1, h2, h3, h4, h5, span, p, a, button { font-family: 'Rubik', sans-serif !important; }
+body, h1, h2, h3, h4, h5, span, p, a, button, mat-card-title { 
+  font-family: 'Rubik', sans-serif !important;
+}
 
 #tabGroupGuardaRoupa > .mat-tab-header {
   position: fixed !important;
@@ -52,6 +63,10 @@ body, h1, h2, h3, h4, h5, span, p, a, button { font-family: 'Rubik', sans-serif 
 .snack-bar-error {
   color: white;
   background-color: #F44336;
+}
+
+.icone-exibir-senha {
+  cursor: pointer;
 }
 
 button {
@@ -80,4 +95,10 @@ mat-dialog-container.mat-dialog-container {
   padding: 0px;
   background: #424242;
   border-radius: 20px;
+}
+
+.display-flex-row-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }

@@ -4,7 +4,7 @@ import { UploadService } from 'src/app/services/upload.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { ShareDataService } from 'src/app/services/share-data.service';
 
 @Component({
   selector: 'app-card-roupa',
@@ -15,30 +15,15 @@ export class CardRoupaComponent implements OnInit
 {
   roupas: Imagem[] = [];
   dialogRef: MatDialogRef<SpinnerComponent>;
-  isMobile: boolean;
   @Output() atualizouGuardaRoupa: EventEmitter<Imagem[]> = new EventEmitter();
 
-  constructor(private uploadService: UploadService, 
-      private breakPointObserver: BreakpointObserver,
+  constructor(private uploadService: UploadService,
+      public shareDataService: ShareDataService,
       private snackBar: MatSnackBar, private dialog: MatDialog) 
-  {
-    this.breakPointObserver.observe([
-      Breakpoints.XSmall
-    ])
-    .subscribe(result => {
-      if (result.matches)
-      {
-        this.isMobile = true;
-      }
-      else
-      {
-        this.isMobile = false;
-      }
-    });
-  }
+  {}
 
   ngOnInit() 
-  { }
+  {}
 
   readFile(event) 
   {

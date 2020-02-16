@@ -1,9 +1,9 @@
-import { Component, ViewContainerRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { ShareDataService } from '../../services/share-data.service';
-import { Router } from '@angular/router';
+import { Router, } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
@@ -11,52 +11,51 @@ import { MatSidenav } from '@angular/material/sidenav';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent implements AfterViewInit
+export class ToolbarComponent implements OnInit
 {
-  @ViewChild('drawer', {static: true}) drawer: MatSidenav;
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
   
-  isMobile: boolean;
-  isSmall: boolean;
+  backgrounds = 
+  {
+    login: 'lightpink',
+    novaconta: '#7941a1'// '#4b0082bd'
+  }
 
   constructor(private breakpointObserver: BreakpointObserver,
       public shareDataService: ShareDataService, public router: Router) 
+  {}
+
+  ngOnInit()
+  {}
+
+  exibirMenu() 
   {
-    this.breakpointObserver.observe([
-      Breakpoints.XSmall,
-      Breakpoints.Small
-    ])
-    .subscribe(result => {
-      if (result.breakpoints[Breakpoints.XSmall])
-      {
-        this.isMobile = true;
-        this.isSmall = false;
-      }
-      else if (result.breakpoints[Breakpoints.Small])
-      {
-        this.isSmall = true;
-        this.isMobile = false;
-      }
-      else
-      {
-        this.isSmall = false;
-        this.isMobile = false;
-      }
-    });
+    return !this.isInvalidRoute() && !this.isMobile();
   }
 
-  ngAfterViewInit()
+  setBackground()
   {
-    const sidenavOpened = this.router.url === '/login' || this.isMobile || this.isSmall ? false :  true;
-
-    if (sidenavOpened)
+    const background = this.backgrounds[this.router.url.replace('/', '').replace('-', '')]
+    
+    if (background && !this.shareDataService.temaNoturno)
     {
-      this.drawer.toggle();
+      return background;
     }
+    return 'initial';
+  }
+
+  private isMobile()
+  {
+    return this.shareDataService.isSmall || this.shareDataService.isXSmall;
+  }
+
+  private isInvalidRoute()
+  {
+    return this.router.url === '/login' || this.router.url === '/nova-conta' ||
+        this.router.url === '/';
   }
 }

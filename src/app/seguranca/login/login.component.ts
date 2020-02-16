@@ -13,25 +13,11 @@ export class LoginComponent implements OnInit
 {
   tipoCampoSenha = 'password';
   form: FormGroup;
-  isMobile: boolean
 
-  constructor(private formBuilder: FormBuilder, public router: Router,
-      private breakPointObserver: BreakpointObserver, 
+  constructor(private formBuilder: FormBuilder, public router: Router, 
       public shareDataService: ShareDataService) 
   {
-    this.breakPointObserver.observe([
-      Breakpoints.XSmall
-    ])
-    .subscribe(result => {
-      if (result.matches)
-      {
-        this.isMobile = true;
-      }
-      else
-      {
-        this.isMobile = false;
-      }
-    });
+
   }
 
   ngOnInit() 

@@ -29,28 +29,12 @@ export class GuardaRoupaComponent implements OnInit {
   
   combinacoes = [];
 
-  isMobile: boolean;
-
   constructor
     (
-      private breakPointObserver: BreakpointObserver,
       public dialog: MatDialog, 
       public shareDataService: ShareDataService
     ) 
   {
-    this.breakPointObserver.observe([
-      Breakpoints.XSmall
-    ])
-    .subscribe(result => {
-      if (result.matches)
-      {
-        this.isMobile = true;
-      }
-      else
-      {
-        this.isMobile = false;
-      }
-    });
     this.shareDataService.tituloBarraSuperior = "Guarda-roupa";
   }
 
