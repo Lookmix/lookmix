@@ -21,7 +21,9 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content [ngStyle]="{'background': setBackground()}">
+  <mat-sidenav-content [ngStyle]="{'background': setBackground(), 
+      'transition': router.url === '/login' || 
+      router.url === '/nova-conta' ? 'background 0.6s' : 'unset'}">
     <mat-toolbar class="mat-elevation-z3 fixed-toolbar" 
         *ngIf="router.url !== '/login' && router.url !== '/nova-conta'">
       <button

@@ -21,8 +21,8 @@ export class ToolbarComponent implements OnInit
   
   backgrounds = 
   {
-    login: 'lightpink',
-    novaconta: '#7941a1'// '#4b0082bd'
+    login: '#ffb6c1ad', //#f873ad (v2)   #ffb6c1ad   #fcd4da   lightpink
+    novaconta: '#8341a1d4'//  #8341a1   #8341a1d4   #7941a1a1   #7941a1   '#4b0082bd'
   }
 
   constructor(private breakpointObserver: BreakpointObserver,
