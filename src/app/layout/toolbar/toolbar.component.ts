@@ -18,12 +18,6 @@ export class ToolbarComponent implements OnInit
       map(result => result.matches),
       shareReplay()
     );
-  
-  backgrounds = 
-  {
-    login: '#ffb6c1ad', //#f873ad (v2)   #ffb6c1ad   #fcd4da   lightpink
-    novaconta: '#8341a1d4'//  #8341a1   #8341a1d4   #7941a1a1   #7941a1   '#4b0082bd'
-  }
 
   constructor(private breakpointObserver: BreakpointObserver,
       public shareDataService: ShareDataService, public router: Router) 
@@ -39,7 +33,8 @@ export class ToolbarComponent implements OnInit
 
   setBackground()
   {
-    const background = this.backgrounds[this.router.url.replace('/', '').replace('-', '')]
+    const background = this.shareDataService.
+        backgroundsLogin[this.router.url.replace('/', '').replace('-', '')];
     
     if (background && !this.shareDataService.temaNoturno)
     {

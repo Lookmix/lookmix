@@ -33,6 +33,8 @@ import { LoginComponent } from './seguranca/login/login.component';
 import { DashboardComponent } from './usuarios/admin/dashboard/dashboard.component';
 import { CadastroUsuarioComponent } from './usuarios/comum/cadastro-usuario/cadastro-usuario.component';
 import { LogoComponent } from './layout/logo/logo.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,8 @@ import { LogoComponent } from './layout/logo/logo.component';
     MatSnackBarModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}

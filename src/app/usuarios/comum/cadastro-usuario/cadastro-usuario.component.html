@@ -116,7 +116,7 @@
       
         <div class="div-botoes-nova-conta">
           <button [color]="shareDataService.temaNoturno ? 'primary' : 'accent'"
-              mat-button type="button" (click)="router.navigate(['/login'])">
+              mat-button type="button" (click)="router.navigate(['/login']); updateMetaTag('login')">
             VOLTAR
           </button>
   

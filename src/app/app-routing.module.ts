@@ -12,19 +12,31 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'prefix',
-    redirectTo: 'guarda-roupa'
+    redirectTo: 'login',
+    data: {
+      corTema: '#fff'
+    }
   },
   {
     path: 'guarda-roupa',
     component: GuardaRoupaComponent,
+    data: {
+      corTema: '#fff'
+    }
   },
   {
     path: 'look-semanal',
-    component: LooksSemanaisComponent
+    component: LooksSemanaisComponent,
+    data: {
+      corTema: '#fff'
+    }
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    data: {
+      corTema: '#ffb6c1ad'
+    }
   },
   // {
   //   path: 'look-aleatorio',
@@ -32,11 +44,17 @@ const routes: Routes = [
   // },
   {
     path: 'configuracoes',
-    component: ConfiguracoesComponent
+    component: ConfiguracoesComponent,
+    data: {
+      corTema: '#fff'
+    }
   },
   {
     path: 'nova-conta',
-    component: CadastroUsuarioComponent
+    component: CadastroUsuarioComponent,
+    data: {
+      corTema: '#8341a1d4'
+    }
   }
 ];
 

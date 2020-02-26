@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { v4 as uuid } from 'uuid';
 import { MatDialog } from '@angular/material/dialog';
 import { SpinnerComponent } from '../../../layout/spinner/spinner.component';
 import { ShareDataService } from '../../../services/share-data.service';
-import { UploadService } from '../../../services/upload.service';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-guarda-roupa',

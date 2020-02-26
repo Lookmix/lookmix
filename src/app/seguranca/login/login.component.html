@@ -64,7 +64,7 @@
 
         <button [color]="shareDataService.temaNoturno ? 'primary' : 'accent'" 
             type="button" class="botao-criar-conta" mat-button
-            (click)="router.navigate(['nova-conta'])">
+            (click)="router.navigate(['nova-conta']); updateMetaTag('novaconta')">
           Criar uma conta
         </button>
       </div>

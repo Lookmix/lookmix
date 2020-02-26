@@ -44,4 +44,9 @@ export class CadastroUsuarioComponent implements OnInit
       senha: ['', Validators.required]
     });
   }
+
+  updateMetaTag(rota)
+  {
+    this.shareDataService.atualizarMetaTagTheme(undefined, rota);
+  }
 }

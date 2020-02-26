@@ -38,5 +38,7 @@ export class ConfiguracoesComponent implements OnInit
     this.shareDataService.temaNoturno = event.checked;
     
     this.temaNoturno = this.shareDataService.temaNoturno;
+
+    this.shareDataService.atualizarMetaTagTheme();
   }
 }
