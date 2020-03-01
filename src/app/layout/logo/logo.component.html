@@ -2,5 +2,7 @@
 		class="div-logo">
 <img (click)="router.navigate(['guarda-roupa'])" 
   	class="ocultar-efeito-padrao-clique logo" 
-  	[src]="shareDataService.temaNoturno ? '../../../assets/hanger-dark-clean.svg' : '../../../assets/hanger-light-clean.svg'">
+	[src]="shareDataService.temaNoturno ? 
+			getAbsolutePath('hanger-dark-clean.svg') : 
+			getAbsolutePath('hanger-light-clean.svg')">
 </div>

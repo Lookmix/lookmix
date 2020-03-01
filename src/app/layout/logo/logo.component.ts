@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShareDataService } from 'src/app/services/share-data.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-logo',
@@ -15,4 +16,8 @@ export class LogoComponent implements OnInit {
   ngOnInit()
   {}
 
+  getAbsolutePath(imageName)
+  {
+    return environment.logoAssetsPath + imageName;
+  }
 }
