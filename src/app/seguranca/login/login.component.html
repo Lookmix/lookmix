@@ -25,15 +25,18 @@
 
     <form [formGroup]="form">
       <div class="div-form-login">
-        <mat-form-field appearance="fill" class="campo-username">
+        <mat-form-field appearance="fill" class="campo-phone">
 
-          <mat-label>Telefone ou nome de usuário</mat-label>
+          <mat-label>Telefone</mat-label>
           
-          <input formControlName="username" matInput required
-              placeholder="E-mail, telefone ou nome de usuário">
+          <input formControlName="phone" matInput required
+              showMaskTyped="true" placeholder="(00) 91234-5678" 
+              mask="(00) 00000-0000">
 
-          <mat-error *ngIf="form.get('username').touched && 
-              form.get('username').hasError('required')">
+          <mat-hint>Digite apenas números</mat-hint>
+            
+          <mat-error *ngIf="form.get('phone').touched && 
+              form.get('phone').hasError('required')">
             Este campo deve ser preenchido
           </mat-error>
         </mat-form-field>

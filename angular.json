@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "combinador-vestiveis": {
+    "combinador-roupas": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/combinador-vestiveis",
+            "outputPath": "dist/combinador-roupas",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,18 +69,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "combinador-vestiveis:build"
+            "browserTarget": "combinador-roupas:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "combinador-vestiveis:build:production"
+              "browserTarget": "combinador-roupas:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "combinador-vestiveis:build"
+            "browserTarget": "combinador-roupas:build"
           }
         },
         "test": {
@@ -119,16 +119,20 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "combinador-vestiveis:serve"
+            "devServerTarget": "combinador-roupas:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "combinador-vestiveis:serve:production"
+              "devServerTarget": "combinador-roupas:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }
   },
-  "defaultProject": "combinador-vestiveis"
+  "defaultProject": "combinador-roupas"
 }

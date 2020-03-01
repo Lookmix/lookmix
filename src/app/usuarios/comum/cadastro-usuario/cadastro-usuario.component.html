@@ -28,7 +28,6 @@
     
             <mat-hint>
               Aquele do Instagram ou do Twitter ;)
-              <!-- @SeuNomeDe.usuario_10 -->
             </mat-hint>
 
             <mat-error *ngIf="form.get('username').touched && 
@@ -46,9 +45,10 @@
             <mat-label>Número do celular</mat-label>
             
             <input formControlName="numero" matInput required
-                placeholder="(00) 12345-6789" type="number">
+                showMaskTyped="true" mask="(00) 00000-0000"
+                placeholder="(00) 12345-6789">
     
-            <mat-hint>DDD e o número</mat-hint>
+            <mat-hint>DDD e número</mat-hint>
 
             <mat-error *ngIf="form.get('numero').touched && 
                 form.get('numero').hasError('required')">

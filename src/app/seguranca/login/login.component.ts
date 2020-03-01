@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit
   private criarFormulario()
   {
     this.form = this.formBuilder.group({
-      username: ['', Validators.required],
+      phone: ['', Validators.required],
       password: ['', Validators.required]
     })
   }

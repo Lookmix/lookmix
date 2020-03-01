@@ -36,6 +36,10 @@ import { LogoComponent } from './layout/logo/logo.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+ 
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +78,8 @@ import { environment } from '../environments/environment';
     MatFormFieldModule,
     MatInputModule,
     MatSlideToggleModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    NgxMaskModule.forRoot(options)
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
