@@ -4,11 +4,11 @@
   "theme_color": "#ffb6c1ad",
   "background_color": "#ffb6c1ad",
   "display": "standalone",
-  "scope": "/",
-  "start_url": "/",
+  "scope": "https://viniciusgouveia.github.io/combinador-roupas/",
+  "start_url": "https://viniciusgouveia.github.io/combinador-roupas/login",
   "icons": [
     {
-      "src": "assets/icons/icon-72x72.png",
+      "src": "assets/icons//icon-72x72.png",
       "sizes": "72x72",
       "type": "image/png"
     },
