@@ -15,6 +15,6 @@ export class UploadService {
 
     formData.append('file', file, file.name);
 
-    return this.httpCliet.post(environment.API_URL + 'upload', formData);
+    return this.httpCliet.post(`${environment.API_URL}/uplaod`, formData);
   }
 }

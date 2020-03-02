@@ -5,7 +5,9 @@ import { environment } from './../../environments/environment'
 @Injectable({
   providedIn: 'root'
 })
-export class SegurancaService {
+export class SegurancaService 
+{
+  private endpoint: string = 'auth';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -13,15 +15,7 @@ export class SegurancaService {
   {
     const body = JSON.stringify(dadosLogin);
 
-    this.httpClient.post(environment.API_URL, body).subscribe(
-      data => 
-      {
-
-      }, 
-      error => 
-      {
-        
-      }
-    )
+    return this.httpClient.post(`${environment.API_URL}/` + 
+        `${this.endpoint}/login`, body, {withCredentials: true});
   }
 }

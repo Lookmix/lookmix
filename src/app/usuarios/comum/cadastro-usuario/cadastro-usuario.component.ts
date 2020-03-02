@@ -3,6 +3,8 @@ import { ShareDataService } from 'src/app/services/share-data.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -21,7 +23,13 @@ export class CadastroUsuarioComponent implements OnInit
     this.screenWidth = window.innerWidth;
   }
 
+  public customPatterns = { 
+    'x': {pattern: new RegExp('[A-Za-z0-9\-\_\.]+')}
+  };
+
   constructor(public shareDataService: ShareDataService, 
+      private usuarioService: UsuarioService,
+      private snackBar: MatSnackBar,
       public platform: Platform, private formBuilder: FormBuilder, 
       public router: Router) 
   {
@@ -48,5 +56,61 @@ export class CadastroUsuarioComponent implements OnInit
   updateMetaTag(rota)
   {
     this.shareDataService.atualizarMetaTagTheme(undefined, rota);
+  }
+
+  validarUsername()
+  {
+    const username = this.form.get('username').value;
+
+    if (username)
+    {
+      this.usuarioService.isUsernameValido(username)
+          .subscribe(
+            data => 
+            {
+              if (!data['is_unique'])
+              {
+                this.form.get('username').setErrors({notUnique: true})
+              }
+            }, 
+            error => 
+            {
+              this.form.get('username').setValue('')
+  
+              this.snackBar.open(
+                  'Erro de rede, por favor, insira o nome de usuário novamente', '', 
+                  {duration: 4000, panelClass: 'snack-bar-error'}
+              );
+              console.log(error);
+            });
+    }
+  }
+
+  validarTelefone()
+  {
+    const controlTelefone = this.form.get('numero');
+
+    if (controlTelefone.value && controlTelefone.valid)
+    {
+      this.usuarioService.isTelefoneValido(controlTelefone.value)
+          .subscribe(
+            data => 
+            {
+              if (!data['is_unique'])
+              {
+                this.form.get('numero').setErrors({notUnique: true})
+              }
+            }, 
+            error => 
+            {
+              this.form.get('numero').setValue('');
+  
+              this.snackBar.open(
+                  'Erro de rede, por favor, insira o telefone novamente', '', 
+                  {duration: 4000, panelClass: 'snack-bar-error'}
+              );
+              console.log(error);
+            });
+    }
   }
 }

@@ -61,7 +61,8 @@
         </mat-form-field>
   
         <button [color]="shareDataService.temaNoturno ? 'accent' : 'primary'" 
-            mat-raised-button type="button" class="botao-entrar">
+            mat-raised-button class="botao-entrar"
+            (click)="entrar()">
           ENTRAR
         </button>
 

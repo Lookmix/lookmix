@@ -24,7 +24,9 @@
             <span matPrefix>@</span><!--&nbsp;-->
 
             <input formControlName="username" matInput required
-                placeholder="SeuNomeDe.usuario_10">
+                mask="x*" [patterns]="customPatterns"
+                placeholder="SeuNomeDe.usuario_10"
+                maxlength="30" (blur)="validarUsername()">
     
             <mat-hint>
               Aquele do Instagram ou do Twitter ;)
@@ -35,7 +37,7 @@
               Este campo deve ser preenchido
             </mat-error>
     
-            <mat-error *ngIf="false">
+            <mat-error *ngIf="form.get('username').hasError('notUnique')">
               Alguém já usa esse nome de usuário, tente outro.
             </mat-error>
           </mat-form-field>
@@ -46,16 +48,22 @@
             
             <input formControlName="numero" matInput required
                 mask="(00) 00000-0000"
+                minlength="11"
+                (blur)="validarTelefone()"
                 placeholder="(00) 12345-6789">
     
             <mat-hint>DDD e número</mat-hint>
+
+            <mat-error *ngIf="form.get('numero').hasError('minlength')">
+              Ainda faltam alguns dígitos
+            </mat-error>
 
             <mat-error *ngIf="form.get('numero').touched && 
                 form.get('numero').hasError('required')">
               Este campo deve ser preenchido
             </mat-error>
     
-            <mat-error *ngIf="false">
+            <mat-error *ngIf="form.get('numero').hasError('notUnique')">
               Alguém já usa esse número.
             </mat-error>
           </mat-form-field>
@@ -121,7 +129,7 @@
           </button>
   
           <button [color]="shareDataService.temaNoturno ? 'accent' : 'primary'" 
-              mat-raised-button type="button">
+              mat-raised-button type="button" [disabled]="form.invalid">
             CONCLUIR
           </button>
         </div>

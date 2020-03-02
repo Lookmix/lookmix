@@ -35,8 +35,10 @@ import { CadastroUsuarioComponent } from './usuarios/comum/cadastro-usuario/cada
 import { LogoComponent } from './layout/logo/logo.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { InterceptorModule } from './seguranca/interceptor.module'
 
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { CookieService } from 'ngx-cookie-service';
  
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -79,10 +81,12 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     MatInputModule,
     MatSlideToggleModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    NgxMaskModule.forRoot(options)
+    NgxMaskModule.forRoot(options),
+    InterceptorModule
   ],
   providers: [
-    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}}
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
+    CookieService
   ],
   entryComponents: [
     SpinnerComponent
