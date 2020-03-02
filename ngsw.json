@@ -1,0 +1,94 @@
+{
+  "configVersion": 1,
+  "timestamp": 1583120395344,
+  "index": "/combinador-roupas/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/combinador-roupas/index.html",
+        "/combinador-roupas/main-es2015.711a3416d9b44c90a524.js",
+        "/combinador-roupas/main-es5.711a3416d9b44c90a524.js",
+        "/combinador-roupas/manifest.webmanifest",
+        "/combinador-roupas/polyfills-es2015.ca64e4516afbb1b890d5.js",
+        "/combinador-roupas/polyfills-es5.277e2e1d6fb2daf91a5c.js",
+        "/combinador-roupas/runtime-es2015.0811dcefd377500b5b1a.js",
+        "/combinador-roupas/runtime-es5.0811dcefd377500b5b1a.js",
+        "/combinador-roupas/styles.6829f3a534895ea4f9b1.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/combinador-roupas/assets/hanger (1).svg",
+        "/combinador-roupas/assets/hanger (2).svg",
+        "/combinador-roupas/assets/hanger-dark-clean.svg",
+        "/combinador-roupas/assets/hanger-light-clean.png",
+        "/combinador-roupas/assets/hanger-light-clean.svg",
+        "/combinador-roupas/assets/hanger-v2.svg",
+        "/combinador-roupas/assets/hanger-yellow.svg",
+        "/combinador-roupas/assets/hanger.svg",
+        "/combinador-roupas/assets/icons/icon-128x128.png",
+        "/combinador-roupas/assets/icons/icon-144x144.png",
+        "/combinador-roupas/assets/icons/icon-152x152.png",
+        "/combinador-roupas/assets/icons/icon-192x192.png",
+        "/combinador-roupas/assets/icons/icon-384x384.png",
+        "/combinador-roupas/assets/icons/icon-512x512.png",
+        "/combinador-roupas/assets/icons/icon-72x72.png",
+        "/combinador-roupas/assets/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/combinador-roupas/assets/hanger (1).svg": "876cf0510d5707253d7c60fca80a94bbaff06ffa",
+    "/combinador-roupas/assets/hanger (2).svg": "29e8b8647f54ab8792970244a61ba9538917574e",
+    "/combinador-roupas/assets/hanger-dark-clean.svg": "e87572b3777dd463af58b6c9bda1ac2fa9e2f266",
+    "/combinador-roupas/assets/hanger-light-clean.png": "24dd0837099451f55f175729282a2ab0dbae83d2",
+    "/combinador-roupas/assets/hanger-light-clean.svg": "bb16cd5de856fcb008ac3070205b04507437128d",
+    "/combinador-roupas/assets/hanger-v2.svg": "a9a060fc8a85bb10006e5288f33e54dea9f16fde",
+    "/combinador-roupas/assets/hanger-yellow.svg": "2d38d2d53d9bd4ba22acc7afb658f43b90cc9bf8",
+    "/combinador-roupas/assets/hanger.svg": "3afdb03a54c74edf6c49d647f8a27d93efbc917a",
+    "/combinador-roupas/assets/icons/icon-128x128.png": "8976a2b60474447476d251553ce0cf97a5e0f529",
+    "/combinador-roupas/assets/icons/icon-144x144.png": "144511080da2f7ad8c30f447e5dfcf5001edf3cc",
+    "/combinador-roupas/assets/icons/icon-152x152.png": "54cb056ddcc6e3e135ff42015c1e3cfd81cc2c39",
+    "/combinador-roupas/assets/icons/icon-192x192.png": "257ba32916b82f204411d95dd354645ca9308739",
+    "/combinador-roupas/assets/icons/icon-384x384.png": "c6195ccda570f6e42a45cad4247faf7dc4aec682",
+    "/combinador-roupas/assets/icons/icon-512x512.png": "de44165ef55e43d83efc611a223cf1ba3c5576b8",
+    "/combinador-roupas/assets/icons/icon-72x72.png": "db378a06b3128fe01bbbc6100da154a763d05834",
+    "/combinador-roupas/assets/icons/icon-96x96.png": "36aded2e756ebf101bd34dd0ce4489a3c74102e2",
+    "/combinador-roupas/index.html": "f13403f26ef6c72ffafc781782aa568b0f17367b",
+    "/combinador-roupas/main-es2015.711a3416d9b44c90a524.js": "195541b0a39ad22f45f44fc4f77a22ff2e8f4f24",
+    "/combinador-roupas/main-es5.711a3416d9b44c90a524.js": "b2a6e09018e5baf28d8be24886cd19f451395072",
+    "/combinador-roupas/manifest.webmanifest": "97335b43fa18bebb338d65f257e6fa4dd9cfb48a",
+    "/combinador-roupas/polyfills-es2015.ca64e4516afbb1b890d5.js": "8779ed8d9bf0580e1b50b352a9b8fd520be24433",
+    "/combinador-roupas/polyfills-es5.277e2e1d6fb2daf91a5c.js": "8d03638471d7374e81cf33adfdea439f84ac3873",
+    "/combinador-roupas/runtime-es2015.0811dcefd377500b5b1a.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/combinador-roupas/runtime-es5.0811dcefd377500b5b1a.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/combinador-roupas/styles.6829f3a534895ea4f9b1.css": "b2f33ef61d5813d589912e2806fe12f443bcc510"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
