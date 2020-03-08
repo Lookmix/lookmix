@@ -32,8 +32,10 @@ export class UsuarioService
 
   isUsernameValido(username): Observable<any>
   {
+    const encodedUsername = encodeURIComponent(username);
+    
     return this.httpClient.get(`${environment.API_URL}/${this.endpoint}` +
-        `/is_username_unique/${username}`);
+        `/is_username_unique/${encodedUsername}`);
   }
 
   isTelefoneValido(telefone): Observable<any>

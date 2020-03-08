@@ -60,8 +60,8 @@ export class CadastroUsuarioComponent implements OnInit
 
   validarUsername()
   {
-    const username = this.form.get('username').value;
-
+    const username = (this.form.get('username').value as string)
+        .toLocaleLowerCase();
     if (username)
     {
       this.usuarioService.isUsernameValido(username)
@@ -78,7 +78,7 @@ export class CadastroUsuarioComponent implements OnInit
               this.form.get('username').setValue('')
   
               this.snackBar.open(
-                  'Erro de rede, por favor, insira o nome de usuário novamente', '', 
+                  'Erro de conexão, por favor, digite o nome de usuário novamente', '', 
                   {duration: 4000, panelClass: 'snack-bar-error'}
               );
               console.log(error);
@@ -106,7 +106,7 @@ export class CadastroUsuarioComponent implements OnInit
               this.form.get('numero').setValue('');
   
               this.snackBar.open(
-                  'Erro de rede, por favor, insira o telefone novamente', '', 
+                  'Erro de conexão, por favor, digite o telefone novamente', '', 
                   {duration: 4000, panelClass: 'snack-bar-error'}
               );
               console.log(error);

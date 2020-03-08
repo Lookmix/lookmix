@@ -45,8 +45,10 @@ export class LoginComponent implements OnInit
           .subscribe(
             data => 
             {
-              localStorage.setItem("access_token_data", data["access_token_data"]);
-              localStorage.setItem("refresh_token_data", data["refresh_token_data"]);
+              localStorage.setItem("access_token_data",
+                  data["access_token_data"]);
+              localStorage.setItem("refresh_token_data",
+                  data["refresh_token_data"]);
             },
             error => 
             {

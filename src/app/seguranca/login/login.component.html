@@ -35,9 +35,8 @@
 
           <mat-hint>Digite apenas números</mat-hint>
             
-          <mat-error *ngIf="form.get('phone').touched && 
-              form.get('phone').hasError('required')">
-            Este campo deve ser preenchido
+          <mat-error *ngIf="form.get('phone').hasError('required')">
+            O telefone deve ser preenchido
           </mat-error>
         </mat-form-field>
   
@@ -54,9 +53,8 @@
             {{tipoCampoSenha === 'password' ? 'visibility' : 'visibility_off'}}
           </mat-icon>
 
-          <mat-error *ngIf="form.get('password').touched && 
-              form.get('password').hasError('required')">
-            Este campo deve ser preenchido
+          <mat-error *ngIf="form.get('password').hasError('required')">
+            A senha deve ser preenchida
           </mat-error>        
         </mat-form-field>
   
