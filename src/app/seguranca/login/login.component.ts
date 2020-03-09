@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ShareDataService } from 'src/app/services/share-data.service';
 import { SegurancaService } from 'src/app/services/seguranca.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit
 
   constructor(private formBuilder: FormBuilder, public router: Router, 
       public shareDataService: ShareDataService, 
+      private snackBar: MatSnackBar,
       private segurancaService: SegurancaService) 
   {}
 
@@ -43,15 +45,21 @@ export class LoginComponent implements OnInit
     {
       this.segurancaService.login(this.form.value)
           .subscribe(
-            data => 
+            data =>
             {
               localStorage.setItem("access_token_data",
-                  data["access_token_data"]);
+                  JSON.stringify(data["access_token_data"]));
               localStorage.setItem("refresh_token_data",
-                  data["refresh_token_data"]);
+                  JSON.stringify(data["refresh_token_data"]));
+
+              this.router.navigate(['guarda-roupa']);
             },
-            error => 
+            error =>
             {
+              this.snackBar.open(
+                  'Erro de conexão, por favor, tente entrar novamente', '', 
+                  {duration: 4000, panelClass: 'snack-bar-error'}
+              );
               console.log(error);
             }
           );

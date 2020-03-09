@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LayoutModule } from '@angular/cdk/layout';
@@ -38,7 +38,6 @@ import { environment } from '../environments/environment';
 import { InterceptorModule } from './seguranca/interceptor.module'
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
-import { CookieService } from 'ngx-cookie-service';
  
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -82,11 +81,14 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     MatSlideToggleModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NgxMaskModule.forRoot(options),
-    InterceptorModule
+    InterceptorModule,
+    HttpClientXsrfModule.withOptions({
+      cookieName: 'csrf_access_token',
+      headerName: 'X-CSRF-TOKEN',
+    }),
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
-    CookieService
   ],
   entryComponents: [
     SpinnerComponent

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SpinnerComponent } from '../../../layout/spinner/spinner.component';
 import { ShareDataService } from '../../../services/share-data.service';
+import { SegurancaService } from 'src/app/services/seguranca.service';
 
 @Component({
   selector: 'app-guarda-roupa',
@@ -29,7 +30,8 @@ export class GuardaRoupaComponent implements OnInit {
   constructor
     (
       public dialog: MatDialog, 
-      public shareDataService: ShareDataService
+      public shareDataService: ShareDataService,
+      private segurancaService: SegurancaService
     ) 
   {
     this.shareDataService.tituloBarraSuperior = "Guarda-roupa";
@@ -71,6 +73,16 @@ export class GuardaRoupaComponent implements OnInit {
     {
       this.guardaRoupa[categoriaPeca] = pecas;
     }
+  }
+
+  tokenExpires()
+  {
+    this.segurancaService.isAuthenticated();
+  }
+
+  protectedEndpoint()
+  {
+    this.segurancaService.testToken();
   }
 }
 
