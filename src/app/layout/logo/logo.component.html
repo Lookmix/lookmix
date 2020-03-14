@@ -1,0 +1,8 @@
+<div [ngStyle]="{'margin': shareDataService.isXSmall ? '10px 0 15px 0px' : '20px'}"
+		class="div-logo">
+<img (click)="router.navigate(['guarda-roupa'])" 
+  	class="ocultar-efeito-padrao-clique logo" 
+	[src]="shareDataService.temaNoturno ? 
+			getAbsolutePath('hanger-dark-clean.svg') : 
+			getAbsolutePath('hanger-light-clean.svg')">
+</div>

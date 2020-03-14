@@ -1,0 +1,153 @@
+<div class="container-nova-conta">
+<!--
+  'background' : shareDataService.temaNoturno ? 
+        'unset' : '#4b0082bd',
+  'height': shareDataService.isXSmall && 
+        screenWidth < 321 ? 'unset' : '100%' -->
+  <div>
+    <app-logo></app-logo>
+  </div>
+
+  <div class="display-flex-row-center">
+    <mat-card class="card-nova-conta" 
+        [ngStyle]="{'width': shareDataService.isXSmall ? '260px' : '300px',
+            'marginBottom': shareDataService.isXSmall ? '20px' : 'unset'}">
+
+      <h2>Crie sua conta gratuita</h2> <!--de graça-->
+  
+      <form [formGroup]="form">
+        <div class="div-formulario">
+          <mat-form-field appearance="fill" floatLabel="always">
+    
+            <mat-label>Nome de usuário</mat-label>
+
+            <span matPrefix>@</span><!--&nbsp;-->
+
+            <input formControlName="username" matInput required
+                placeholder="SeuNomeDe.usuario_10"
+                maxlength="30" (blur)="validarUsername()"
+                mask="x*" [patterns]="customPatterns" 
+                [dropSpecialCharacters]="false">
+    
+            <mat-hint>
+              <!-- Poder ser aquele do Instagram ou do Twitter, caso estejam disponíveis ;) -->
+              <!-- Pode usar o do Instagram ou Twitter caso estejam disponíveis ;)
+              Pode ser o do Instagram ou Twitter se estiverem disponíveis aqui ;) -->
+
+              Aquele do Instagram ou do Twitter ;)
+            </mat-hint>
+
+            <mat-error *ngIf="form.get('username').touched && 
+                form.get('username').hasError('required')">
+              O nome de usuário deve ser preenchido
+            </mat-error>
+    
+            <mat-error *ngIf="form.get('username').hasError('notUnique')">
+              <!-- Alguém já usa esse :/ tenta outro aí. -->
+              <!-- Algum ninja já usa esse :/ tenta outro aí. -->
+              Algum ninja já pegou esse, tenta outro aí.
+            </mat-error>
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill">
+    
+            <mat-label>Número do celular</mat-label>
+            
+            <input formControlName="numero" matInput required
+                mask="(00) 00000-0000"
+                minlength="11"
+                (blur)="validarTelefone()"
+                placeholder="(00) 12345-6789">
+    
+            <mat-hint>DDD e número</mat-hint>
+
+            <mat-error *ngIf="form.get('numero').hasError('minlength')">
+              Ainda faltam alguns dígitos
+            </mat-error>
+
+            <mat-error *ngIf="form.get('numero').touched && 
+                form.get('numero').hasError('required')">
+              O telefone deve ser preenchido
+            </mat-error>
+
+            <mat-error *ngIf="form.get('numero').hasError('notUnique')">
+              <!-- Ops, outra pessoa já usa esse, veja se digitou corretamente -->
+              <!-- Ops, alguém já usa esse, veja se digitou corretamente. -->
+              <!-- Alguém já usa esse, ele está correto? -->
+              <!-- Alguém já usa esse, você digitou corretamente? -->
+              <!-- Alguém já usa esse, você digitou certo?  -->
+              Alguém já usa esse, você digitou correto? 
+              <!-- Alguém já usa esse número, ele está correto? -->
+              <!-- Alguém se cadastrou com esse número antes,  -->
+            </mat-error>
+          </mat-form-field>
+    
+          <!-- <mat-form-field appearance="fill">
+    
+            <mat-label>E-mail</mat-label>
+            
+            <input formControlName="email" matInput
+                placeholder="Digite seu e-mail">
+    
+            <mat-hint>Opcional</mat-hint>
+    
+            <mat-error *ngIf="form.get('email').touched && 
+                form.get('email').hasError('email')">
+              E-mail inválido
+            </mat-error>
+          </mat-form-field> -->
+    
+          <mat-form-field appearance="fill">
+    
+            <mat-label>Senha</mat-label>
+    
+            <input formControlName="senha" matInput placeholder="Digite sua senha" 
+                [type]="tipoCampoSenha" required>
+    
+            <mat-icon class="ocultar-efeito-padrao-clique icone-exibir-senha"
+                (click)="tipoCampoSenha === 'password' ? tipoCampoSenha = 'text' : 
+                    tipoCampoSenha = 'password'" matSuffix>
+              {{tipoCampoSenha === 'password' ? 'visibility' : 'visibility_off'}}
+            </mat-icon>
+    
+            <mat-error *ngIf="form.get('senha').touched && 
+                form.get('senha').hasError('required')">
+              A senha deve ser preenchida
+            </mat-error>        
+          </mat-form-field>
+          
+          <!-- <mat-form-field appearance="fill">
+            
+            <mat-label>Confirmação de senha</mat-label>
+            
+            <input formControlName="password" matInput placeholder="Digite sua senha" 
+                [type]="tipoCampoSenha" required>
+            
+            <mat-icon class="ocultar-efeito-padrao-clique icone-exibir-senha"
+                (click)="tipoCampoSenha === 'password' ? tipoCampoSenha = 'text' : 
+                tipoCampoSenha = 'password'" matSuffix>
+              {{tipoCampoSenha === 'password' ? 'visibility' : 'visibility_off'}}
+            </mat-icon>
+          
+          <mat-error *ngIf="form.get('password').touched && 
+          form.get('password').hasError('required')">
+          Este campo deve ser preenchido
+        </mat-error>        
+      </mat-form-field> -->
+        </div>
+      
+        <div class="div-botoes-nova-conta">
+          <button [color]="shareDataService.temaNoturno ? 'primary' : 'accent'"
+              mat-button type="button" (click)="router.navigate(['/login']); updateMetaTag('login')">
+            VOLTAR
+          </button>
+  
+          <button [color]="shareDataService.temaNoturno ? 'accent' : 'primary'" 
+              mat-raised-button type="button" [disabled]="form.invalid">
+            CONCLUIR
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

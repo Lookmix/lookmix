@@ -1,0 +1,75 @@
+<div class="container-login"> <!--background: indigo-->
+
+  <!-- 
+    [ngStyle]="{'background': shareDataService.temaNoturno ? 
+    'unset' : 'lightpink'}"
+    
+    <div [ngStyle]="{'margin': shareDataService.isXSmall ? '10px 0 15px 0px' : '20px'}"
+      class="div-logo">
+    <img (click)="router.navigate(['/'])" 
+        class="ocultar-efeito-padrao-clique logo-login" 
+        src="../../../assets/hanger.svg">
+  </div> -->
+  <app-logo></app-logo>
+
+  <mat-card [ngStyle]="{'width': shareDataService.isXSmall ? '260px' : '300px'}"
+      class="card-login">
+
+    <h2 class="titulo-login">
+      Entre na sua conta
+    </h2>
+
+    <!-- <div style="display: flex; margin-bottom: 20px;">
+      <img style="width: 117px; margin: auto;" src="../../../assets/hanger.svg">
+    </div> -->
+
+    <form [formGroup]="form">
+      <div class="div-form-login">
+        <mat-form-field appearance="fill" class="campo-phone">
+
+          <mat-label>Telefone</mat-label>
+          
+          <input formControlName="phone" matInput required
+              placeholder="(00) 91234-5678" 
+              mask="(00) 00000-0000">
+
+          <mat-hint>Digite apenas números</mat-hint>
+            
+          <mat-error *ngIf="form.get('phone').hasError('required')">
+            O telefone deve ser preenchido
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill" class="campo-senha">
+
+          <mat-label>Senha</mat-label>
+
+          <input formControlName="password" matInput placeholder="Digite sua senha" 
+              [type]="tipoCampoSenha" required>
+
+          <mat-icon class="ocultar-efeito-padrao-clique icone-exibir-senha"
+              (click)="tipoCampoSenha === 'password' ? tipoCampoSenha = 'text' : 
+                  tipoCampoSenha = 'password'" matSuffix>
+            {{tipoCampoSenha === 'password' ? 'visibility' : 'visibility_off'}}
+          </mat-icon>
+
+          <mat-error *ngIf="form.get('password').hasError('required')">
+            A senha deve ser preenchida
+          </mat-error>        
+        </mat-form-field>
+  
+        <button [color]="shareDataService.temaNoturno ? 'accent' : 'primary'" 
+            mat-raised-button class="botao-entrar"
+            (click)="entrar()">
+          ENTRAR
+        </button>
+
+        <button [color]="shareDataService.temaNoturno ? 'primary' : 'accent'" 
+            type="button" class="botao-criar-conta" mat-button
+            (click)="router.navigate(['nova-conta']); updateMetaTag('novaconta')">
+          Criar uma conta
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
