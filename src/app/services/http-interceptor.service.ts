@@ -40,8 +40,10 @@ export class HttpInterceptorService implements HttpInterceptor
       withCredentials: true,
       setHeaders: headers
     });
-    if (!utils.isTokenValid('access_token_data')
-        && !this.blackListEnpoints.includes(request.url))
+    const isIntoBlackList = this.blackListEnpoints.filter(endpoint => 
+        request.url.includes(endpoint))[0] !== undefined;
+
+    if (!utils.isTokenValid('access_token_data') && !isIntoBlackList)
     {
       if (utils.isTokenValid('refresh_token_data'))
       {
@@ -59,12 +61,15 @@ export class HttpInterceptorService implements HttpInterceptor
               }, 
               error => 
               {
-                this.snackBar.open(error, '', {
-                  duration: 4000, 
-                  panelClass: 'snack-bar-error', 
-                  verticalPosition: 'bottom', 
-                  horizontalPosition: 'end'
-                })
+                // todo: corrigir isso -> erro acontece ao adicionar roupa
+                // sem conexão. Na verdade está correto mas está comentado
+                // temporariamente.
+                // this.snackBar.open(error, '', {
+                //   duration: 4000, 
+                //   panelClass: 'snack-bar-error', 
+                //   verticalPosition: 'bottom', 
+                //   horizontalPosition: 'end'
+                // })
               }
             );
       }
@@ -81,11 +86,11 @@ export class HttpInterceptorService implements HttpInterceptor
 
   private setHeaders(request, xsrfToken)
   {
-    let headers;
+    let headers = {};
 
     if (!request.url.includes('api/upload'))
     {
-      headers = {"Content-Type": "application/json"}
+      headers['Content-Type'] = 'application/json'
     }
     if (xsrfToken !== null) 
     {
