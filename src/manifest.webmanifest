@@ -4,8 +4,8 @@
   "theme_color": "#ffb6c1ad",
   "background_color": "#ffb6c1ad",
   "display": "standalone",
-  "scope": "https://viniciusgouveia.github.io/combinador-roupas/",
-  "start_url": "https://viniciusgouveia.github.io/combinador-roupas/login",
+  "scope": "https://viniciusgouveia.github.io/guarda-roupa-virtual/",
+  "start_url": "https://viniciusgouveia.github.io/guarda-roupa-virtual/login",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

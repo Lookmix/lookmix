@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "combinador-roupas": {
+    "guarda-roupa-virtual": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/combinador-roupas",
+            "outputPath": "dist/guarda-roupa-virtual",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -69,18 +69,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "combinador-roupas:build"
+            "browserTarget": "guarda-roupa-virtual:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "combinador-roupas:build:production"
+              "browserTarget": "guarda-roupa-virtual:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "combinador-roupas:build"
+            "browserTarget": "guarda-roupa-virtual:build"
           }
         },
         "test": {
@@ -119,11 +119,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "combinador-roupas:serve"
+            "devServerTarget": "guarda-roupa-virtual:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "combinador-roupas:serve:production"
+              "devServerTarget": "guarda-roupa-virtual:serve:production"
             }
           }
         },
@@ -134,5 +134,5 @@
       }
     }
   },
-  "defaultProject": "combinador-roupas"
+  "defaultProject": "guarda-roupa-virtual"
 }
