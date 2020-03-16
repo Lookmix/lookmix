@@ -16,6 +16,13 @@ export class HttpInterceptorService implements HttpInterceptor
 { 
   private requestPendente;
 
+  private blackListEnpoints = [
+    'api/auth/refresh',
+    'api/auth/login',
+    'api/usuarios/is_username_unique',
+    'api/usuarios/is_phone_unique'
+  ]
+
   constructor(private tokenExtractor: HttpXsrfTokenExtractor,
       private segurancaService: SegurancaService,
       private snackBar: MatSnackBar,
@@ -26,7 +33,7 @@ export class HttpInterceptorService implements HttpInterceptor
       next: HttpHandler): Observable<HttpEvent<any>> 
   {    
     const xsrfToken = this.tokenExtractor.getToken() as string;
-    console.log(xsrfToken);
+
     let headers = this.setHeaders(request, xsrfToken);
 
     const requestModificada = request.clone({
@@ -34,8 +41,7 @@ export class HttpInterceptorService implements HttpInterceptor
       setHeaders: headers
     });
     if (!utils.isTokenValid('access_token_data')
-        && !request.url.includes('api/auth/refresh') 
-        && !request.url.includes('api/auth/login'))
+        && !this.blackListEnpoints.includes(request.url))
     {
       if (utils.isTokenValid('refresh_token_data'))
       {

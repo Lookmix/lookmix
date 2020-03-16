@@ -4,8 +4,8 @@
       <mat-card [ngStyle]="{'padding': shareDataService.isXSmall ? '16px 10px' : '16px'}">
         <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'm'">Camisas, camisetas, polos e regatas</h1> <!-- Manga-curta ()  Roupas de cima-->
         <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'f'">Camisas e blusas</h1> <!--Manga-curta ()-->
-        <button mat-button (click)="tokenExpires()">ESTÁ VÁLIDO?</button>
-        <button mat-button (click)="protectedEndpoint()">TESTAR TOKEN</button>
+        <!-- <button mat-button (click)="tokenExpires()">ESTÁ VÁLIDO?</button>
+        <button mat-button (click)="protectedEndpoint()">TESTAR TOKEN</button> -->
         <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'mangaCurta')"></app-card-roupa>
     
         <br/>
