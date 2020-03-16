@@ -9,8 +9,8 @@ import { SegurancaService } from 'src/app/services/seguranca.service';
   templateUrl: './guarda-roupa.component.html',
   styleUrls: ['./guarda-roupa.component.scss']
 })
-export class GuardaRoupaComponent implements OnInit {
-
+export class GuardaRoupaComponent implements OnInit 
+{
   guardaRoupa = {
     mangaCurta: [],
     mangaLonga: [],

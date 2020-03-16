@@ -1,0 +1,43 @@
+<div class="container-dialog-confirmacao mat-app-background" 
+    [class.dark-theme]="shareDataService.temaNoturno">
+  <h2 mat-dialog-title>Confirmação do número de telefone</h2>
+  
+  <mat-dialog-content>
+    <p>
+      Enviamos um SMS com um código para o seu 
+      número. É só digitar o código no campo abaixo 
+      e concluir ;)
+    </p>
+      
+    <form [formGroup]="form">
+      <div class="div-campo-codigo">
+        <mat-form-field appearance="fill">
+          <mat-label>Código</mat-label>
+          <input matInput placeholder="Digite aqui"
+              formControlName="codigo" mask="000000"
+              minlength="6" required>
+          <mat-hint>São 6 números</mat-hint>
+  
+          <mat-error *ngIf="form.get('codigo').hasError('required')">
+            Cadê código?
+          </mat-error>
+
+          <mat-error *ngIf="form.get('codigo').hasError('minlength')">
+            Ainda faltam alguns números
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="div-botoes">
+        <button mat-button type="button" mat-dialog-close>
+          CANCELAR
+        </button>
+        
+        <button mat-raised-button 
+            [color]="shareDataService.temaNoturno ? 'accent' : 'primary'">
+          CONCLUIR
+        </button>
+      </div>
+    </form>
+  </mat-dialog-content>
+</div>

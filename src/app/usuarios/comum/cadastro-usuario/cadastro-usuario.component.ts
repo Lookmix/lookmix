@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-cadastro-usuario',
@@ -29,7 +30,7 @@ export class CadastroUsuarioComponent implements OnInit
 
   constructor(public shareDataService: ShareDataService, 
       private usuarioService: UsuarioService,
-      private snackBar: MatSnackBar,
+      private snackBar: MatSnackBar, public dialog: MatDialog,
       public platform: Platform, private formBuilder: FormBuilder, 
       public router: Router) 
   {
@@ -112,5 +113,46 @@ export class CadastroUsuarioComponent implements OnInit
               console.log(error);
             });
     }
+  }
+
+  abrirDialogConfirmacaoNumero()
+  {
+    if (this.form.valid)
+    {
+      this.dialog.open(ConfirmacaoNumeroDialogComponent, {
+        disableClose: true,
+        width: '280px'
+      })
+    }
+  }
+}
+
+@Component({
+  selector: 'app-confirmacao-numero-dialog',
+  templateUrl: './confirmacao-numero-dialog.component.html',
+  styleUrls: ['./confirmacao-numero-dialog.component.scss']
+})
+export class ConfirmacaoNumeroDialogComponent implements OnInit 
+{ 
+  form: FormGroup; 
+
+  constructor(public shareDataService: ShareDataService, 
+      private usuarioService: UsuarioService,
+      private snackBar: MatSnackBar,
+      public platform: Platform, private formBuilder: FormBuilder, 
+      public router: Router) 
+  {
+  }
+
+  ngOnInit() 
+  {    
+    this.createForm();
+  }
+
+  private createForm()
+  {
+    this.form = this.formBuilder.group({
+      codigo: ['', Validators.required],
+    });
   }
 }

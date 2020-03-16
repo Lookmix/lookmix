@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } 
+    from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { LayoutModule } from '@angular/cdk/layout';
@@ -31,14 +32,15 @@ import { LooksSemanaisComponent } from './usuarios/comum/looks-semanais/looks-se
 import { CardRoupaComponent } from './layout/card-roupa/card-roupa.component';
 import { LoginComponent } from './seguranca/login/login.component';
 import { DashboardComponent } from './usuarios/admin/dashboard/dashboard.component';
-import { CadastroUsuarioComponent } from './usuarios/comum/cadastro-usuario/cadastro-usuario.component';
+import { CadastroUsuarioComponent, ConfirmacaoNumeroDialogComponent } from './usuarios/comum/cadastro-usuario/cadastro-usuario.component';
 import { LogoComponent } from './layout/logo/logo.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { HttpInterceptorService } from './services/http-interceptor.service'
 import { environment } from '../environments/environment';
-import { InterceptorModule } from './seguranca/interceptor.module'
-
 import { NgxMaskModule, IConfig } from 'ngx-mask';
- 
+import * as utils from './utils'
+// import { HttpXsrfCookieExtractorService } from './services/http-xsrf-cookie-extractor.service';
+
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule({
@@ -53,6 +55,7 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     LoginComponent,
     DashboardComponent,
     CadastroUsuarioComponent,
+    ConfirmacaoNumeroDialogComponent,
     LogoComponent
   ],
   imports: [
@@ -81,17 +84,27 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     MatSlideToggleModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NgxMaskModule.forRoot(options),
-    InterceptorModule,
+    // todo: essa lógica só é executada no memento quem o módulo é criado,
+    // ou seja, não atende à necessidade de mudança dinâmica.
     HttpClientXsrfModule.withOptions({
-      cookieName: 'csrf_access_token',
+      cookieName: utils.isTokenValid('access_token_data') ? 
+          'csrf_access_token' : 'csrf_refresh_token',
       headerName: 'X-CSRF-TOKEN',
     }),
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
-  ],
-  entryComponents: [
-    SpinnerComponent
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: HttpInterceptorService, 
+      multi: true
+    },
+    // todo: Testar essa alternativa para escolher entre o refresh ou 
+    // access token
+    // { 
+    //   provide: HttpXsrfTokenExtractor, 
+    //   useClass: HttpXsrfCookieExtractorService
+    // }
   ],
   bootstrap: [AppComponent]
 })

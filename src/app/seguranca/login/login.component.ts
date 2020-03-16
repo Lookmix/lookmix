@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ShareDataService } from 'src/app/services/share-data.service';
 import { SegurancaService } from 'src/app/services/seguranca.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import * as utils from './../../utils'
 
 @Component({
   selector: 'app-login',
@@ -47,10 +48,7 @@ export class LoginComponent implements OnInit
           .subscribe(
             data =>
             {
-              localStorage.setItem("access_token_data",
-                  JSON.stringify(data["access_token_data"]));
-              localStorage.setItem("refresh_token_data",
-                  JSON.stringify(data["refresh_token_data"]));
+              utils.setLocalStorageTokenData(data);
 
               this.router.navigate(['guarda-roupa']);
             },
