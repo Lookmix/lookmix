@@ -1,22 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, Subject } from 'rxjs';
 import { take, catchError, retryWhen, delay,
-    concat, concatMap } from 'rxjs/operators';
+    map, concatMap, switchMap, tap } from 'rxjs/operators';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, 
     HTTP_INTERCEPTORS,
-    HttpXsrfTokenExtractor} from '@angular/common/http';
+    HttpXsrfTokenExtractor,
+    HttpClient,
+    HttpResponse} from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SegurancaService } from './seguranca.service';
 import * as utils from './../utils';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor 
 { 
-  private requestPendente;
+  private requestPendente: HttpRequest<any>;
 
-  private blackListEnpoints = [
+  private whiteListEnpoints = [
     'api/auth/refresh',
     'api/auth/login',
     'api/usuarios/is_username_unique',
@@ -24,54 +26,38 @@ export class HttpInterceptorService implements HttpInterceptor
   ]
 
   constructor(private tokenExtractor: HttpXsrfTokenExtractor,
-      private segurancaService: SegurancaService,
+      private httpClient: HttpClient,
       private snackBar: MatSnackBar,
       private router: Router) {}
-
 
   intercept(request: HttpRequest<any>, 
       next: HttpHandler): Observable<HttpEvent<any>> 
   {    
     const xsrfToken = this.tokenExtractor.getToken() as string;
 
-    let headers = this.setHeaders(request, xsrfToken);
+    let headers = this.setHeaders(request.url, xsrfToken);
 
     const requestModificada = request.clone({
       withCredentials: true,
       setHeaders: headers
     });
-    const isIntoBlackList = this.blackListEnpoints.filter(endpoint => 
+    const isUrlIntoWhiteList = this.whiteListEnpoints.filter(endpoint => 
         request.url.includes(endpoint))[0] !== undefined;
 
-    if (!utils.isTokenValid('access_token_data') && !isIntoBlackList)
+    if (!utils.isTokenValid('access_token_data') && !isUrlIntoWhiteList)
     {
       if (utils.isTokenValid('refresh_token_data'))
       {
         this.requestPendente = requestModificada;
 
-        this.getNewTokenWithRefreshToken()
-            .subscribe(
-              data => 
-              {
-                utils.setLocalStorageTokenData(data);
-
-                // todo: ainda não foi testado (requestPendente -> request 
-                // que seria executada caso o access-token estivesse válido)
-                return next.handle(this.requestPendente);
-              }, 
-              error => 
-              {
-                // todo: corrigir isso -> erro acontece ao adicionar roupa
-                // sem conexão. Na verdade está correto mas está comentado
-                // temporariamente.
-                // this.snackBar.open(error, '', {
-                //   duration: 4000, 
-                //   panelClass: 'snack-bar-error', 
-                //   verticalPosition: 'bottom', 
-                //   horizontalPosition: 'end'
-                // })
-              }
-            );
+        return this.refreshToken()
+            .pipe(
+                tap(response => 
+                {
+                  utils.setLocalStorageTokenData(response);
+                  // console.log(response);
+                }),
+                concatMap(() => this.httpClient.request(this.requestPendente)))
       }
       else
       {
@@ -80,21 +66,38 @@ export class HttpInterceptorService implements HttpInterceptor
     }
     else
     {
-      return next.handle(requestModificada);
+      return next.handle(requestModificada)
+          // .pipe(
+          //     // tap(result => {console.log(result); return result}),
+          //     take(1),
+          //     catchError(err => 
+          //     {
+          //       console.log(err);
+          //       return throwError(err);
+          //     }),
+          //     retryWhen(errors =>
+          //         errors.pipe(
+          //             delay(2500),
+          //             take(4),
+          //             concatMap(() => throwError('Erro de rede. ' +
+          //                 'Você está conectado à internet?'))
+          //         )
+          //     ),
+          // );
     }
   }
 
-  private setHeaders(request, xsrfToken)
+  private setHeaders(url, xsrfToken)
   {
     let headers = {};
 
-    if (!request.url.includes('api/upload'))
+    if (!url.includes('api/upload'))
     {
       headers['Content-Type'] = 'application/json'
     }
     if (xsrfToken !== null) 
     {
-      headers["X-CSRF-TOKEN"] = xsrfToken
+      headers['X-CSRF-TOKEN'] = xsrfToken
     }
     return headers;
   }
@@ -103,36 +106,78 @@ export class HttpInterceptorService implements HttpInterceptor
   {
     this.router.navigate(['login']);
 
-    this.snackBar.open('Por questões de segurança, ' +
+    this.snackBar.open('Por questões de segurança ' +
         'você precisa entrar na sua conta novamente.', '', 
     {
       duration: 4500, 
       verticalPosition: 'bottom', 
-      horizontalPosition: 'end'
+      horizontalPosition: 'center'
     }) 
   }
 
-  private getNewTokenWithRefreshToken(): Observable<any>
+  private refreshToken()
   {
-    return this.segurancaService.refreshToken()
-        .pipe(
-          take(1),
-          catchError(err => 
-          {
-            return throwError(err);
-          }),
-          retryWhen(errors =>
-            errors.pipe(
-              concatMap(result => 
-              {
-                return throwError(result);
-              }),
-              delay(2500),
-              take(4),
-              concatMap(() => throwError('Erro de rede. ' +
-                  'Você está conectado à internet?'))
-            )
-          )
-        );
+    return this.httpClient.post(`${environment.API_URL}/` + 
+        `auth/refresh`, {})
+        // .pipe(
+        //     take(1),
+        //     catchError(err => 
+        //     {
+        //       return throwError(err);
+        //     }),
+        //     retryWhen(errors =>
+        //         errors.pipe(
+        //             concatMap(result => 
+        //             {
+        //               return throwError(result);
+        //             }),
+        //             delay(2500),
+        //             take(4),
+        //             concatMap(() => throwError('Erro de rede. ' +
+        //                 'Você está conectado à internet?'))
+        //         )
+        //     ),
+        // );
+  }
+
+  private getNewTokenWithRefreshToken()
+  {
+    // return this.refreshToken()
+    //     .pipe(
+    //         take(1),
+    //         catchError(err => 
+    //         {
+    //           return throwError(err);
+    //         }),
+    //         retryWhen(errors =>
+    //             errors.pipe(
+    //                 concatMap(result => 
+    //                 {
+    //                   return throwError(result);
+    //                 }),
+    //                 delay(2500),
+    //                 take(4),
+    //                 concatMap(() => throwError('Erro de rede. ' +
+    //                     'Você está conectado à internet?'))
+    //             )
+    //         ),
+    //     )
+    //     .subscribe(
+    //         response => 
+    //         {              
+    //           utils.setLocalStorageTokenData(response);
+              
+    //           this.httpClient.request(this.requestPendente).subscribe();
+    //         }, 
+    //         error => 
+    //         {
+    //           console.log(error);
+    //             // this.snackBar.open(error, '', {
+    //             //   duration: 4000, 
+    //             //   panelClass: 'snack-bar-error', 
+    //             //   verticalPosition: 'bottom', 
+    //             //   horizontalPosition: 'end'
+    //             // })
+    //         });
   }
 }

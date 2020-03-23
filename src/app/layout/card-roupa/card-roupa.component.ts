@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { v4 as uuid } from 'uuid';
 import { UploadService } from 'src/app/services/upload.service';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SpinnerComponent } from '../spinner/spinner.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { ShareDataService } from 'src/app/services/share-data.service';
+
 
 @Component({
   selector: 'app-card-roupa',
@@ -113,19 +114,20 @@ export class CardRoupaComponent implements OnInit
     {
       fileToUpload = fileFormData.inputFile;
     }
-    this.uploadService.uploadFile(fileToUpload).subscribe(
-      dados => 
-      {
-        roupa.uploadCompleto = true;
-        roupa.falhaUpload = false;
-      },
-      erro => 
-      {
-        roupa.falhaUpload = true;
-        roupa.uploadCompleto = false;
+    this.uploadService.uploadFile(fileToUpload)
+        .subscribe(
+            response => 
+            {
+              roupa.uploadCompleto = true;
+              roupa.falhaUpload = false;
+            },
+            erro => 
+            {
+              roupa.falhaUpload = true;
+              roupa.uploadCompleto = false;
 
-        console.log(erro)
-      });
+              console.log(erro)
+            });
   }
 
   private isTipoArquivoValido(inputFiles: any[])

@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS } 
+import { HttpClientModule, HttpClientXsrfModule, HTTP_INTERCEPTORS, HttpXsrfTokenExtractor } 
     from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -38,8 +38,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpInterceptorService } from './services/http-interceptor.service'
 import { environment } from '../environments/environment';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
-import * as utils from './utils'
-// import { HttpXsrfCookieExtractorService } from './services/http-xsrf-cookie-extractor.service';
+import { HttpXsrfTokenExtractorService } from './services/http-xsrf-token-extractor.service';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -84,13 +83,6 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     MatSlideToggleModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NgxMaskModule.forRoot(options),
-    // todo: essa lógica só é executada no memento quem o módulo é criado,
-    // ou seja, não atende à necessidade de mudança dinâmica.
-    HttpClientXsrfModule.withOptions({
-      cookieName: utils.isTokenValid('access_token_data') ? 
-          'csrf_access_token' : 'csrf_refresh_token',
-      headerName: 'X-CSRF-TOKEN',
-    }),
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},
@@ -99,12 +91,10 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
       useClass: HttpInterceptorService, 
       multi: true
     },
-    // todo: Testar essa alternativa para escolher entre o refresh ou 
-    // access token
-    // { 
-    //   provide: HttpXsrfTokenExtractor, 
-    //   useClass: HttpXsrfCookieExtractorService
-    // }
+    { 
+      provide: HttpXsrfTokenExtractor, 
+      useClass: HttpXsrfTokenExtractorService
+    }
   ],
   bootstrap: [AppComponent]
 })
