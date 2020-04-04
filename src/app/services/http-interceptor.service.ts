@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError, Subject } from 'rxjs';
-import { take, catchError, retryWhen, delay,
-    map, concatMap, switchMap, tap } from 'rxjs/operators';
+import { Observable, throwError, of } from 'rxjs';
+import { retryWhen, delay, concatMap, tap } from 'rxjs/operators';
 import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, 
-    HTTP_INTERCEPTORS,
-    HttpXsrfTokenExtractor,
-    HttpClient,
-    HttpResponse} from '@angular/common/http';
+    HttpXsrfTokenExtractor, HttpClient} from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as utils from './../utils';
 import { Router } from '@angular/router';
@@ -67,23 +63,17 @@ export class HttpInterceptorService implements HttpInterceptor
     else
     {
       return next.handle(requestModificada)
-          // .pipe(
-          //     // tap(result => {console.log(result); return result}),
-          //     take(1),
-          //     catchError(err => 
-          //     {
-          //       console.log(err);
-          //       return throwError(err);
-          //     }),
-          //     retryWhen(errors =>
-          //         errors.pipe(
-          //             delay(2500),
-          //             take(4),
-          //             concatMap(() => throwError('Erro de rede. ' +
-          //                 'Você está conectado à internet?'))
-          //         )
-          //     ),
-          // );
+          .pipe(
+              retryWhen(errors =>
+                  errors.pipe(
+                      delay(2500),
+                      concatMap((e, index) => 
+                          index === 4 ? throwError('Erro de rede, ' + 
+                              'Você está conectado à internet?') : of(null)
+                        )
+                    ),
+                ),
+            );
     }
   }
 
@@ -108,76 +98,12 @@ export class HttpInterceptorService implements HttpInterceptor
 
     this.snackBar.open('Por questões de segurança ' +
         'você precisa entrar na sua conta novamente.', '', 
-    {
-      duration: 4500, 
-      verticalPosition: 'bottom', 
-      horizontalPosition: 'center'
-    }) 
+    {duration: 4500}) 
   }
 
   private refreshToken()
   {
     return this.httpClient.post(`${environment.API_URL}/` + 
         `auth/refresh`, {})
-        // .pipe(
-        //     take(1),
-        //     catchError(err => 
-        //     {
-        //       return throwError(err);
-        //     }),
-        //     retryWhen(errors =>
-        //         errors.pipe(
-        //             concatMap(result => 
-        //             {
-        //               return throwError(result);
-        //             }),
-        //             delay(2500),
-        //             take(4),
-        //             concatMap(() => throwError('Erro de rede. ' +
-        //                 'Você está conectado à internet?'))
-        //         )
-        //     ),
-        // );
-  }
-
-  private getNewTokenWithRefreshToken()
-  {
-    // return this.refreshToken()
-    //     .pipe(
-    //         take(1),
-    //         catchError(err => 
-    //         {
-    //           return throwError(err);
-    //         }),
-    //         retryWhen(errors =>
-    //             errors.pipe(
-    //                 concatMap(result => 
-    //                 {
-    //                   return throwError(result);
-    //                 }),
-    //                 delay(2500),
-    //                 take(4),
-    //                 concatMap(() => throwError('Erro de rede. ' +
-    //                     'Você está conectado à internet?'))
-    //             )
-    //         ),
-    //     )
-    //     .subscribe(
-    //         response => 
-    //         {              
-    //           utils.setLocalStorageTokenData(response);
-              
-    //           this.httpClient.request(this.requestPendente).subscribe();
-    //         }, 
-    //         error => 
-    //         {
-    //           console.log(error);
-    //             // this.snackBar.open(error, '', {
-    //             //   duration: 4000, 
-    //             //   panelClass: 'snack-bar-error', 
-    //             //   verticalPosition: 'bottom', 
-    //             //   horizontalPosition: 'end'
-    //             // })
-    //         });
   }
 }

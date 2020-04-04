@@ -15,7 +15,7 @@
 
       <h2>Crie sua conta gratuita</h2> <!--de graça-->
   
-      <form [formGroup]="form">
+      <form [formGroup]="form" autocomplete="off">
         <div class="div-formulario">
           <mat-form-field appearance="fill" floatLabel="always">
     
@@ -24,11 +24,25 @@
             <span matPrefix>@</span><!--&nbsp;-->
 
             <input formControlName="username" matInput required
-                placeholder="SeuNomeDe.usuario_10"
-                maxlength="30" (blur)="validarUsername()"
+                placeholder="seuNomeDe.usuario_25"
+                (keyup)="validarUsername(); form.get('username').hasError('required') ? 
+                    setInvisibleUsernameInputIcons() : false"
+                maxlength="30"
                 mask="x*" [patterns]="customPatterns" 
                 [dropSpecialCharacters]="false">
-    
+
+            <span matSuffix *ngIf="exibirSpinnerNomeUsuario">
+              <mat-spinner [diameter]="18"></mat-spinner>
+            </span>
+
+            <span matSuffix *ngIf="exibirIconeNomeValido">
+              <mat-icon>sentiment_very_satisfied</mat-icon>
+            </span>
+
+            <span matSuffix *ngIf="exibirIconeNomeInvalido">
+              <mat-icon>sentiment_very_dissatisfied</mat-icon>
+            </span>
+            
             <mat-hint>
               <!-- Poder ser aquele do Instagram ou do Twitter, caso estejam disponíveis ;) -->
               <!-- Pode usar o do Instagram ou Twitter caso estejam disponíveis ;)
@@ -55,9 +69,22 @@
             <input formControlName="numero" matInput required
                 mask="(00) 00000-0000"
                 minlength="11"
-                (blur)="validarTelefone()"
+                (keyup)="validarTelefone(); form.get('numero').hasError('required') ? 
+                    setInvisibleNumeroInputIcons() : false"
                 placeholder="(00) 12345-6789">
     
+            <span matSuffix *ngIf="exibirSpinnerNumero">
+              <mat-spinner [diameter]="18"></mat-spinner>
+            </span>
+
+            <span matSuffix *ngIf="exibirIconeNumeroValido">
+              <mat-icon>sentiment_very_satisfied</mat-icon>
+            </span>
+
+            <span matSuffix *ngIf="exibirIconeNumeroInvalido">
+              <mat-icon>sentiment_very_dissatisfied</mat-icon>
+            </span>
+
             <mat-hint>DDD e número</mat-hint>
 
             <mat-error *ngIf="form.get('numero').hasError('minlength')">
@@ -140,6 +167,7 @@
           </button>
   
           <button [color]="shareDataService.temaNoturno ? 'accent' : 'primary'" 
+              [disabled]="disableNextButton"
               mat-stroked-button (click)="abrirDialogConfirmacaoNumero()">
             PRÓXIMO
           </button>
