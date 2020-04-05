@@ -48,3 +48,14 @@ export function setLocalStorageTokenData(dados)
 	localStorage.setItem("refresh_token_data",
 			JSON.stringify(dados["refresh_token_data"]));
 }
+
+export function clearLocalStorageTokenData()
+{
+	localStorage.removeItem("access_token_data");
+	localStorage.removeItem("refresh_token_data");
+}
+
+export function getTokenJTI(tokenName: string)
+{
+	return JSON.parse(localStorage.getItem(tokenName))['jti'];
+}

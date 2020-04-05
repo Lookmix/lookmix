@@ -6,7 +6,7 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest,
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as utils from './../utils';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { SegurancaService } from './seguranca.service';
 
 
 @Injectable()
@@ -17,6 +17,7 @@ export class HttpInterceptorService implements HttpInterceptor
   private whiteListEnpoints = [
     'api/auth/refresh',
     'api/auth/login',
+    'api/auth/token',
     'api/usuarios/is_username_unique',
     'api/usuarios/is_phone_unique'
   ]
@@ -24,7 +25,8 @@ export class HttpInterceptorService implements HttpInterceptor
   constructor(private tokenExtractor: HttpXsrfTokenExtractor,
       private httpClient: HttpClient,
       private snackBar: MatSnackBar,
-      private router: Router) {}
+      private router: Router, 
+      private segurancaService: SegurancaService) {}
 
   intercept(request: HttpRequest<any>, 
       next: HttpHandler): Observable<HttpEvent<any>> 
@@ -46,14 +48,7 @@ export class HttpInterceptorService implements HttpInterceptor
       {
         this.requestPendente = requestModificada;
 
-        return this.refreshToken()
-            .pipe(
-                tap(response => 
-                {
-                  utils.setLocalStorageTokenData(response);
-                  // console.log(response);
-                }),
-                concatMap(() => this.httpClient.request(this.requestPendente)))
+        return this.renovarTokenEExecutarRequestInterceptada();
       }
       else
       {
@@ -62,18 +57,7 @@ export class HttpInterceptorService implements HttpInterceptor
     }
     else
     {
-      return next.handle(requestModificada)
-          .pipe(
-              retryWhen(errors =>
-                  errors.pipe(
-                      delay(2500),
-                      concatMap((e, index) => 
-                          index === 4 ? throwError('Erro de rede, ' + 
-                              'Você está conectado à internet?') : of(null)
-                        )
-                    ),
-                ),
-            );
+      return this.executarRequestInterceptada(next, requestModificada)
     }
   }
 
@@ -98,12 +82,33 @@ export class HttpInterceptorService implements HttpInterceptor
 
     this.snackBar.open('Por questões de segurança ' +
         'você precisa entrar na sua conta novamente.', '', 
-    {duration: 4500}) 
+        {duration: 4500}) 
   }
 
-  private refreshToken()
+  private renovarTokenEExecutarRequestInterceptada(): Observable<HttpEvent<any>>
   {
-    return this.httpClient.post(`${environment.API_URL}/` + 
-        `auth/refresh`, {})
+    return this.segurancaService.refreshToken()
+        .pipe(
+            tap(response => 
+            {
+              utils.setLocalStorageTokenData(response);
+            }),
+            concatMap(() => this.httpClient.request(this.requestPendente)))
+  }
+
+  private executarRequestInterceptada(next: HttpHandler, request): Observable<HttpEvent<any>>
+  {
+    return next.handle(request)
+        .pipe(
+            retryWhen(errors =>
+                errors.pipe(
+                    delay(2500),
+                    concatMap((e, index) => 
+                        index === 4 ? throwError('Erro de rede, ' + 
+                            'Você está conectado à internet?') : of(null)
+                      )
+                  ),
+              ),
+          );
   }
 }

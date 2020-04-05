@@ -1,10 +1,13 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap, concatMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { SegurancaService } from 'src/app/services/seguranca.service';
 import { ShareDataService } from '../../services/share-data.service';
-import { Router, } from '@angular/router';
-import { MatSidenav } from '@angular/material/sidenav';
+import * as utils from './../../utils';
 
 @Component({
   selector: 'app-toolbar',
@@ -20,6 +23,8 @@ export class ToolbarComponent implements OnInit
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
+      private snackBar: MatSnackBar,
+      private segurancaService: SegurancaService,
       public shareDataService: ShareDataService, public router: Router) 
   {}
 
@@ -52,5 +57,44 @@ export class ToolbarComponent implements OnInit
   {
     return this.router.url === '/login' || this.router.url === '/nova-conta' ||
         this.router.url === '/';
+  }
+
+  logout()
+  {
+    const tokenJTI = utils.getTokenJTI('access_token_data');
+
+    if (!utils.isTokenValid('access_token_data'))
+    {
+      const observable = this.segurancaService.refreshToken()
+          .pipe(
+              tap(response => 
+              {
+                utils.setLocalStorageTokenData(response);
+              }),
+              concatMap(() => this.segurancaService.logout(tokenJTI)));
+      this.limparLocalStorageERedirecionar(observable);
+    }
+    else
+    {
+      this.limparLocalStorageERedirecionar(this.segurancaService.logout(tokenJTI));
+    }
+  }
+
+  private limparLocalStorageERedirecionar(observable: Observable<any>)
+  {
+    observable.subscribe(
+        () => 
+        {
+          utils.clearLocalStorageTokenData();
+          
+          this.router.navigate(['login']);        
+        }, 
+        error => 
+        {
+          this.snackBar.open('Ocorreu um erro ao tentar sair, ' 
+              + 'por favor, tente novamente', '', {duration: 3500});
+  
+          console.log(error);
+        }); 
   }
 }

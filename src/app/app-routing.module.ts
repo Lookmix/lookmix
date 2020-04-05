@@ -5,8 +5,7 @@ import { LooksSemanaisComponent } from './usuarios/comum/looks-semanais/looks-se
 import { LoginComponent } from './seguranca/login/login.component';
 import { ConfiguracoesComponent } from './usuarios/comum/configuracoes/configuracoes.component';
 import { CadastroUsuarioComponent } from './usuarios/comum/cadastro-usuario/cadastro-usuario.component';
-
-
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -22,21 +21,24 @@ const routes: Routes = [
     component: GuardaRoupaComponent,
     data: {
       corTema: '#fff'
-    }
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'look-semanal',
     component: LooksSemanaisComponent,
     data: {
       corTema: '#fff'
-    }
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
     component: LoginComponent,
     data: {
       corTema: '#ffb6c1ad'
-    }
+    },
+    canActivate: [AuthGuard]
   },
   // {
   //   path: 'look-aleatorio',
@@ -47,14 +49,16 @@ const routes: Routes = [
     component: ConfiguracoesComponent,
     data: {
       corTema: '#fff'
-    }
+    },
+    canActivate: [AuthGuard]
   },
   {
     path: 'nova-conta',
     component: CadastroUsuarioComponent,
     data: {
       corTema: '#8341a1d4'
-    }
+    },
+    canActivate: [AuthGuard]
   }
 ];
 

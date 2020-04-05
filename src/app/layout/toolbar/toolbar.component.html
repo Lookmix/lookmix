@@ -19,6 +19,9 @@
       <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" [routerLink]="['configuracoes']">
         Configurações
       </a>
+      <a mat-list-item (click)="logout(); shareDataService.isXSmall ? drawer.toggle() : false">
+        Sair
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content [ngStyle]="{'background': setBackground(), 
