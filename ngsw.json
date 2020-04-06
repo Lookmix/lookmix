@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1584333302798,
+  "timestamp": 1586137523722,
   "index": "/guarda-roupa-virtual/index.html",
   "assetGroups": [
     {
@@ -9,14 +9,14 @@
       "updateMode": "prefetch",
       "urls": [
         "/guarda-roupa-virtual/index.html",
-        "/guarda-roupa-virtual/main-es2015.54fbda659bc160dc918e.js",
-        "/guarda-roupa-virtual/main-es5.54fbda659bc160dc918e.js",
+        "/guarda-roupa-virtual/main-es2015.6cca55136264979ba540.js",
+        "/guarda-roupa-virtual/main-es5.6cca55136264979ba540.js",
         "/guarda-roupa-virtual/manifest.webmanifest",
         "/guarda-roupa-virtual/polyfills-es2015.ca64e4516afbb1b890d5.js",
-        "/guarda-roupa-virtual/polyfills-es5.277e2e1d6fb2daf91a5c.js",
+        "/guarda-roupa-virtual/polyfills-es5.ad81c68d1c3d7a0429f1.js",
         "/guarda-roupa-virtual/runtime-es2015.0811dcefd377500b5b1a.js",
         "/guarda-roupa-virtual/runtime-es5.0811dcefd377500b5b1a.js",
-        "/guarda-roupa-virtual/styles.5decacd59019af85e6ee.css"
+        "/guarda-roupa-virtual/styles.fa8b6b912203f55cecaa.css"
       ],
       "patterns": []
     },
@@ -63,15 +63,15 @@
     "/guarda-roupa-virtual/assets/icons/icon-512x512.png": "de44165ef55e43d83efc611a223cf1ba3c5576b8",
     "/guarda-roupa-virtual/assets/icons/icon-72x72.png": "db378a06b3128fe01bbbc6100da154a763d05834",
     "/guarda-roupa-virtual/assets/icons/icon-96x96.png": "36aded2e756ebf101bd34dd0ce4489a3c74102e2",
-    "/guarda-roupa-virtual/index.html": "f508edcf5e224450a955b561bcbed39c11d08c07",
-    "/guarda-roupa-virtual/main-es2015.54fbda659bc160dc918e.js": "c52195c9ec8e09b60fcd27a2f8de3f64d0e0c434",
-    "/guarda-roupa-virtual/main-es5.54fbda659bc160dc918e.js": "78b430a9e852337161e90f75d119be6ad204b252",
+    "/guarda-roupa-virtual/index.html": "a5c0c0c1fc59edc05b2f7fdd8d96d12849d757cf",
+    "/guarda-roupa-virtual/main-es2015.6cca55136264979ba540.js": "332415bf8c07fffda15dd4081d1e2e6531f1cc78",
+    "/guarda-roupa-virtual/main-es5.6cca55136264979ba540.js": "4446c61b9b6184731e139330d0de301da94b1bf1",
     "/guarda-roupa-virtual/manifest.webmanifest": "4fe3987edc3f0d8b2765813272f58a71cdb21538",
     "/guarda-roupa-virtual/polyfills-es2015.ca64e4516afbb1b890d5.js": "8779ed8d9bf0580e1b50b352a9b8fd520be24433",
-    "/guarda-roupa-virtual/polyfills-es5.277e2e1d6fb2daf91a5c.js": "8d03638471d7374e81cf33adfdea439f84ac3873",
+    "/guarda-roupa-virtual/polyfills-es5.ad81c68d1c3d7a0429f1.js": "8d03638471d7374e81cf33adfdea439f84ac3873",
     "/guarda-roupa-virtual/runtime-es2015.0811dcefd377500b5b1a.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "/guarda-roupa-virtual/runtime-es5.0811dcefd377500b5b1a.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "/guarda-roupa-virtual/styles.5decacd59019af85e6ee.css": "cb9488ea593bd5b5afdcefc1550dc1a570004e38"
+    "/guarda-roupa-virtual/styles.fa8b6b912203f55cecaa.css": "a807b1de8d1f65f4eb669920fd171848d5e99603"
   },
   "navigationUrls": [
     {
