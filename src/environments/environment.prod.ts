@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  API_URL: 'https://guarda-roupa-virtual-api.herokuapp.com/api',
+  API_URL: 'https://guardaroupavirtual.rj.r.appspot.com/api',
   logoAssetsPath: 'assets/'
 };

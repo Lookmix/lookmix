@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://guarda-roupa-virtual-api.herokuapp.com/api',
-  // API_URL: 'http://127.0.0.1:5000/api',
+  // API_URL: 'https://guardaroupavirtual.rj.r.appspot.com/api',
+  API_URL: 'http://192.168.0.17:5000/api',
   logoAssetsPath: '../../../assets/'
 };
 
