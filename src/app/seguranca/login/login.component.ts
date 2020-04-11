@@ -46,21 +46,21 @@ export class LoginComponent implements OnInit
     {
       this.segurancaService.login(this.form.value)
           .subscribe(
-            data =>
-            {
-              utils.setLocalStorageTokenData(data);
+              data =>
+              {
+                utils.setLocalStorageTokenData(data);
 
-              this.router.navigate(['guarda-roupa']);
-            },
-            error =>
-            {
-              this.snackBar.open(
-                  'Erro de conexão, por favor, tente entrar novamente', '', 
-                  {duration: 4000, panelClass: 'snack-bar-error'}
-              );
-              console.log(error);
-            }
-          );
+                this.router.navigate(['guarda-roupa']);
+              },
+              error =>
+              {
+                this.snackBar.open(
+                    'Erro de conexão, por favor, tente entrar novamente', '', 
+                    {duration: 4000, panelClass: 'snack-bar-error'}
+                );
+                console.log(error);
+              }
+            );
     }
   }
 }
