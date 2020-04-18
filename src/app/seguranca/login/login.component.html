@@ -33,10 +33,14 @@
               placeholder="(00) 91234-5678" 
               mask="(00) 00000-0000">
 
-          <mat-hint>Digite apenas números</mat-hint>
+          <mat-hint>Só precisa digitar os números ;)</mat-hint>
             
           <mat-error *ngIf="form.get('phone').hasError('required')">
             O telefone deve ser preenchido
+          </mat-error>
+
+          <mat-error *ngIf="form.get('phone').hasError('Mask error')">
+            O número está incorreto
           </mat-error>
         </mat-form-field>
   
@@ -58,15 +62,24 @@
           </mat-error>        
         </mat-form-field>
   
-        <button [color]="shareDataService.temaNoturno ? 'accent' : 'primary'" 
-            mat-raised-button class="botao-entrar"
-            (click)="entrar()">
-          ENTRAR
+        <button mat-raised-button [color]="shareDataService.temaNoturno ? 'accent' : 'primary'" 
+            class="botao-entrar" [disableRipple]="desabilitarBotaoEntrar"
+            (click)="entrar()" >
+          <span style="margin-right: 10px;"> <!--[disabled]="desabilitarBotaoEntrar"-->
+            {{textoBotaoEntrar}}
+          </span>
+
+          <mat-icon style="width: 21px; height: 21px; margin-top: 2px;" 
+              *ngIf="desabilitarBotaoEntrar">
+            <mat-spinner [color]="shareDataService.temaNoturno ? 'primary' : 'accent'" 
+                [diameter]="18"></mat-spinner>
+          </mat-icon>
         </button>
 
         <button [color]="shareDataService.temaNoturno ? 'primary' : 'accent'" 
             type="button" class="botao-criar-conta" mat-button
-            (click)="router.navigate(['nova-conta']); updateMetaTag('novaconta')">
+            [disableRipple]="desabilitarBotaoEntrar"
+            (click)="redirecionarEAtualizarMetaTag('novaconta')">
           Criar uma conta
         </button>
       </div>

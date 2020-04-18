@@ -127,7 +127,7 @@
             <mat-label>Senha</mat-label>
     
             <input formControlName="senha" matInput placeholder="Digite sua senha" 
-                [type]="tipoCampoSenha" required>
+                [type]="tipoCampoSenha" required (keyup)="setStateNextButton()">
     
             <mat-icon class="ocultar-efeito-padrao-clique icone-exibir-senha"
                 (click)="tipoCampoSenha === 'password' ? tipoCampoSenha = 'text' : 
@@ -166,10 +166,10 @@
             VOLTAR
           </button>
   
-          <button [color]="shareDataService.temaNoturno ? 'accent' : 'primary'" 
+          <button [color]="shareDataService.temaNoturno ? '' : 'primary'" 
               [disabled]="disableNextButton"
               mat-stroked-button (click)="abrirDialogConfirmacaoNumero()">
-            PRÓXIMO
+            CRIAR
           </button>
         </div>
       </form>

@@ -102,13 +102,27 @@ export class HttpInterceptorService implements HttpInterceptor
         .pipe(
             retryWhen(errors =>
                 errors.pipe(
+                    concatMap(errors => 
+                    {
+                      return this.tratarErro(errors);
+                    }),
                     delay(2500),
                     concatMap((e, index) => 
-                        index === 4 ? throwError('Erro de rede, ' + 
-                            'Você está conectado à internet?') : of(null)
-                      )
+                    {
+                      return index === 4 ? throwError('Erro de rede, ' + 
+                          'Você está conectado à internet?') : of(null)
+                    })
                   ),
               ),
           );
+  }
+
+  private tratarErro(errors)
+  {
+    if (errors.status === 401)
+    {
+      return throwError({unauthorized: true})
+    }
+    return of(null);
   }
 }

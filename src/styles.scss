@@ -33,7 +33,6 @@ $dark-app-theme:   mat-dark-theme($dark-app-primary, $dark-app-accent, $dark-app
   }
   .mat-stroked-button {
     border-color: #ff4081 !important;
-    color: white !important;
   }
   @include angular-material-theme($dark-app-theme);
 }
@@ -114,4 +113,8 @@ mat-dialog-content.mat-dialog-content {
 
 button.mat-stroked-button {
   line-height: 25px !important;
+}
+
+.backdrop-confirmacao-numero {
+  background: rgba(0, 0, 0, 0.88);
 }

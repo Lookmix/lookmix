@@ -14,6 +14,9 @@ import * as utils from './../../utils'
 export class LoginComponent implements OnInit 
 {
   tipoCampoSenha = 'password';
+  textoBotaoEntrar = 'ENTRAR';
+  desabilitarBotaoEntrar = false;
+
   form: FormGroup;
 
   constructor(private formBuilder: FormBuilder, public router: Router, 
@@ -35,15 +38,23 @@ export class LoginComponent implements OnInit
     })
   }
 
-  updateMetaTag(rota)
+  redirecionarEAtualizarMetaTag(rota)
   {
-    this.shareDataService.atualizarMetaTagTheme(undefined, rota);
+    if (!this.desabilitarBotaoEntrar)
+    {
+      this.router.navigate(['nova-conta'])
+      
+      this.shareDataService.atualizarMetaTagTheme(undefined, rota);
+    }
   }
 
   entrar()
   {
-    if (this.form.valid)
+    if (this.form.valid && !this.desabilitarBotaoEntrar)
     {
+      this.textoBotaoEntrar = 'ENTRANDO...'
+      this.desabilitarBotaoEntrar = true;
+
       this.segurancaService.login(this.form.value)
           .subscribe(
               data =>
@@ -54,10 +65,18 @@ export class LoginComponent implements OnInit
               },
               error =>
               {
-                this.snackBar.open(
-                    'Erro de conexão, por favor, tente entrar novamente', '', 
-                    {duration: 4000, panelClass: 'snack-bar-error'}
-                );
+                let mensagem = error;
+
+                if (error.unauthorized)
+                {
+                  mensagem = 'O telefone ou a senha estão incorretos';
+                }
+                this.snackBar.open(mensagem, '', {
+                    duration: 4000, panelClass: 'snack-bar-error'});
+
+                this.textoBotaoEntrar = 'ENTRAR';
+                this.desabilitarBotaoEntrar = false;
+                
                 console.log(error);
               }
             );

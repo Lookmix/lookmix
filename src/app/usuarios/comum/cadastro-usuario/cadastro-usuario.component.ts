@@ -77,7 +77,7 @@ export class CadastroUsuarioComponent implements OnInit
     this.shareDataService.atualizarMetaTagTheme(undefined, rota);
   }
 
-  private setStateNextButton()
+  setStateNextButton()
   {
     if (this.form.invalid || this.exibirSpinnerNomeUsuario || 
         this.exibirSpinnerNumero)
@@ -96,7 +96,8 @@ export class CadastroUsuarioComponent implements OnInit
     {
       this.dialog.open(ConfirmacaoNumeroDialogComponent, {
         disableClose: true,
-        width: '280px'
+        width: '280px',
+        backdropClass: 'backdrop-confirmacao-numero'
       })
     }
   }
