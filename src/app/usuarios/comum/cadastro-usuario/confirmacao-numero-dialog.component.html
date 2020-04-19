@@ -29,13 +29,21 @@
       </div>
 
       <div class="div-botoes">
-        <button mat-button type="button" mat-dialog-close>
+        <button mat-button type="button" mat-dialog-close 
+            [disabled]="exibirSpinnerBotaoConcluir">
           CANCELAR
         </button>
         
-        <button mat-raised-button 
-            [color]="shareDataService.temaNoturno ? 'accent' : 'primary'">
-          CONCLUIR
+        <button mat-raised-button (click)="concluir()" 
+            [disableRipple]="exibirSpinnerBotaoConcluir"
+            [color]="shareDataService.temaNoturno ? 'primary' : 'accent'">
+
+          {{exibirSpinnerBotaoConcluir ? 'CONCLUINDO...' : 'CONCLUIR'}}
+
+          <mat-icon style="width: 18px; height: 21px; margin-left: 3px;" 
+              *ngIf="exibirSpinnerBotaoConcluir">
+            <mat-spinner color="accent" [diameter]="18"></mat-spinner>
+          </mat-icon>
         </button>
       </div>
     </form>

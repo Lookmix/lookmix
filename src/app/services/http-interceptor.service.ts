@@ -19,7 +19,10 @@ export class HttpInterceptorService implements HttpInterceptor
     'api/auth/login',
     'api/auth/token',
     'api/usuarios/is_username_unique',
-    'api/usuarios/is_phone_unique'
+    'api/usuarios/is_phone_unique',
+    'api/usuarios/send_verify_code',
+    'api/usuarios/verify_code',
+    'api/usuarios/save'
   ]
 
   constructor(private tokenExtractor: HttpXsrfTokenExtractor,

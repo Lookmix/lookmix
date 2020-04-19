@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 
@@ -15,8 +15,11 @@ export class UsuarioService
 
   }
 
-  cadastrar()
-  {}
+  cadastrar(usuario): Observable<any>
+  {
+    return this.httpClient.post(`${environment.API_URL}/${this.endpoint}` +
+        `/save`, usuario);
+  }
 
   atualizar()
   {}
@@ -42,5 +45,22 @@ export class UsuarioService
   {
     return this.httpClient.get(`${environment.API_URL}/${this.endpoint}` +
         `/is_phone_unique/${telefone}`);
+  }
+
+  sendVerifyCode(phone): Observable<any>
+  {
+    return this.httpClient.get(`${environment.API_URL}/${this.endpoint}` +
+        `/send_verify_code`, {params: new HttpParams().set('phone', phone)});
+  }
+
+  verifyCode(request_id, code): Observable<any>
+  {
+    let httpParams = new HttpParams();
+
+    httpParams = httpParams.append('request_id', request_id);
+    httpParams = httpParams.append('code', code);
+
+    return this.httpClient.get(`${environment.API_URL}/${this.endpoint}` +
+        `/verify_code`, {params: httpParams});
   }
 }
