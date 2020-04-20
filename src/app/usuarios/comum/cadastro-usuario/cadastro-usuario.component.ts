@@ -67,7 +67,7 @@ export class CadastroUsuarioComponent implements OnInit
   private createForm()
   {
     this.form = this.formBuilder.group({
-      username: ['', Validators.required],
+      // username: ['', Validators.required],
       // email: ['', Validators.email],
       numero_telefone: ['', Validators.required],
       password: ['', Validators.required]
@@ -81,7 +81,7 @@ export class CadastroUsuarioComponent implements OnInit
 
   setStateNextButton()
   {
-    if (this.form.invalid || this.exibirSpinnerNomeUsuario || 
+    if (this.form.invalid || //this.exibirSpinnerNomeUsuario || 
         this.exibirSpinnerNumero)
     {
       this.disableNextButton = true;
@@ -286,6 +286,7 @@ export class ConfirmacaoNumeroDialogComponent implements OnInit
 { 
   form: FormGroup; 
   exibirSpinnerBotaoConcluir: boolean = false;
+  tentativas = 1;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
       public shareDataService: ShareDataService, 
@@ -332,8 +333,27 @@ export class ConfirmacaoNumeroDialogComponent implements OnInit
                 }
                 else
                 {
-                  this.exibirMsgErroEAlterarStatusBotaoConcluir(
-                        'Código inválido, tente novamente.');
+                  this.form.get('codigo').setValue('');
+
+                  if (this.tentativas === 3)
+                  {
+                    this.tentativas = 0;
+
+                    this.sendNewCode();
+
+                    this.snackBar.open('Suas tentativas esgotaram, um novo código foi enviado para o seu número.', 
+                        '', {duration: 5000})
+                    
+                    this.exibirSpinnerBotaoConcluir = false;
+                  }
+                  else
+                  {
+                    this.exibirMsgErroEAlterarStatusBotaoConcluir(
+                          'Código inválido, tente novamente. Você ainda tem ' + 
+                          (3 - this.tentativas) + ' tentativa(s).');
+
+                    this.tentativas += 1;
+                  }
                 }
               }, 
               error => 
@@ -358,5 +378,19 @@ export class ConfirmacaoNumeroDialogComponent implements OnInit
     this.form = this.formBuilder.group({
       codigo: ['', Validators.required],
     });
+  }
+
+  private sendNewCode()
+  {
+    this.usuarioService.sendVerifyCode(this.data.usuario.numero_telefone)
+        .subscribe(
+            data => 
+            {
+              this.data.request_id = data['request_id']
+            }, 
+            error => 
+            {
+              console.log(error);
+            });
   }
 }

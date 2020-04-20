@@ -4,24 +4,26 @@
         'unset' : '#4b0082bd',
   'height': shareDataService.isXSmall && 
         screenWidth < 321 ? 'unset' : '100%' -->
-  <div>
-    <app-logo></app-logo>
-  </div>
 
   <div class="display-flex-row-center">
     <mat-card class="card-nova-conta" 
         [ngStyle]="{'width': shareDataService.isXSmall ? '260px' : '300px',
             'marginBottom': shareDataService.isXSmall ? '20px' : 'unset'}">
 
+      <div>
+        <app-logo></app-logo>
+      </div>
+
       <h2>Crie sua conta gratuita</h2> <!--de graça-->
   
       <form [formGroup]="form" autocomplete="off">
         <div class="div-formulario">
+          <!--
           <mat-form-field appearance="fill" floatLabel="always">
     
             <mat-label>Nome de usuário</mat-label>
 
-            <span matPrefix>@</span><!--&nbsp;-->
+            <span matPrefix>@</span>
 
             <input formControlName="username" matInput required
                 placeholder="seuNomeDe.usuario_25"
@@ -44,10 +46,6 @@
             </span>
             
             <mat-hint>
-              <!-- Poder ser aquele do Instagram ou do Twitter, caso estejam disponíveis ;) -->
-              <!-- Pode usar o do Instagram ou Twitter caso estejam disponíveis ;)
-              Pode ser o do Instagram ou Twitter se estiverem disponíveis aqui ;) -->
-
               Aquele do Instagram ou do Twitter ;)
             </mat-hint>
 
@@ -56,11 +54,9 @@
             </mat-error>
     
             <mat-error *ngIf="form.get('username').hasError('notUnique')">
-              <!-- Alguém já usa esse :/ tenta outro aí. -->
-              <!-- Algum ninja já usa esse :/ tenta outro aí. -->
               Algum ninja já pegou esse, tenta outro aí.
             </mat-error>
-          </mat-form-field>
+          </mat-form-field>-->
           
           <mat-form-field appearance="fill">
     
@@ -168,7 +164,8 @@
   
           <button [color]="shareDataService.temaNoturno ? '' : 'primary'" 
               [disabled]="disableNextButton" [disableRipple]="exibirSpinnerBotaoCriar"
-              mat-stroked-button (click)="abrirDialogConfirmacaoNumero()">
+              mat-stroked-button (click)="abrirDialogConfirmacaoNumero()"
+              id="criar-conta">
 
             {{exibirSpinnerBotaoCriar ? 'CRIANDO...' : 'CRIAR'}}
 

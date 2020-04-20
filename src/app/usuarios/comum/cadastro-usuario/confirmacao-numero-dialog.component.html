@@ -4,9 +4,9 @@
   
   <mat-dialog-content>
     <p>
-      Enviamos um SMS com um código para o seu 
-      número. É só digitar o código no campo abaixo 
-      e concluir ;)
+      Enviamos um SMS com um código para o 
+      número <strong>{{ data.usuario.numero_telefone }}</strong>. 
+      É só digitar o código no campo abaixo e concluir ;)
     </p>
       
     <form [formGroup]="form">
@@ -36,13 +36,14 @@
         
         <button mat-raised-button (click)="concluir()" 
             [disableRipple]="exibirSpinnerBotaoConcluir"
-            [color]="shareDataService.temaNoturno ? 'primary' : 'accent'">
+            [color]="shareDataService.temaNoturno ? 'accent' : 'primary'">
 
           {{exibirSpinnerBotaoConcluir ? 'CONCLUINDO...' : 'CONCLUIR'}}
 
           <mat-icon style="width: 18px; height: 21px; margin-left: 3px;" 
               *ngIf="exibirSpinnerBotaoConcluir">
-            <mat-spinner color="accent" [diameter]="18"></mat-spinner>
+            <mat-spinner [color]="shareDataService.temaNoturno ? 'primary' : 'accent'" 
+                [diameter]="18"></mat-spinner>
           </mat-icon>
         </button>
       </div>

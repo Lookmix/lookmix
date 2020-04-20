@@ -41,8 +41,11 @@
     </mat-toolbar>
 
     <div [ngStyle]="{'marginTop': router.url !== '/login' && 
-            router.url !== '/nova-conta' ? '56px' : '0px'}"
-        class="div-router-outlet">
+            router.url !== '/nova-conta' ? '56px' : '0px',
+            'display': router.url === '/nova-conta' || router.url === '/login' ? 'flex' : 'block', 
+            'flexDirection': router.url === '/nova-conta' || router.url === '/login' ? 'column' : 'unset', 
+            'justifyContent': router.url === '/nova-conta' || router.url === '/login' ? 'center' : 'unset'}"
+        class="div-router-outlet"><!--'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'center'-->
       <router-outlet></router-outlet>
     </div>
 

@@ -36,31 +36,48 @@ export class HttpInterceptorService implements HttpInterceptor
   {    
     const xsrfToken = this.tokenExtractor.getToken() as string;
 
+    const isUrlIntoWhiteList = this.whiteListEnpoints.filter(endpoint => 
+        request.url.includes(endpoint))[0] !== undefined;
+
     let headers = this.setHeaders(request.url, xsrfToken);
 
     const requestModificada = request.clone({
       withCredentials: true,
       setHeaders: headers
     });
-    const isUrlIntoWhiteList = this.whiteListEnpoints.filter(endpoint => 
-        request.url.includes(endpoint))[0] !== undefined;
-
-    if (!utils.isTokenValid('access_token_data') && !isUrlIntoWhiteList)
+    if (xsrfToken)
     {
-      if (utils.isTokenValid('refresh_token_data'))
+      if (!utils.isTokenValid('access_token_data') && !isUrlIntoWhiteList)
       {
-        this.requestPendente = requestModificada;
+        if (utils.isTokenValid('refresh_token_data'))
+        {
+          this.requestPendente = requestModificada;
+  
+          return this.renovarTokenEExecutarRequestInterceptada();
+        }
+        else
+        {
+          this.redirecionarParaLogin();
 
-        return this.renovarTokenEExecutarRequestInterceptada();
+          return of(null);
+        }
       }
       else
       {
-        this.redirecionarParaLogin();
+        return this.executarRequestInterceptada(next, requestModificada)
       }
+    }
+    else if (isUrlIntoWhiteList && !request.url.includes('api/auth/refresh'))
+    {
+      return this.executarRequestInterceptada(next, requestModificada);
     }
     else
     {
-      return this.executarRequestInterceptada(next, requestModificada)
+      utils.clearLocalStorageTokenData();
+
+      this.redirecionarParaLogin();
+
+      return of(null);
     }
   }
 
@@ -72,7 +89,7 @@ export class HttpInterceptorService implements HttpInterceptor
     {
       headers['Content-Type'] = 'application/json'
     }
-    if (xsrfToken !== null) 
+    if (xsrfToken) 
     {
       headers['X-CSRF-TOKEN'] = xsrfToken
     }

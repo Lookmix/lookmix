@@ -10,10 +10,11 @@
         class="ocultar-efeito-padrao-clique logo-login" 
         src="../../../assets/hanger.svg">
   </div> -->
-  <app-logo></app-logo>
-
+  
   <mat-card [ngStyle]="{'width': shareDataService.isXSmall ? '260px' : '300px'}"
       class="card-login">
+    
+    <app-logo></app-logo>
 
     <h2 class="titulo-login">
       Entre na sua conta
@@ -27,7 +28,7 @@
       <div class="div-form-login">
         <mat-form-field appearance="fill" class="campo-phone">
 
-          <mat-label>Telefone</mat-label>
+          <mat-label>Número do celular</mat-label>
           
           <input formControlName="phone" matInput required
               placeholder="(00) 91234-5678" 
@@ -36,7 +37,7 @@
           <mat-hint>Só precisa digitar os números ;)</mat-hint>
             
           <mat-error *ngIf="form.get('phone').hasError('required')">
-            O telefone deve ser preenchido
+            O número do celular deve ser preenchido
           </mat-error>
 
           <mat-error *ngIf="form.get('phone').hasError('Mask error')">
@@ -76,12 +77,29 @@
           </mat-icon>
         </button>
 
-        <button [color]="shareDataService.temaNoturno ? 'primary' : 'accent'" 
-            type="button" class="botao-criar-conta" mat-button
-            [disableRipple]="desabilitarBotaoEntrar"
-            (click)="redirecionarEAtualizarMetaTag('novaconta')">
-          Criar uma conta
-        </button>
+        <div class="div-botoes-secundarios">
+          <div>
+            <mat-divider [inset]="true"></mat-divider>
+          </div>
+          <button [color]="shareDataService.temaNoturno ? 'primary' : 'accent'" 
+              type="button" class="botao-criar-conta" mat-stroked-button
+              [disableRipple]="desabilitarBotaoEntrar"
+              (click)="redirecionarEAtualizarMetaTag('novaconta')">
+            Criar uma conta
+          </button>
+  
+          <!--
+            [color]="shareDataService.temaNoturno ? 'primary' : 'accent'"
+          -->
+          <button 
+              type="button" mat-button
+              [disableRipple]="true" 
+              [ngClass]="{'efeito-clique': ativarEfeitoClique, 'botao-recuperar-senha': true}"
+              (touchstart)="ativarEfeitoClique = true;" 
+              (touchend)="ativarEfeitoClique = false;">
+            Recuperar senha
+          </button>
+        </div>
       </div>
     </form>
   </mat-card>

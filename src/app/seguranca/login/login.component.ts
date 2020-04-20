@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit
   tipoCampoSenha = 'password';
   textoBotaoEntrar = 'ENTRAR';
   desabilitarBotaoEntrar = false;
+  ativarEfeitoClique: boolean = false;
 
   form: FormGroup;
 
@@ -24,12 +25,11 @@ export class LoginComponent implements OnInit
       private snackBar: MatSnackBar,
       private segurancaService: SegurancaService) 
   {}
-
+  
   ngOnInit() 
   {
     this.criarFormulario();
   }
-
   private criarFormulario()
   {
     this.form = this.formBuilder.group({
