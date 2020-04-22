@@ -105,7 +105,7 @@ export class CadastroUsuarioComponent implements OnInit
                 this.dialog.open(ConfirmacaoNumeroDialogComponent, {
                   disableClose: true,
                   width: '280px',
-                  backdropClass: 'backdrop-confirmacao-numero',
+                  backdropClass: 'backdrop-dialog',
                   data: {
                     usuario: this.form.value,
                     request_id: data['request_id']
@@ -121,6 +121,9 @@ export class CadastroUsuarioComponent implements OnInit
               error => 
               {
                 console.log(error);
+
+                this.snackBar.open(error, '', {
+                    duration: 4500, panelClass: 'snack-bar-error'});
 
                 this.exibirSpinnerBotaoCriar = false;
               });
@@ -390,6 +393,9 @@ export class ConfirmacaoNumeroDialogComponent implements OnInit
             }, 
             error => 
             {
+              this.snackBar.open(error, '', {
+                  duration: 4500, panelClass: 'snack-bar-error'})
+
               console.log(error);
             });
   }

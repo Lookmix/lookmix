@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import * as utils from './../utils';
 import { SegurancaService } from '../services/seguranca.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { SpinnerComponent } from '../layout/spinner/spinner.component';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,8 @@ export class AuthGuard implements CanActivate
 
   constructor(private segurancaService: SegurancaService,
       private snackBar: MatSnackBar,
-      private router: Router)
+      private router: Router,
+      private dialog: MatDialog)
   {}
 
   canActivate(
@@ -51,6 +54,8 @@ export class AuthGuard implements CanActivate
   
   private renovarTokenERedirecionar(url)
   {
+    const dialogSpinnerRef = this.abrirSpinnerCarregamento();
+
     this.segurancaService.refreshToken()
         .subscribe(
             data => 
@@ -58,13 +63,27 @@ export class AuthGuard implements CanActivate
               utils.setLocalStorageTokenData(data);
 
               this.router.navigate([url]);
+
+              dialogSpinnerRef.close();
             }, 
             error => 
             {
               this.router.navigate(['login'])
 
+              dialogSpinnerRef.close();
+
               console.log(error);
             });
+  }
+
+  private abrirSpinnerCarregamento(): MatDialogRef<SpinnerComponent>
+  {
+   return this.dialog.open(SpinnerComponent, {
+      disableClose: true,
+      data: {
+        titulo: "Carregando..."
+      }
+    });
   }
 
   private permitirNavegarParaLoginOuNovaConta(): boolean

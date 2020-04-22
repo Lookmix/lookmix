@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,7 +31,7 @@ import { GuardaRoupaComponent } from './usuarios/comum/guarda-roupa/guarda-roupa
 import { ConfiguracoesComponent } from './usuarios/comum/configuracoes/configuracoes.component';
 import { LooksSemanaisComponent } from './usuarios/comum/looks-semanais/looks-semanais.component';
 import { CardRoupaComponent } from './layout/card-roupa/card-roupa.component';
-import { LoginComponent } from './seguranca/login/login.component';
+import { LoginComponent, RecuperacaoSenhaComponent } from './seguranca/login/login.component';
 import { DashboardComponent } from './usuarios/admin/dashboard/dashboard.component';
 import { CadastroUsuarioComponent, ConfirmacaoNumeroDialogComponent } from './usuarios/comum/cadastro-usuario/cadastro-usuario.component';
 import { LogoComponent } from './layout/logo/logo.component';
@@ -55,7 +56,8 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     DashboardComponent,
     CadastroUsuarioComponent,
     ConfirmacaoNumeroDialogComponent,
-    LogoComponent
+    LogoComponent,
+    RecuperacaoSenhaComponent
   ],
   imports: [
     BrowserModule,
@@ -81,6 +83,7 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     MatFormFieldModule,
     MatInputModule,
     MatSlideToggleModule,
+    MatStepperModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NgxMaskModule.forRoot(options),
   ],

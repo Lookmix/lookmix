@@ -1,0 +1,18 @@
+.container-recuperacao-senha {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  padding: 16px;
+  background-color: #424242 !important;
+}
+
+::ng-deep mat-horizontal-stepper#stepper-recuperacao-senha > 
+		div.mat-horizontal-stepper-header-container {
+  display: none !important;
+}
+
+::ng-deep mat-horizontal-stepper#stepper-recuperacao-senha > 
+		div.mat-horizontal-content-container {
+  padding: unset !important;
+}

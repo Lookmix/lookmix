@@ -1,0 +1,81 @@
+<div class="container-recuperacao-senha mat-app-background" 
+    [class.dark-theme]="shareDataService.temaNoturno">
+  
+  <h2 mat-dialog-title>Confirmação do número de telefone</h2>
+
+  <mat-dialog-content>
+    <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper"
+        id="stepper-recuperacao-senha">
+        
+      <mat-step [stepControl]="formGroupTelefone">
+  
+        <p>Digite o número do seu celular abaixo. Vamos te enviar um código por SMS.</p>
+  
+        <form [formGroup]="formGroupTelefone">
+          <mat-form-field appearance="fill">
+            <mat-label>Número do celular</mat-label>
+            <input matInput placeholder="(00) 91234-5678" 
+                mask="(00) 00000-0000"
+                formControlName="phone" required>
+  
+            <mat-hint>DDD e número</mat-hint>
+          </mat-form-field>
+        </form>
+      </mat-step>
+      
+      <mat-step [stepControl]="formGroupCodigo">
+  
+        <p>Digite abaixo o código recebido </p>
+  
+        <form [formGroup]="formGroupCodigo">
+
+          <mat-form-field appearance="fill">
+            <mat-label>Código</mat-label>
+            <input matInput formControlName="codigo" minlength="6" mask="000000"
+                placeholder="Digite aqui" required>
+            
+            <mat-hint>São 6 números</mat-hint>
+
+            <mat-error *ngIf="formGroupCodigo.get('codigo').hasError('required')">
+              Cadê código?
+            </mat-error>
+  
+            <mat-error *ngIf="formGroupCodigo.get('codigo').hasError('minlength')">
+              Ainda faltam alguns números
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </mat-step>
+    
+      <mat-step [stepControl]="formGroupSenha">
+  
+        <p>Digite sua nova senha</p>
+    
+        <form [formGroup]="formGroupSenha">
+
+          <mat-form-field appearance="fill">
+            <mat-label>Nova senha</mat-label>
+            <input matInput formControlName="password" 
+                placeholder="Digite aqui" required>
+          </mat-form-field>
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+  
+    <div class="div-botoes-dialog">
+      <button mat-button (click)="previusStep()">
+        {{valorTextoBotaoVoltar}}
+      </button>
+    
+      <button mat-stroked-button (click)="nextStep()">
+    
+        {{valorTextoBotaoProximo}}
+    
+        <mat-icon *ngIf="exibirSpinnerBotaoNext" 
+            style="height: 21px; width: 21px; margin-left: 5px;">
+          <mat-spinner color="accent" [diameter]="18"></mat-spinner>
+        </mat-icon>
+      </button>
+    </div>
+  </mat-dialog-content>
+</div>
