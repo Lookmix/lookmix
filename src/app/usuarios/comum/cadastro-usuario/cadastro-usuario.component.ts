@@ -340,7 +340,7 @@ export class ConfirmacaoNumeroDialogComponent implements OnInit
 
                   if (this.tentativas === 3)
                   {
-                    this.tentativas = 0;
+                    this.tentativas = 1;
 
                     this.sendNewCode();
 

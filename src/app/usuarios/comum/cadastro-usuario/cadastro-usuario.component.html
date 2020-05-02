@@ -7,14 +7,13 @@
 
   <div class="display-flex-row-center">
     <mat-card class="card-nova-conta" 
-        [ngStyle]="{'width': shareDataService.isXSmall ? '260px' : '300px',
-            'marginBottom': shareDataService.isXSmall ? '20px' : 'unset'}">
+        [ngStyle]="{'width': shareDataService.isXSmall ? '260px' : '300px'}">
 
       <div>
         <app-logo></app-logo>
       </div>
 
-      <h2>Crie sua conta gratuita</h2> <!--de graça-->
+      <h3>Crie sua conta gratuita</h3> <!--de graça-->
   
       <form [formGroup]="form" autocomplete="off">
         <div class="div-formulario">

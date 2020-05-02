@@ -4,7 +4,12 @@
   justify-content: center;
   margin: auto;
   padding: 16px;
-  background-color: #424242 !important;
+  height: -webkit-fill-available;
+  // background-color: #424242 !important;
+}
+
+#stepper-recuperacao-senha {
+  min-height: 170px;
 }
 
 ::ng-deep mat-horizontal-stepper#stepper-recuperacao-senha > 
@@ -15,4 +20,9 @@
 ::ng-deep mat-horizontal-stepper#stepper-recuperacao-senha > 
 		div.mat-horizontal-content-container {
   padding: unset !important;
+}
+
+form > mat-form-field {
+  margin-bottom: 15px;
+  width: 100%;
 }

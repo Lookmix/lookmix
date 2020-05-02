@@ -24,6 +24,12 @@ export class UsuarioService
   atualizar()
   {}
 
+  atualizarSenha(phone, newPassword): Observable<any>
+  {
+    return this.httpClient.put(`${environment.API_URL}/${this.endpoint}` +
+        `/update_password/${phone}`, {password: newPassword});
+  }
+
   getById()
   {}
 

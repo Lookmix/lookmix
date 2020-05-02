@@ -7,6 +7,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import * as utils from './../../utils'
 import { MatHorizontalStepper } from '@angular/material/stepper';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -72,7 +75,7 @@ export class LoginComponent implements OnInit
 
                 if (error.unauthorized)
                 {
-                  mensagem = 'O telefone ou a senha estão incorretos';
+                  mensagem = 'O número ou a senha estão incorretos';
                 }
                 this.snackBar.open(mensagem, '', {
                     duration: 4000, panelClass: 'snack-bar-error'});
@@ -108,8 +111,10 @@ export class RecuperacaoSenhaComponent implements OnInit
   @ViewChild('stepper') stepper: MatHorizontalStepper;
   valorTextoBotaoProximo: string = 'ENVIAR';
   valorTextoBotaoVoltar: string = 'CANCELAR';
+  tipoCampoSenha: string = 'password'
   exibirSpinnerBotaoNext: boolean = false;
-
+  requestNexmoId: string;
+  tentativas = 1;
 
   formGroupTelefone: FormGroup;
   formGroupCodigo: FormGroup;
@@ -118,7 +123,8 @@ export class RecuperacaoSenhaComponent implements OnInit
   constructor(private formBuilder: FormBuilder, 
       private dialogRef: MatDialogRef<RecuperacaoSenhaComponent>,
       public shareDataService: ShareDataService,
-      private snackBar: MatSnackBar)
+      private snackBar: MatSnackBar, 
+      private usuarioService: UsuarioService)
   {}
 
   ngOnInit()
@@ -144,7 +150,11 @@ export class RecuperacaoSenhaComponent implements OnInit
         this.valorTextoBotaoProximo = 'ENVIANDO...'
         this.exibirSpinnerBotaoNext = true;
 
-        this.sendCode();
+        this.validarNumeroCelular();
+      }
+      else
+      {
+        this.formGroupTelefone.markAllAsTouched();
       }
     }
     else if (this.stepper.selectedIndex === 1)
@@ -156,6 +166,10 @@ export class RecuperacaoSenhaComponent implements OnInit
 
         this.verifyCode();
       }
+      else
+      {
+        this.formGroupCodigo.markAllAsTouched();
+      }
     }
     else
     {
@@ -165,6 +179,10 @@ export class RecuperacaoSenhaComponent implements OnInit
         this.exibirSpinnerBotaoNext = true;
 
         this.atualizarSenha();
+      }
+      else
+      {
+        this.formGroupSenha.markAllAsTouched();
       }
     }
   }
@@ -193,30 +211,144 @@ export class RecuperacaoSenhaComponent implements OnInit
     this.dialogRef.close();
   }
 
-  private sendCode()
+  private validarNumeroCelular()
   {
-    this.stepper.next();
-    this.exibirSpinnerBotaoNext = false;
-    this.valorTextoBotaoProximo = 'PRÓXIMO';
-    this.valorTextoBotaoVoltar = 'VOLTAR'
-    
+    this.usuarioService.isTelefoneValido(this.formGroupTelefone.value['phone'])
+        .subscribe(
+            successData => 
+            {
+              if (successData['is_unique'])
+              {
+                this.snackBar.open('O número informado não pertence a nenhuma conta.', '', 
+                {
+                  duration: 4000,
+                  panelClass: 'snack-bar-error'
+                });
+                this.exibirSpinnerBotaoNext = false;
+                this.valorTextoBotaoProximo = 'ENVIAR'
+              }
+              else
+              {
+                this.sendCode()
+                    .subscribe(
+                        () => 
+                        {
+                          this.stepper.next();
+                          this.exibirSpinnerBotaoNext = false;
+                          this.valorTextoBotaoProximo = 'PRÓXIMO';
+                          this.valorTextoBotaoVoltar = 'CANCELAR'
+                        },
+                        errorNexmo => 
+                        {
+                          this.exibirMsgErroEOcultarSpinnerBotaoNext(errorNexmo);
+
+                          this.exibirSpinnerBotaoNext = false;
+                          this.valorTextoBotaoProximo = 'ENVIAR'
+                        })
+              }
+            },
+            error => 
+            {
+              this.exibirMsgErroEOcultarSpinnerBotaoNext(error);
+
+              this.exibirSpinnerBotaoNext = false;
+              this.valorTextoBotaoProximo = 'ENVIAR'
+            });
+  }
+
+  private sendCode(): Observable<any>
+  {
+    return this.usuarioService.sendVerifyCode(this.formGroupTelefone.value['phone'])
+        .pipe(
+            tap(nexmoResponse => 
+            {
+              this.requestNexmoId = nexmoResponse['request_id'];
+
+              return nexmoResponse;
+            })
+          );
   }
 
   private verifyCode()
   {
-    this.stepper.next();
-    this.exibirSpinnerBotaoNext = false;
-    this.valorTextoBotaoProximo = 'ATUALIZAR';
-    this.valorTextoBotaoVoltar = 'CANCELAR'
+    this.usuarioService.verifyCode(this.requestNexmoId, this.formGroupCodigo.value['codigo'])
+        .subscribe(
+            data => 
+            {
+              if (data['is_valid'])
+              {
+                this.stepper.next();
+                this.exibirSpinnerBotaoNext = false;
+                this.valorTextoBotaoProximo = 'ATUALIZAR';
+                this.valorTextoBotaoVoltar = 'CANCELAR'
+              }
+              else
+              {
+                this.formGroupCodigo.get('codigo').setValue('');
+                this.exibirSpinnerBotaoNext = false;
+                this.valorTextoBotaoProximo = 'PRÓXIMO';
+
+                if (this.tentativas === 3)
+                {
+                  this.tentativas = 1;
+
+                  this.sendCode()
+                      .subscribe(
+                          () => 
+                          {
+                            this.snackBar.open('Suas tentativas esgotaram, um novo código foi enviado para o seu número.', '', 
+                            {
+                              duration: 5000
+                            });
+                          }, 
+                          error => 
+                          {
+                            this.exibirMsgErroEOcultarSpinnerBotaoNext(error);
+
+                            this.exibirSpinnerBotaoNext = false;
+                            this.valorTextoBotaoProximo = 'PRÓXIMO';
+                          });
+                }
+                else
+                {
+                  this.exibirMsgErroEOcultarSpinnerBotaoNext(
+                        'Código inválido, tente novamente. Você ainda tem ' + 
+                        (3 - this.tentativas) + ' tentativa(s).');
+
+                  this.tentativas += 1;
+                }
+              }
+            }, 
+            error => 
+            {
+              this.exibirMsgErroEOcultarSpinnerBotaoNext(error);
+
+              this.exibirSpinnerBotaoNext = false;
+              this.valorTextoBotaoProximo = 'PRÓXIMO';
+            });
   }
 
   private atualizarSenha()
   {
-    setTimeout(() => {
-      this.snackBar.open('Senha atualizada com sucesso.', '', {duration: 4000});
+    this.usuarioService.atualizarSenha(this.formGroupTelefone.value['phone'], 
+        this.formGroupSenha.value['password'])
+        .subscribe(
+            () => 
+            {
+              this.snackBar.open('Senha atualizada com sucesso.', '', 
+              {
+                duration: 4000
+              });
+              this.closeDialog();
+            },
+            error => 
+            {
+              this.exibirMsgErroEOcultarSpinnerBotaoNext(error);
 
-      this.closeDialog();
-    }, 3000);
+              this.exibirSpinnerBotaoNext = false;
+              this.valorTextoBotaoProximo = 'ATUALIZAR';
+            }
+          )
   }
 
   private createForms()
@@ -230,5 +362,15 @@ export class RecuperacaoSenhaComponent implements OnInit
     this.formGroupSenha = this.formBuilder.group({
       password: ['', Validators.required]
     });
+  }
+
+  private exibirMsgErroEOcultarSpinnerBotaoNext(error)
+  {
+    this.exibirSpinnerBotaoNext = false;
+
+    this.snackBar.open(error, '', {
+        duration: 4000, panelClass: 'snack-bar-error'})
+
+    console.log(error);
   }
 }

@@ -1,7 +1,9 @@
 <div class="container-recuperacao-senha mat-app-background" 
-    [class.dark-theme]="shareDataService.temaNoturno">
+    [class.dark-theme]="shareDataService.temaNoturno" 
+    [ngStyle]="{'backgroundColor': shareDataService.temaNoturno ? 
+        '#424242' : 'white'}">
   
-  <h2 mat-dialog-title>Confirmação do número de telefone</h2>
+  <h2 mat-dialog-title>Recuperação de senha</h2>
 
   <mat-dialog-content>
     <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper"
@@ -18,6 +20,14 @@
                 mask="(00) 00000-0000"
                 formControlName="phone" required>
   
+            <mat-error *ngIf="formGroupTelefone.get('phone').hasError('required')">
+              O número do celular deve ser preenchido
+            </mat-error>
+  
+            <mat-error *ngIf="formGroupTelefone.get('phone').hasError('Mask error')">
+              O número está incorreto
+            </mat-error>
+
             <mat-hint>DDD e número</mat-hint>
           </mat-form-field>
         </form>
@@ -55,8 +65,19 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Nova senha</mat-label>
-            <input matInput formControlName="password" 
-                placeholder="Digite aqui" required>
+
+            <input matInput formControlName="password" required
+                placeholder="Digite aqui" [type]="tipoCampoSenha">
+
+            <mat-icon class="ocultar-efeito-padrao-clique icone-exibir-senha"
+                (click)="tipoCampoSenha === 'password' ? tipoCampoSenha = 'text' : 
+                    tipoCampoSenha = 'password'" matSuffix>
+              {{tipoCampoSenha === 'password' ? 'visibility' : 'visibility_off'}}
+            </mat-icon>
+  
+            <mat-error *ngIf="formGroupSenha.get('password').hasError('required')">
+              A senha deve ser preenchida
+            </mat-error>  
           </mat-form-field>
         </form>
       </mat-step>
@@ -67,7 +88,8 @@
         {{valorTextoBotaoVoltar}}
       </button>
     
-      <button mat-stroked-button (click)="nextStep()">
+      <button mat-stroked-button (click)="nextStep()" 
+          [color]="shareDataService.temaNoturno ? 'primary' : 'accent'">
     
         {{valorTextoBotaoProximo}}
     
