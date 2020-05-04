@@ -45,9 +45,9 @@ export class AuthGuard implements CanActivate
     }
     this.router.navigate(['login']);
 
-    this.snackBar.open('Por questões de segurança ' +
-        'você precisa entrar na sua conta novamente.', '', 
-        {duration: 4500}) 
+    const msg: string = 'Por questões de segurança você precisa entrar na sua conta novamente.';
+
+    this.snackBar.open(msg, '', {duration: 4500});
 
     return false;
   }
@@ -72,6 +72,8 @@ export class AuthGuard implements CanActivate
 
               dialogSpinnerRef.close();
 
+              this.snackBar.open(error, '', {duration: 4500}) 
+
               console.log(error);
             });
   }
@@ -80,6 +82,8 @@ export class AuthGuard implements CanActivate
   {
    return this.dialog.open(SpinnerComponent, {
       disableClose: true,
+      minWidth: '200px',
+      backdropClass: 'backdrop-dialog',
       data: {
         titulo: "Carregando..."
       }
@@ -91,7 +95,7 @@ export class AuthGuard implements CanActivate
     if (utils.isTokenValid('access_token_data') || 
         utils.isTokenValid('refresh_token_data'))
     {
-      this.router.navigate(['guarda-roupa'])
+      this.router.navigate(['home'])
 
       return false;
     }

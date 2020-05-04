@@ -25,7 +25,8 @@ export class ToolbarComponent implements OnInit
   constructor(private breakpointObserver: BreakpointObserver,
       private snackBar: MatSnackBar,
       private segurancaService: SegurancaService,
-      public shareDataService: ShareDataService, public router: Router) 
+      public shareDataService: ShareDataService, 
+      public router: Router) 
   {}
 
   ngOnInit()

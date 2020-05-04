@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { v4 as uuid } from 'uuid';
 import { UploadService } from 'src/app/services/upload.service';
-import { SpinnerComponent } from '../spinner/spinner.component';
+import { SpinnerComponent } from './../../../layout/spinner/spinner.component';
 import { ShareDataService } from 'src/app/services/share-data.service';
 
 

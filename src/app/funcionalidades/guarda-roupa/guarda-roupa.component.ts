@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SpinnerComponent } from '../../../layout/spinner/spinner.component';
-import { ShareDataService } from '../../../services/share-data.service';
+import { SpinnerComponent } from '../../layout/spinner/spinner.component';
+import { ShareDataService } from '../../services/share-data.service';
 import { SegurancaService } from 'src/app/services/seguranca.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { SegurancaService } from 'src/app/services/seguranca.service';
   templateUrl: './guarda-roupa.component.html',
   styleUrls: ['./guarda-roupa.component.scss']
 })
-export class GuardaRoupaComponent implements OnInit 
+export class GuardaRoupaComponent implements OnInit, AfterViewInit
 {
   guardaRoupa = {
     mangaCurta: [],
@@ -27,18 +27,21 @@ export class GuardaRoupaComponent implements OnInit
   
   combinacoes = [];
 
-  constructor
-    (
-      public dialog: MatDialog, 
+  constructor(public dialog: MatDialog, 
       public shareDataService: ShareDataService,
       private segurancaService: SegurancaService
     ) 
   {
-    this.shareDataService.tituloBarraSuperior = "Guarda-roupa";
+    // this.shareDataService.tituloBarraSuperior = "Guarda-roupa";
   }
 
   ngOnInit()
-  { }
+  {
+  }
+
+  ngAfterViewInit()
+  {
+  }
 
   gerarCombinacoes()
   {

@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GuardaRoupaComponent } from './usuarios/comum/guarda-roupa/guarda-roupa.component';
-import { LooksSemanaisComponent } from './usuarios/comum/looks-semanais/looks-semanais.component';
+import { GuardaRoupaComponent } from './funcionalidades/guarda-roupa/guarda-roupa.component';
+import { LooksSemanaisComponent } from './funcionalidades/looks-semanais/looks-semanais.component';
 import { LoginComponent } from './seguranca/login/login.component';
-import { ConfiguracoesComponent } from './usuarios/comum/configuracoes/configuracoes.component';
-import { CadastroUsuarioComponent } from './usuarios/comum/cadastro-usuario/cadastro-usuario.component';
+import { ConfiguracoesComponent } from './funcionalidades/configuracoes/configuracoes.component';
+import { CadastroUsuarioComponent } from './funcionalidades/cadastro-usuario/cadastro-usuario.component';
 import { AuthGuard } from './guards/auth.guard';
+import { MenuNavegacaoComponent } from './layout/menu-navegacao/menu-navegacao.component';
 
 const routes: Routes = [
   {
@@ -59,7 +60,15 @@ const routes: Routes = [
       corTema: '#8341a1d4'
     },
     canActivate: [AuthGuard]
-  }
+  },
+  {
+    path: 'home',
+    component: MenuNavegacaoComponent,
+    data: {
+      corTema: '#fff'
+    },
+    canActivate: [AuthGuard]
+  },
 ];
 
 @NgModule({

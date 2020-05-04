@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ShareDataService } from '../../../services/share-data.service';
+import { ShareDataService } from '../../services/share-data.service';
 
 @Component({
   selector: 'app-pagina-configuracoes',

@@ -27,19 +27,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './layout/toolbar/toolbar.component';
 import { SpinnerComponent } from './layout/spinner/spinner.component';
-import { GuardaRoupaComponent } from './usuarios/comum/guarda-roupa/guarda-roupa.component';
-import { ConfiguracoesComponent } from './usuarios/comum/configuracoes/configuracoes.component';
-import { LooksSemanaisComponent } from './usuarios/comum/looks-semanais/looks-semanais.component';
-import { CardRoupaComponent } from './layout/card-roupa/card-roupa.component';
+import { GuardaRoupaComponent } from './funcionalidades/guarda-roupa/guarda-roupa.component';
+import { ConfiguracoesComponent } from './funcionalidades/configuracoes/configuracoes.component';
+import { LooksSemanaisComponent } from './funcionalidades/looks-semanais/looks-semanais.component';
+import { CardRoupaComponent } from './funcionalidades/guarda-roupa/card-roupa/card-roupa.component';
 import { LoginComponent, RecuperacaoSenhaComponent } from './seguranca/login/login.component';
-import { DashboardComponent } from './usuarios/admin/dashboard/dashboard.component';
-import { CadastroUsuarioComponent, ConfirmacaoNumeroDialogComponent } from './usuarios/comum/cadastro-usuario/cadastro-usuario.component';
+import { CadastroUsuarioComponent, ConfirmacaoNumeroDialogComponent } from './funcionalidades/cadastro-usuario/cadastro-usuario.component';
 import { LogoComponent } from './layout/logo/logo.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { HttpInterceptorService } from './services/http-interceptor.service'
 import { environment } from '../environments/environment';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { HttpXsrfTokenExtractorService } from './services/http-xsrf-token-extractor.service';
+import { MenuNavegacaoComponent } from './layout/menu-navegacao/menu-navegacao.component';
+import { ListaDivisorGuardaRoupaComponent } from './funcionalidades/guarda-roupa/lista-divisor-guarda-roupa/lista-divisor-guarda-roupa.component';
+import { MatRippleModule } from '@angular/material/core';
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -53,11 +55,12 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     LooksSemanaisComponent,
     CardRoupaComponent,
     LoginComponent,
-    DashboardComponent,
     CadastroUsuarioComponent,
     ConfirmacaoNumeroDialogComponent,
     LogoComponent,
-    RecuperacaoSenhaComponent
+    RecuperacaoSenhaComponent,
+    MenuNavegacaoComponent,
+    ListaDivisorGuardaRoupaComponent
   ],
   imports: [
     BrowserModule,
@@ -86,6 +89,7 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     MatStepperModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NgxMaskModule.forRoot(options),
+    MatRippleModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},

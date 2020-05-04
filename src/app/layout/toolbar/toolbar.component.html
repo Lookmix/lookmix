@@ -3,20 +3,27 @@
       [opened]="exibirMenu()" autoFocus="false"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"> <!--[opened]="false" *ngIf="router.url !== '/login'"-->
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
+    <mat-nav-list><!--
       <a mat-list-item (click)="drawer.toggle()" [routerLink]="['login']">
         Entrar
       </a>
-      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" [routerLink]="['look-semanal']">
+      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" 
+          [routerLink]="['home']">
+        Início
+      </a>
+      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" 
+          [routerLink]="['look-semanal']">
         Looks da semana
       </a>
       <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false">
         Look aleatório
       </a>
-      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" [routerLink]="['guarda-roupa']">
+      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" 
+          [routerLink]="['guarda-roupa']">
         Meu guarda-roupa
-      </a>
-      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" [routerLink]="['configuracoes']">
+      </a>-->
+      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" 
+          [routerLink]="['configuracoes']">
         Configurações
       </a>
       <a mat-list-item (click)="logout(); shareDataService.isXSmall ? drawer.toggle() : false">
@@ -24,11 +31,20 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content [ngStyle]="{'background': setBackground(), 
-      'transition': router.url === '/login' || 
-      router.url === '/nova-conta' ? 'background 0.75s' : 'unset'}"> 
-    <mat-toolbar class="mat-elevation-z3 fixed-toolbar" 
-        *ngIf="router.url !== '/login' && router.url !== '/nova-conta'">
+  <mat-sidenav-content [ngStyle]="
+      {
+        'background': setBackground(), 
+        'transition': 
+          router.url === '/login' || 
+          router.url === '/nova-conta' ? 'background 0.75s' : 'unset'
+      }"> 
+    <mat-toolbar class="fixed-toolbar" 
+        *ngIf="router.url !== '/login' && router.url !== '/nova-conta'"
+        [ngStyle]="
+            {
+              'borderBottom': !shareDataService.temaNoturno ? '1px solid #0000001f' : '1px solid #ffffff1a',
+              'background': shareDataService.temaNoturno ? '#303030' : 'white'
+            }"> <!--mat-elevation-z3-->
       <button
           type="button"
           aria-label="Toggle sidenav"
@@ -40,12 +56,22 @@
       <span class="titulo-toolbar">{{shareDataService.tituloBarraSuperior}}</span>
     </mat-toolbar>
 
-    <div [ngStyle]="{'marginTop': router.url !== '/login' && 
-            router.url !== '/nova-conta' ? '56px' : '0px',
-            'display': router.url === '/nova-conta' || router.url === '/login' ? 'flex' : 'block', 
-            'flexDirection': router.url === '/nova-conta' || router.url === '/login' ? 'column' : 'unset', 
-            'justifyContent': router.url === '/nova-conta' || router.url === '/login' ? 'center' : 'unset'}"
-        class="div-router-outlet"><!--'display': 'flex', 'flexDirection': 'column', 'justifyContent': 'center'-->
+    <div class="div-router-outlet" 
+        [ngStyle]="
+        {
+          'marginTop': 
+            router.url !== '/nova-conta' && 
+            router.url !== '/login' ? '56px' : '0px',
+          'display': 
+            router.url === '/nova-conta' || 
+            router.url === '/login' ? 'flex' : 'block', 
+          'flexDirection': 
+            router.url === '/nova-conta' || 
+            router.url === '/login' ? 'column' : 'unset', 
+          'justifyContent': 
+            router.url === '/nova-conta' || 
+            router.url === '/login' ? 'center' : 'unset'
+        }">
       <router-outlet></router-outlet>
     </div>
 

@@ -1,0 +1,25 @@
+::ng-deep mat-tab-group#tabGroupMenuNavegacao > mat-tab-header.mat-tab-header {
+  position: fixed !important;
+  width: 100% !important;
+  z-index: 2 !important;
+  margin-top: 64px;
+  bottom: 0%;
+  box-shadow: 0px -3px 3px -2px rgba(0, 0, 0, 0.2), 
+      0px -3px 4px 0px rgba(0, 0, 0, 0.14), 
+      0px -4px 8px 0px rgba(0, 0, 0, 0.12);
+  background: white;
+}
+
+::ng-deep mat-tab-group#tabGroupMenuNavegacao.tab-noturno > mat-tab-header.mat-tab-header {
+  background: #424242;
+}
+
+::ng-deep div.mat-tab-label {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+

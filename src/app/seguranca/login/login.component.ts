@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit
   {
     this.criarFormulario();
   }
+
   private criarFormulario()
   {
     this.form = this.formBuilder.group({
@@ -67,7 +68,7 @@ export class LoginComponent implements OnInit
               {
                 utils.setLocalStorageTokenData(data);
 
-                this.router.navigate(['guarda-roupa']);
+                this.router.navigate(['home']);
               },
               error =>
               {

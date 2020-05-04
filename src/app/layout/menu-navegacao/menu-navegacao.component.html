@@ -1,0 +1,37 @@
+<div>
+  <mat-tab-group 
+      mat-stretch-tabs id="tabGroupMenuNavegacao"
+      [ngClass]="{'tab-noturno': shareDataService.temaNoturno}"
+      headerPosition="above" [disableRipple]="true"> <!---->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon svgIcon="guarda-roupa"></mat-icon>
+      </ng-template>
+      <div>
+        <app-lista-divisor-guarda-roupa></app-lista-divisor-guarda-roupa>
+      </div>
+    </mat-tab>
+  
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>
+          date_range
+        </mat-icon>
+      </ng-template>
+      <div>
+        <h4>Looks da semana</h4>
+      </div>
+    </mat-tab>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon>
+          shuffle
+        </mat-icon>
+      </ng-template>
+      <div>
+        <h4>Look aleatório</h4>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
