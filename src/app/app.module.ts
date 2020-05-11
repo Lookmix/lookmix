@@ -21,7 +21,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatRippleModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,8 +43,8 @@ import { environment } from '../environments/environment';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { HttpXsrfTokenExtractorService } from './services/http-xsrf-token-extractor.service';
 import { MenuNavegacaoComponent } from './layout/menu-navegacao/menu-navegacao.component';
-import { ListaDivisorGuardaRoupaComponent } from './funcionalidades/guarda-roupa/lista-divisor-guarda-roupa/lista-divisor-guarda-roupa.component';
-import { MatRippleModule } from '@angular/material/core';
+import { ListaGuardaRoupasComponent } from './funcionalidades/guarda-roupa/lista-guarda-roupas/lista-guarda-roupas.component';
+
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
@@ -60,7 +63,7 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     LogoComponent,
     RecuperacaoSenhaComponent,
     MenuNavegacaoComponent,
-    ListaDivisorGuardaRoupaComponent
+    ListaGuardaRoupasComponent
   ],
   imports: [
     BrowserModule,
@@ -87,9 +90,11 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     MatInputModule,
     MatSlideToggleModule,
     MatStepperModule,
+    MatRippleModule,
+    MatSelectModule,
+    
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NgxMaskModule.forRoot(options),
-    MatRippleModule
   ],
   providers: [
     {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: true}},

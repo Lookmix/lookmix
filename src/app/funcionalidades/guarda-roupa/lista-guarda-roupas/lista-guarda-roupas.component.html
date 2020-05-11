@@ -1,0 +1,11 @@
+<div *ngIf="!shareDataService.guardaRoupaEscolhido" style="padding: 10px;">
+  <mat-card style="margin: 10px 0;" matRipple 
+      *ngFor="let guardaRoupa of listaGuardaRoupas"
+      (click)="exibirGuardaRoupaEscolhido(guardaRoupa)">
+    {{guardaRoupa.nome}}
+  </mat-card>
+</div>
+
+<div *ngIf="shareDataService.guardaRoupaEscolhido">
+  <app-guarda-roupa #guardaRoupa></app-guarda-roupa>
+</div>

@@ -1,8 +1,9 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SpinnerComponent } from '../../layout/spinner/spinner.component';
 import { ShareDataService } from '../../services/share-data.service';
 import { SegurancaService } from 'src/app/services/seguranca.service';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-guarda-roupa',
@@ -11,6 +12,8 @@ import { SegurancaService } from 'src/app/services/seguranca.service';
 })
 export class GuardaRoupaComponent implements OnInit, AfterViewInit
 {
+  @ViewChild('tabGroupGuardaRoupa', {static: true}) tabGroupGuardaRoupa: MatTabGroup;
+
   guardaRoupa = {
     mangaCurta: [],
     mangaLonga: [],
@@ -32,16 +35,14 @@ export class GuardaRoupaComponent implements OnInit, AfterViewInit
       private segurancaService: SegurancaService
     ) 
   {
-    // this.shareDataService.tituloBarraSuperior = "Guarda-roupa";
+    //this.shareDataService.tituloBarraSuperior = 'Guarda-roupa';
   }
 
   ngOnInit()
-  {
-  }
+  { }
 
   ngAfterViewInit()
-  {
-  }
+  { }
 
   gerarCombinacoes()
   {
@@ -86,6 +87,11 @@ export class GuardaRoupaComponent implements OnInit, AfterViewInit
   protectedEndpoint()
   {
     this.segurancaService.testToken();
+  }
+
+  realinharInkBar()
+  {
+    this.tabGroupGuardaRoupa.realignInkBar();
   }
 }
 

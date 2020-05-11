@@ -28,3 +28,20 @@
 .div-router-outlet {
   height: 100%;
 }
+
+::ng-deep #campo-guarda-roupa-escolhido {
+  .mat-form-field-wrapper >.mat-form-field-underline {
+    display: none;
+  }
+  width: 90px;
+  font-size: 20px;
+  height: 56px;
+  margin-left: 15px;
+  margin-top: -17px;
+
+  /*width: 90px;
+  font-size: 16px;
+  height: 56px;
+  margin-left: 20px;*/
+}
+

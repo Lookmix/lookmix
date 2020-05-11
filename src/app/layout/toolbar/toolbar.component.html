@@ -1,27 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [opened]="exibirMenu()" autoFocus="false"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"> <!--[opened]="false" *ngIf="router.url !== '/login'"-->
+      [mode]="(isHandset$ | async) ? 'over' : 'side'">
     <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list><!--
-      <a mat-list-item (click)="drawer.toggle()" [routerLink]="['login']">
-        Entrar
-      </a>
-      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" 
-          [routerLink]="['home']">
-        Início
-      </a>
-      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" 
-          [routerLink]="['look-semanal']">
-        Looks da semana
-      </a>
-      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false">
-        Look aleatório
-      </a>
-      <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" 
-          [routerLink]="['guarda-roupa']">
-        Meu guarda-roupa
-      </a>-->
+    <mat-nav-list>
       <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" 
           [routerLink]="['configuracoes']">
         Configurações
@@ -31,6 +13,7 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
+
   <mat-sidenav-content [ngStyle]="
       {
         'background': setBackground(), 
@@ -44,16 +27,35 @@
             {
               'borderBottom': !shareDataService.temaNoturno ? '1px solid #0000001f' : '1px solid #ffffff1a',
               'background': shareDataService.temaNoturno ? '#303030' : 'white'
-            }"> <!--mat-elevation-z3-->
+            }">
       <button
           type="button"
           aria-label="Toggle sidenav"
           mat-icon-button
-          (click)="drawer.toggle()"
+          (click)="isIntoWhiteListMenu() ? drawer.toggle() : backPage()"
           *ngIf="true">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        <mat-icon aria-label="Side nav toggle icon">
+          {{isIntoWhiteListMenu() ? 'menu' : 'arrow_back'}}
+        </mat-icon>
       </button>
-      <span class="titulo-toolbar">{{shareDataService.tituloBarraSuperior}}</span>
+
+      <span class="titulo-toolbar" *ngIf="!shareDataService.guardaRoupaEscolhido || 
+          !shareDataService.tabGuardaRoupaSelecionada || router.url !== '/home'">
+        {{shareDataService.tituloBarraSuperior}}
+      </span>
+
+      <div *ngIf="shareDataService.tabGuardaRoupaSelecionada && 
+          shareDataService.guardaRoupaEscolhido && router.url === '/home'">
+
+        <mat-form-field id="campo-guarda-roupa-escolhido" class="ocultar-efeito-padrao-clique">
+          <mat-select [value]="shareDataService.guardaRoupaEscolhido.nome">
+            <mat-option *ngFor="let guardaRoupa of shareDataService.listaGuardaRoupas" 
+                [value]="guardaRoupa.nome" style="height: 2.4em;">
+              {{guardaRoupa.nome}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> 
+      </div>
     </mat-toolbar>
 
     <div class="div-router-outlet" 

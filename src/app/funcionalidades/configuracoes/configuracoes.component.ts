@@ -13,7 +13,7 @@ export class ConfiguracoesComponent implements OnInit
 
   constructor(public shareDataService: ShareDataService) 
   {
-    this.shareDataService.tituloBarraSuperior = "Configurações";
+    this.shareDataService.tituloBarraSuperior = 'Configurações';
   }
 
   ngOnInit() 

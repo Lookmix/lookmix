@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Meta } from '@angular/platform-browser';
-import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
+import { ActivatedRoute, Router, RoutesRecognized, NavigationEnd } from '@angular/router';
+import { filter, pairwise } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,14 @@ export class ShareDataService
   temaNoturno: boolean;
   isXSmall: boolean;
   isSmall: boolean;
+  tabGuardaRoupaSelecionada: boolean = false;
+  guardaRoupaEscolhido: any;
+  listaGuardaRoupas: any[];
+  urlAnterior: string;
+
+  whiteListMenuButton = [
+    '/home'
+  ]
 
   backgroundsLogin = 
   {
@@ -25,6 +35,8 @@ export class ShareDataService
   {
     this.estiloGuardaRoupa = localStorage.getItem('estiloGuardaRoupa');
     this.temaNoturno = localStorage.getItem('temaNoturno') === 'true';
+    this.guardaRoupaEscolhido = JSON.parse(localStorage.getItem('guardaRoupaEscolhido'));
+    this.urlAnterior = localStorage.getItem('urlAnterior');
 
     this.atualizarMetaTagTheme();
 
@@ -32,7 +44,8 @@ export class ShareDataService
       Breakpoints.XSmall,
       Breakpoints.Small
     ])
-    .subscribe(result => {
+    .subscribe(result => 
+    {
       if (result.breakpoints[Breakpoints.XSmall])
       {
         this.isXSmall = true;
@@ -49,21 +62,23 @@ export class ShareDataService
         this.isXSmall = false;
       }
     });
+    this.router.events
+        .pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
+        .subscribe((events) => 
+        {
+            this.urlAnterior = events[0].urlAfterRedirects;
+            
+            localStorage.setItem('urlAnterior', this.urlAnterior);
 
-    this.router.events.subscribe((data) => 
-    {
-      if (data instanceof RoutesRecognized) 
-      {
-        let routeData = data.state.root.firstChild.data;
+            let routeData = events[1].state.root.firstChild.data;
 
-        setTimeout(() => {
-          if (!this.temaNoturno)
-          {
-            this.meta.updateTag({name:'theme-color', content: routeData.corTema});
-          }
-        })
-      }
-    });
+            setTimeout(() => {
+              if (!this.temaNoturno)
+              {
+                this.meta.updateTag({name:'theme-color', content: routeData.corTema});
+              }
+            });
+        });
   }
 
   atualizarMetaTagTheme(cor?: string, rota?: string)
@@ -92,4 +107,6 @@ export class ShareDataService
       this.meta.updateTag({name:'theme-color', content: 'initial'});
     }
   }
+
+
 }

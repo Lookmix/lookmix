@@ -98,4 +98,16 @@ export class ToolbarComponent implements OnInit
           console.log(error);
         }); 
   }
+
+  isIntoWhiteListMenu()
+  {
+    return this.shareDataService.whiteListMenuButton.includes(this.router.url);
+  }
+
+  backPage()
+  {
+    console.log(this.shareDataService.urlAnterior);
+
+    this.router.navigate([this.shareDataService.urlAnterior]);
+  }
 }

@@ -1,33 +1,50 @@
 <div>
-  <mat-tab-group 
+  <mat-tab-group #tabGroupMenuNavegacao
       mat-stretch-tabs id="tabGroupMenuNavegacao"
       [ngClass]="{'tab-noturno': shareDataService.temaNoturno}"
-      headerPosition="above" [disableRipple]="true"> <!---->
+      headerPosition="above" [disableRipple]="true"
+      (selectedIndexChange)="alterarInformacoesBaseadasNaAbaEscolhida($event)">
+
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon svgIcon="guarda-roupa"></mat-icon>
-      </ng-template>
-      <div>
-        <app-lista-divisor-guarda-roupa></app-lista-divisor-guarda-roupa>
-      </div>
-    </mat-tab>
-  
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon>
-          date_range
-        </mat-icon>
+        <div [ngClass]="{'indicador-aba-selecionada': 
+                tabGroupMenuNavegacao.selectedIndex === 0}"
+            [ngStyle]="{'background': tabGroupMenuNavegacao.selectedIndex === 0 ? 
+                (shareDataService.temaNoturno ? '#ffffff4d' : '#0000003d') : 'unset'}">
+          <mat-icon class="margem-icone-menu-navegacao">
+            date_range
+          </mat-icon>
+        </div>
       </ng-template>
       <div>
         <h4>Looks da semana</h4>
       </div>
     </mat-tab>
 
+    <mat-tab #tabGuardaRoupa>
+      <ng-template mat-tab-label>
+        <div [ngClass]="{'indicador-aba-selecionada': 
+                tabGroupMenuNavegacao.selectedIndex === 1}"
+            [ngStyle]="{'background': tabGroupMenuNavegacao.selectedIndex === 1 ? 
+                (shareDataService.temaNoturno ? '#ffffff4d' : '#0000003d') : 'unset'}">
+          <mat-icon class="margem-icone-menu-navegacao" svgIcon="guarda-roupa"></mat-icon>
+        </div>
+      </ng-template>
+      <div>
+        <app-lista-guarda-roupas #listaGuardaRoupas></app-lista-guarda-roupas>
+      </div>
+    </mat-tab>
+
     <mat-tab>
       <ng-template mat-tab-label>
-        <mat-icon>
-          shuffle
-        </mat-icon>
+        <div [ngClass]="{'indicador-aba-selecionada': 
+                tabGroupMenuNavegacao.selectedIndex === 2}"
+            [ngStyle]="{'background': tabGroupMenuNavegacao.selectedIndex === 2 ? 
+                (shareDataService.temaNoturno ? '#ffffff4d' : '#0000003d') : 'unset'}">
+          <mat-icon class="margem-icone-menu-navegacao">
+            shuffle
+          </mat-icon>
+        </div>
       </ng-template>
       <div>
         <h4>Look aleatório</h4>

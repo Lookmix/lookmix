@@ -15,5 +15,33 @@ h1, h3, p {
 
 .container-guarda-roupa {
   padding: 20px 10px;
-  // background: #0000000f;
+}
+
+::ng-deep #tabGroupGuardaRoupa.tab-noturno > mat-tab-header {
+  background: #303030;
+}
+
+::ng-deep #tabGroupGuardaRoupa.tab-light > mat-tab-header {
+  background: #FAFAFA;
+}
+
+::ng-deep #tabGroupGuardaRoupa > mat-tab-header {
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  /*box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 
+    0px 3px 4px 0px rgba(0, 0, 0, 0.14), 
+    0px 4px 8px 0px rgba(0, 0, 0, 0.12);*/
+}
+
+::ng-deep #tabGroupGuardaRoupa > div.mat-tab-body-wrapper {
+  margin-top: 48px;
+}
+
+::ng-deep #tabGroupGuardaRoupa > mat-tab-header > .mat-tab-label-container > .mat-tab-list > .mat-tab-labels > .mat-tab-label { 
+  .mat-tab-label-content {
+    white-space: pre-wrap;
+  }
+  max-width: 75px;
+  padding: 0 10px;
 }

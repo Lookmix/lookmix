@@ -10,8 +10,12 @@
   background: white;
 }
 
-::ng-deep mat-tab-group#tabGroupMenuNavegacao.tab-noturno > mat-tab-header.mat-tab-header {
+::ng-deep mat-tab-group#tabGroupMenuNavegacao.tab-noturno > mat-tab-header {
   background: #424242;
+}
+
+::ng-deep mat-tab-group#tabGroupMenuNavegacao.tab-light > mat-tab-header {
+  background: #FAFAFA
 }
 
 ::ng-deep div.mat-tab-label {
@@ -23,3 +27,18 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+::ng-deep #tabGroupMenuNavegacao > mat-tab-header > div.mat-tab-label-container > div > mat-ink-bar {
+  display: none;
+  width: 0px;
+}
+
+.indicador-aba-selecionada {
+  border-radius: 100px;
+  height: 32px;
+  width: 32px;
+  transition-duration: 0.6s;
+}
+
+.margem-icone-menu-navegacao {
+  margin-top: 4px;
+}

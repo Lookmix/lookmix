@@ -38,6 +38,7 @@ $dark-app-theme:   mat-dark-theme($dark-app-primary, $dark-app-accent, $dark-app
 }
 
 
+
 /**
 font-family: 'Rubik', sans-serif;
 font-family: 'Roboto', sans-serif;
@@ -48,19 +49,6 @@ html, body { height: 100%; font-family: 'Rubik', sans-serif !important; }
 body { margin: 0; }
 body, h1, h2, h3, h4, h5, span, p, a, button, mat-card-title { 
   font-family: 'Rubik', sans-serif !important;
-}
-
-#tabGroupGuardaRoupa > .mat-tab-header {
-  position: fixed !important;
-  width: 100% !important;
-  z-index: 2 !important;
-  box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 
-    0px 3px 4px 0px rgba(0, 0, 0, 0.14), 
-    0px 4px 8px 0px rgba(0, 0, 0, 0.12);
-}
-
-#tabGroupGuardaRoupa > div.mat-tab-body-wrapper {
-  margin-top: 48px;
 }
 
 .snack-bar-error {
