@@ -80,3 +80,16 @@ export function getTokenJTI(tokenName: string)
 {
 	return JSON.parse(localStorage.getItem(tokenName))['jti'];
 }
+
+export function getFromLocalStorageDadosUrlAnterior()
+{
+	return JSON.parse(localStorage.getItem('urlAnterior'));
+}
+
+export function setInLocalStorageDadosUrlAnterior(urlAnterior: string, renovouTokenDuranteRedirecionamento: boolean)
+{
+	localStorage.setItem('urlAnterior', JSON.stringify({
+		'url': urlAnterior,
+		'renovouTokenDuranteRedirecionamento': renovouTokenDuranteRedirecionamento
+	}));
+}

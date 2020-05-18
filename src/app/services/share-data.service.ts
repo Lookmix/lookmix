@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Meta } from '@angular/platform-browser';
-import { ActivatedRoute, Router, RoutesRecognized, NavigationEnd } from '@angular/router';
+import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { filter, pairwise } from 'rxjs/operators';
-
+import * as utils from './../utils';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +36,8 @@ export class ShareDataService
     this.estiloGuardaRoupa = localStorage.getItem('estiloGuardaRoupa');
     this.temaNoturno = localStorage.getItem('temaNoturno') === 'true';
     this.guardaRoupaEscolhido = JSON.parse(localStorage.getItem('guardaRoupaEscolhido'));
-    this.urlAnterior = localStorage.getItem('urlAnterior');
+    this.urlAnterior = utils.getFromLocalStorageDadosUrlAnterior() ? 
+        utils.getFromLocalStorageDadosUrlAnterior()['url'] : '';
 
     this.atualizarMetaTagTheme();
 
@@ -66,18 +67,21 @@ export class ShareDataService
         .pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
         .subscribe((events) => 
         {
+          if (!utils.getFromLocalStorageDadosUrlAnterior() || 
+              !utils.getFromLocalStorageDadosUrlAnterior()['renovouTokenDuranteRedirecionamento'])
+          {
             this.urlAnterior = events[0].urlAfterRedirects;
-            
-            localStorage.setItem('urlAnterior', this.urlAnterior);
+  
+            utils.setInLocalStorageDadosUrlAnterior(this.urlAnterior, false);
+          }
+          let routeData = events[1].state.root.firstChild.data;
 
-            let routeData = events[1].state.root.firstChild.data;
-
-            setTimeout(() => {
-              if (!this.temaNoturno)
-              {
-                this.meta.updateTag({name:'theme-color', content: routeData.corTema});
-              }
-            });
+          setTimeout(() => {
+            if (!this.temaNoturno)
+            {
+              this.meta.updateTag({name:'theme-color', content: routeData.corTema});
+            }
+          });
         });
   }
 

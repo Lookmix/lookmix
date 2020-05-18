@@ -35,6 +35,12 @@ export class AuthGuard implements CanActivate
     }
     if (utils.isTokenValid('access_token_data'))
     {
+      const localStorageDadosUrlAnterior = utils.getFromLocalStorageDadosUrlAnterior();
+
+      if (localStorageDadosUrlAnterior)
+      {
+        utils.setInLocalStorageDadosUrlAnterior(localStorageDadosUrlAnterior['url'], false);
+      }
       return true;
     }
     else if (utils.isTokenValid('refresh_token_data'))
@@ -62,17 +68,24 @@ export class AuthGuard implements CanActivate
             {
               utils.setLocalStorageTokenData(data);
 
+              const localStorageDadosUrlAnterior = utils.getFromLocalStorageDadosUrlAnterior();
+
+              utils.setInLocalStorageDadosUrlAnterior(localStorageDadosUrlAnterior['url'], true)
+
               this.router.navigate([url]);
 
               dialogSpinnerRef.close();
             }, 
             error => 
             {
-              this.router.navigate(['login'])
+              utils.clearLocalStorageTokenData();
+              
+              this.router.navigate(['login']);
 
               dialogSpinnerRef.close();
 
-              this.snackBar.open(error, '', {duration: 4500}) 
+              this.snackBar.open('Devido à um erro de rede você precisa entrar novamente.', 
+                  '', {duration: 4500}) 
 
               console.log(error);
             });

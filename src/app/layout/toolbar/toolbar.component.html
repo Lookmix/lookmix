@@ -21,13 +21,14 @@
           router.url === '/login' || 
           router.url === '/nova-conta' ? 'background 0.75s' : 'unset'
       }"> 
-    <mat-toolbar class="fixed-toolbar" 
+    <mat-toolbar 
         *ngIf="router.url !== '/login' && router.url !== '/nova-conta'"
         [ngStyle]="
             {
               'borderBottom': !shareDataService.temaNoturno ? '1px solid #0000001f' : '1px solid #ffffff1a',
               'background': shareDataService.temaNoturno ? '#303030' : 'white'
-            }">
+            }"
+        [ngClass]="{'fixed-toolbar': true}">
       <button
           type="button"
           aria-label="Toggle sidenav"
@@ -47,7 +48,8 @@
       <div *ngIf="shareDataService.tabGuardaRoupaSelecionada && 
           shareDataService.guardaRoupaEscolhido && router.url === '/home'">
 
-        <mat-form-field id="campo-guarda-roupa-escolhido" class="ocultar-efeito-padrao-clique">
+        <mat-form-field id="campo-guarda-roupa-escolhido" 
+            class="ocultar-efeito-padrao-clique">
           <mat-select [value]="shareDataService.guardaRoupaEscolhido.nome">
             <mat-option *ngFor="let guardaRoupa of shareDataService.listaGuardaRoupas" 
                 [value]="guardaRoupa.nome" style="height: 2.4em;">
