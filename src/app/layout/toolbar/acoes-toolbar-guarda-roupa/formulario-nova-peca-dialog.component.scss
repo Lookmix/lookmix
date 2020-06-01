@@ -1,0 +1,9 @@
+.container-formulario-nova-peca {
+  border-radius: 0px;
+  height: 100%;
+}
+
+::ng-deep #containerDialogFormularioNovaPeca.mat-dialog-container {
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
