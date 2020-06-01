@@ -3,6 +3,7 @@
       [opened]="exibirMenu()" autoFocus="false"
       [mode]="(isHandset$ | async) ? 'over' : 'side'">
     <mat-toolbar>Menu</mat-toolbar>
+    
     <mat-nav-list>
       <a mat-list-item (click)="shareDataService.isXSmall ? drawer.toggle() : false" 
           [routerLink]="['configuracoes']">
@@ -45,18 +46,8 @@
         {{shareDataService.tituloBarraSuperior}}
       </span>
 
-      <div *ngIf="shareDataService.tabGuardaRoupaSelecionada && 
-          shareDataService.guardaRoupaEscolhido && router.url === '/home'">
-
-        <mat-form-field id="campo-guarda-roupa-escolhido" 
-            class="ocultar-efeito-padrao-clique">
-          <mat-select [value]="shareDataService.guardaRoupaEscolhido.nome">
-            <mat-option *ngFor="let guardaRoupa of shareDataService.listaGuardaRoupas" 
-                [value]="guardaRoupa.nome" style="height: 2.4em;">
-              {{guardaRoupa.nome}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field> 
+      <div style="width: 100%">
+        <app-acoes-toolbar-guarda-roupa></app-acoes-toolbar-guarda-roupa>
       </div>
     </mat-toolbar>
 

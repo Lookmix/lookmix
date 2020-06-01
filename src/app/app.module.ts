@@ -44,6 +44,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { HttpXsrfTokenExtractorService } from './services/http-xsrf-token-extractor.service';
 import { MenuNavegacaoComponent } from './layout/menu-navegacao/menu-navegacao.component';
 import { ListaGuardaRoupasComponent } from './funcionalidades/guarda-roupa/lista-guarda-roupas/lista-guarda-roupas.component';
+import { AcoesToolbarGuardaRoupaComponent, FormularioNovaPecaDialogComponent } from './layout/toolbar/acoes-toolbar-guarda-roupa/acoes-toolbar-guarda-roupa.component';
 
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
@@ -63,7 +64,9 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     LogoComponent,
     RecuperacaoSenhaComponent,
     MenuNavegacaoComponent,
-    ListaGuardaRoupasComponent
+    ListaGuardaRoupasComponent,
+    AcoesToolbarGuardaRoupaComponent,
+    FormularioNovaPecaDialogComponent
   ],
   imports: [
     BrowserModule,
