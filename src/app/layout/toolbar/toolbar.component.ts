@@ -8,6 +8,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SegurancaService } from 'src/app/services/seguranca.service';
 import { ShareDataService } from '../../services/share-data.service';
 import * as utils from './../../utils';
+import { SpinnerComponent } from '../spinner/spinner.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-toolbar',
@@ -16,6 +18,8 @@ import * as utils from './../../utils';
 })
 export class ToolbarComponent implements OnInit
 {
+  private dialogSpinnerRef: MatDialogRef<SpinnerComponent>;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -26,7 +30,8 @@ export class ToolbarComponent implements OnInit
       private snackBar: MatSnackBar,
       private segurancaService: SegurancaService,
       public shareDataService: ShareDataService, 
-      public router: Router) 
+      public router: Router, 
+      private dialog: MatDialog) 
   {}
 
   ngOnInit()
@@ -62,6 +67,14 @@ export class ToolbarComponent implements OnInit
 
   logout()
   {
+    this.dialogSpinnerRef = this.dialog.open(SpinnerComponent, {
+      disableClose: true,
+      minWidth: '200px',
+      backdropClass: 'backdrop-dialog',
+      data: {
+        titulo: "Carregando..."
+      }
+    });
     const tokenJTI = utils.getTokenJTI('access_token_data');
 
     if (!utils.isTokenValid('access_token_data'))
@@ -87,6 +100,8 @@ export class ToolbarComponent implements OnInit
         () => 
         {
           utils.clearLocalStorageTokenData();
+
+          this.dialogSpinnerRef.close();
           
           this.router.navigate(['login']);        
         }, 
@@ -94,7 +109,9 @@ export class ToolbarComponent implements OnInit
         {
           this.snackBar.open('Ocorreu um erro ao tentar sair, ' 
               + 'por favor, tente novamente', '', {duration: 3500});
-  
+
+          this.dialogSpinnerRef.close();
+
           console.log(error);
         }); 
   }
