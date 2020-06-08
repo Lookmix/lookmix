@@ -92,40 +92,30 @@ export class CadastroUsuarioComponent implements OnInit
     }
   }
   
-  abrirDialogConfirmacaoNumero()
+  criarConta()
   {
     if (this.form.valid && !this.exibirSpinnerBotaoCriar)
     {
       this.exibirSpinnerBotaoCriar = true;
 
-      this.usuarioService.sendVerifyCode(this.form.value.numero_telefone)
+      this.usuarioService.cadastrar(this.form.value)
           .subscribe(
-              data => 
+              () => 
               {
-                this.dialog.open(ConfirmacaoNumeroDialogComponent, {
-                  disableClose: true,
-                  width: '280px',
-                  backdropClass: 'backdrop-dialog',
-                  data: {
-                    usuario: this.form.value,
-                    request_id: data['request_id']
-                  }
-                })
-                .afterClosed()
-                    .subscribe(
-                        () => 
-                        {
-                          this.exibirSpinnerBotaoCriar = false;
-                        });
+                this.router.navigate(['/login']);
+
+                this.snackBar.open('Conta criada com sucesso ;)', '', {
+                    duration:  4500})
               }, 
               error => 
               {
-                console.log(error);
-
-                this.snackBar.open(error, '', {
-                    duration: 4500, panelClass: 'snack-bar-error'});
-
+                this.snackBar.open('Ocorreu um erro ao criar conta, por favor, tente novamente.', '', {
+                  duration:  4500,
+                  panelClass: 'snack-bar-error'
+                });
                 this.exibirSpinnerBotaoCriar = false;
+
+                console.log(error);
               });
     }
   }
