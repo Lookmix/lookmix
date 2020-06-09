@@ -134,5 +134,8 @@
       }
     }
   },
-  "defaultProject": "guarda-roupa-virtual"
+  "defaultProject": "guarda-roupa-virtual",
+  "cli": {
+    "analytics": "8ceb2df1-1bf8-416b-bea6-dd9015f72fcf"
+  }
 }

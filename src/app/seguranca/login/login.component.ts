@@ -55,38 +55,23 @@ export class LoginComponent implements OnInit
     }
   }
 
-  entrar()
-  {
-    if (this.form.valid && !this.desabilitarBotaoEntrar)
-    {
-      this.textoBotaoEntrar = 'ENTRANDO...'
-      this.desabilitarBotaoEntrar = true;
-
-      this.segurancaService.login(this.form.value)
-          .subscribe(
-              data =>
-              {
-                utils.setLocalStorageTokenData(data);
-
-                this.router.navigate(['home']);
-              },
-              error =>
-              {
-                let mensagem = error;
-
-                if (error.unauthorized)
-                {
-                  mensagem = 'O número ou a senha estão incorretos';
-                }
-                this.snackBar.open(mensagem, '', {
-                    duration: 4000, panelClass: 'snack-bar-error'});
-
-                this.textoBotaoEntrar = 'ENTRAR';
-                this.desabilitarBotaoEntrar = false;
-                
-                console.log(error);
-              }
-            );
+  entrar(){
+  if (this.form.valid && !this.desabilitarBotaoEntrar){
+    this.textoBotaoEntrar = 'ENTRANDO...';
+    this.desabilitarBotaoEntrar = true;
+    this.segurancaService.login(this.form.value)
+      .subscribe(
+        data => {
+          utils.setLocalStorageTokenData(data);
+          this.router.navigate(['home']);
+        },
+        error => {
+          let mensagem = error;
+          if (error.unauthorized) mensagem = 'O número ou a senha estão incorretos';
+          this.snackBar.open(mensagem, '', { duration: 4000, panelClass: 'snack-bar-error'});
+          this.textoBotaoEntrar = 'ENTRAR';
+          this.desabilitarBotaoEntrar = false;
+        });
     }
   }
 
