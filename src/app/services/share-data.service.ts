@@ -4,6 +4,7 @@ import { Meta } from '@angular/platform-browser';
 import { ActivatedRoute, Router, RoutesRecognized } from '@angular/router';
 import { filter, pairwise } from 'rxjs/operators';
 import * as utils from './../utils';
+import * as uuid from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,64 @@ export class ShareDataService
   isSmall: boolean;
   tabGuardaRoupaSelecionada: boolean = false;
   guardaRoupaEscolhido: any;
-  listaGuardaRoupas: any[];
+  listaGuardaRoupas: any[] = [
+    {
+      id: uuid.v4(), 
+      nome: 'Casual'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Social'
+    }
+  ];
+  listaEstacoesDoAno: any[] = [
+    {
+      id: uuid.v4(), 
+      nome: 'Primavera'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Verão'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Outono'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Inverno'
+    },
+  ];
+  listaOcasioes: any[] = [
+    {
+      id: uuid.v4(),
+      nome: 'Básico'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Trabalho'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Faculdade'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Festa'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Viagem'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Academia'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Praia'
+    },
+  ]
   urlAnterior: string;
 
   whiteListMenuButton = [
@@ -35,7 +93,8 @@ export class ShareDataService
   {
     this.estiloGuardaRoupa = localStorage.getItem('estiloGuardaRoupa');
     this.temaNoturno = localStorage.getItem('temaNoturno') === 'true';
-    this.guardaRoupaEscolhido = JSON.parse(localStorage.getItem('guardaRoupaEscolhido'));
+    const guardaRoupaEscolhido = JSON.parse(localStorage.getItem('guardaRoupaEscolhido'));
+    this.guardaRoupaEscolhido = guardaRoupaEscolhido !== null ? guardaRoupaEscolhido : undefined;
     this.urlAnterior = utils.getFromLocalStorageDadosUrlAnterior() ? 
         utils.getFromLocalStorageDadosUrlAnterior()['url'] : '';
 

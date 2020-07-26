@@ -1,73 +1,5 @@
 <div class="container-guarda-roupa" *ngIf="false"> <!--margin: 10px 10px-->
-  <mat-card [ngStyle]="{'padding': shareDataService.isXSmall ? '16px 10px' : '16px'}">
-    <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'm'">Camisas, camisetas, polos e regatas</h1> <!-- Manga-curta ()  Roupas de cima-->
-    <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'f'">Camisas e blusas</h1> <!--Manga-curta ()-->
-    <button mat-button (click)="tokenExpires()">ESTÁ VÁLIDO?</button>
-    <button mat-button (click)="protectedEndpoint()">TESTAR TOKEN</button>
-    <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'mangaCurta')"></app-card-roupa>
 
-    <br/>
-    <br/>
-    
-    <h1>Casacos, jaquetas, moletons e sobretudos</h1> <!--Manga-longa ()-->
-
-    <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'mangaLonga')"></app-card-roupa>
-
-    <br/>
-    <br/>
-
-    <ng-container *ngIf="shareDataService.estiloGuardaRoupa === 'f'">
-      <h1>Peças únicas</h1>
-      
-      <!-- <h3 *ngIf="shareDataService.estiloGuardaRoupa === 'm'">Macacões</h3> -->
-      <h3>Vestidos e macacões</h3>
-
-      <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'pecasUnicas')"></app-card-roupa>
-
-      <br/>
-      <br/>
-    </ng-container>
-
-    <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'm'">Calças e bermudas</h1><!--Pernas-->
-    <h1 *ngIf="shareDataService.estiloGuardaRoupa === 'f'">Calças, shorts e saias</h1>
-
-    <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'roupasBaixo')"></app-card-roupa>
-    
-    <br/>
-    <br/>
-    
-    <h1>Calçados</h1>
-
-    <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'calcados')"></app-card-roupa>
-    
-    <br/>
-    <br/>
-
-    <h1>Acessórios</h1>
-
-    <h3 class="subtitulo-acessorios">Cabeça</h3>
-    <p>Bonés, chapéus, óculos, brincos e laços</p>
-
-    <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'acessorios', 'cabeca')"></app-card-roupa>
-
-    <h3 class="subtitulo-acessorios">Pescoço</h3>
-    <p>Colares, correntes, gravatas e cachecóis</p>
-
-    <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'acessorios', 'pescoco')"></app-card-roupa>
-
-    <h3 class="subtitulo-acessorios">Braços</h3>
-    <p>Bolsas, pulseiras, relógios, luvas e anéis</p>
-
-    <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'acessorios', 'bracos')"></app-card-roupa>
-
-    <h3 class="subtitulo-acessorios">Cintura e Pernas</h3>
-    <p>Cintos e meias</p>
-
-    <app-card-roupa (atualizouGuardaRoupa)="atualizarGuardaRoupa($event, 'acessorios', 'pernas')"></app-card-roupa>
-
-    <br/>
-    <br/>
-    
     <!-- <h1>Combinações</h1>
     <button type="button" mat-flat-button (click)="gerarCombinacoes()" color="accent">
       Gerar combinações 
@@ -82,10 +14,6 @@
         </div>
       </ng-container>
     </div> -->
-    
-    <br/>
-    <br/>
-  </mat-card>
 </div>
 
 <div>
@@ -110,11 +38,11 @@
       </p>
     </mat-tab>
 
-    <mat-tab label="Busto">
+    <mat-tab label="Roupas de cima">
   
     </mat-tab>
 
-    <mat-tab label="Pernas">
+    <mat-tab label="Pernas e pés">
   
     </mat-tab>
 

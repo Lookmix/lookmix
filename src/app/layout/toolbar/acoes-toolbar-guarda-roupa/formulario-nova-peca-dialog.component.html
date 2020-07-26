@@ -1,6 +1,125 @@
 <div [class.dark-theme]="shareDataService.temaNoturno" 
     class="mat-app-background container-formulario-nova-peca">
-  <button mat-dialog-close>
-    FECHAR
-  </button>
+
+  <h1 mat-dialog-title>Novas peças de roupa</h1>
+
+  <div>
+    <app-card-roupa 
+        (selecionouPeca)="mudarFormulario($event)"
+        (atualizouGuardaRoupa)="atualizarGuardaRoupa($event)">
+    </app-card-roupa>
+    
+    <br/>
+
+    <button mat-button (click)="blinking = !blinking; piscar()">PISCAR</button>
+
+    <br/>
+
+    <div style="display: flex; flex-direction: column;"
+        [ngClass]="{'blinking': blinking, 'background-elementos-formulario': !shareDataService.temaNoturno,
+            'background-noturno-elementos-formulario': shareDataService.temaNoturno}">
+      <span style="font-weight: bold;" class="title-card">Categoria</span>
+
+      <mat-form-field class="ocultar-efeito-padrao-clique" id="categoriaRef"
+          [ngStyle]="{'marginTop': subcategoriaEscolhida ? '15px' : '0px'}">
+
+        <mat-label>{{subcategoriaEscolhida?.nameGroup}}</mat-label>
+
+        <mat-select [value]="subcategoriaEscolhida" (selectionChange)="setCategoria($event)">
+          <mat-optgroup *ngFor="let subcategoria of categorias"
+              [label]="subcategoria.nameGroup">
+            <mat-option *ngFor="let itemListGroup of subcategoria.listGroup" 
+                [value]="subcategoria">
+              {{itemListGroup}}
+            </mat-option>
+          </mat-optgroup>
+        </mat-select>
+      </mat-form-field>       
+    </div>
+
+    <br/>
+
+    <div [ngClass]="{'blinking': blinking, 'background-elementos-formulario': !shareDataService.temaNoturno,
+        'background-noturno-elementos-formulario': shareDataService.temaNoturno}">
+      <span style="font-weight: bold;" class="title-card">
+        Ocasião
+      </span>
+
+      <div style="margin: 0 -12px;" id="div-parent-chip-list">
+        <mat-chip-list [multiple]="true">
+          <mat-chip style="background-color: transparent; padding: 5px; margin: 0;" 
+              disableRipple [selectable]="false" disabled>
+          </mat-chip>
+
+          <mat-chip #chipRef="matChip" 
+              *ngFor="let ocasiao of shareDataService.listaOcasioes; let last = last; let first = first"
+              color="accent" (click)="chipRef.selected = !chipRef.selected" 
+              (selectionChange)="escolherOcasiao($event)"
+              [ngStyle]="{'marginLeft': first ? '10px' : '4px'}">
+            {{ocasiao.nome}}
+          </mat-chip>
+          
+          <mat-chip style="background-color: transparent;" 
+              disableRipple [selectable]="false" disabled>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+
+    <br/>
+
+    <div style="display: flex; flex-direction: column;"
+        [ngClass]="{'blinking': blinking, 'background-elementos-formulario': !shareDataService.temaNoturno,
+            'background-noturno-elementos-formulario': shareDataService.temaNoturno}">
+      <span style="font-weight: bold; margin-bottom: 5px;" class="title-card">
+        Guarda-roupa
+      </span>
+
+      <div id="div-button-toggle-ocasiao">
+        <mat-button-toggle-group #toggleGroupOcasiao="matButtonToggleGroup" name="ocasiao">
+          <mat-button-toggle value="casual" #toggleButtonCasual="matButtonToggle" 
+              [ngStyle]="{'color': toggleButtonCasual.checked ? '#ff4081' : 'inherit'}">
+            Casual
+          </mat-button-toggle>
+          <mat-button-toggle value="social" #toggleButtonSocial="matButtonToggle"
+              [ngStyle]="{'color': toggleButtonSocial.checked ? '#ff4081' : 'inherit'}">
+            Social
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+
+    <br/>
+
+    <div style="display: flex; flex-direction: column;"
+        [ngClass]="{'blinking': blinking, 'background-elementos-formulario': !shareDataService.temaNoturno,
+            'background-noturno-elementos-formulario': shareDataService.temaNoturno}">
+      <span style="font-weight: bold; margin-bottom: 5px;" class="title-card">
+        Estação do ano
+      </span>
+
+      <div style="display: flex; flex-direction: column;">
+        <mat-checkbox *ngFor="let estacao of shareDataService.listaEstacoesDoAno"
+            style="margin-bottom:0px;">
+          {{estacao.nome}}
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <br/>
+
+    <mat-divider></mat-divider>
+
+    <br/>
+
+    <div style="display: flex; justify-content: space-between;">
+      <button mat-button mat-dialog-close>
+        FECHAR
+      </button>
+
+      <button mat-stroked-button color="primary">
+        SALVAR
+      </button>
+    </div>
+  </div>
 </div>

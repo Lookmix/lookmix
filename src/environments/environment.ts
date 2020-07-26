@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // API_URL: 'https://api.lookmix.app/api',
-  API_URL: 'http://192.168.0.6:5000/api',
+  API_URL: 'http://192.168.0.13:5000/api',
   logoAssetsPath: '../../../assets/'
 };
 

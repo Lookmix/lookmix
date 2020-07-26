@@ -1,9 +1,256 @@
 .container-formulario-nova-peca {
   border-radius: 0px;
-  height: 100%;
+  // height: 100%;
+  padding: 16px;
 }
 
 ::ng-deep #containerDialogFormularioNovaPeca.mat-dialog-container {
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
 }
+
+::ng-deep #div-parent-chip-list > mat-chip-list > div.mat-chip-list-wrapper {
+  height: 55px;
+  overflow-x: auto;
+  flex-wrap: nowrap !important;
+}
+
+::ng-deep #div-button-toggle-ocasiao > mat-button-toggle-group > mat-button-toggle > button {
+  font-weight: normal !important;
+}
+
+.background-elementos-formulario {
+  background-color: #00000008;
+  border-radius: 20px; 
+  padding: 16px;
+}
+
+.background-noturno-elementos-formulario {
+  background-color: #00000026;
+  border-radius: 20px; 
+  padding: 16px;
+}
+
+::ng-deep mat-optgroup > mat-option > span.mat-option-text {
+  font-size: 13px !important;
+}
+
+// Categoria
+.dark-theme .blinking {
+  animation:blinkingDarkBackground 1.2s infinite;
+
+  span.title-card {
+    animation:blinkingDarkTitleCard 1.2s infinite;
+  }
+  
+  ::ng-deep div.mat-form-field-underline {
+    animation:blinkingDarkInput 1.2s infinite;
+  }
+  
+  ::ng-deep div.mat-select-arrow {
+    animation:blinkingDarkSelectInputIcon 1.2s infinite;  
+  }
+  
+  ::ng-deep .mat-select-value {
+    animation:blinkingDarkSelectValue 1.2s infinite;
+  }
+  
+  ::ng-deep .mat-form-field-label {
+    animation:blinkingDarkInputLabel 1.2s infinite;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    animation:blinkingDarkUnderline 1.2s infinite;
+  }
+}
+
+@keyframes blinkingDarkBackground {
+  0%   { background: #00000026; }
+  20%  { background: #00000026; }
+  40%  { 
+    background: #ffffff47; 
+  }
+  60%  { 
+    background: #ffffff47; 
+  }
+  80%  { background: #00000026; }
+  100% { background: #00000026; }
+}
+
+@keyframes blinkingDarkTitleCard {
+  0%   { color: white; }
+  20%  { color: white }
+  40%  { 
+    color: transparent; 
+  }
+  60%  { 
+    color: transparent; 
+  }
+  80%  { color: white; }
+  100% { color: white; }
+}
+
+@keyframes blinkingDarkInput {
+  0%   { background-color: #ffffffb3; }
+  20%  { background-color: #ffffffb3; }
+  40%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  60%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  80%  { background-color: #ffffffb3; }
+  100% { background-color: #ffffffb3; }
+}
+
+@keyframes blinkingDarkSelectInputIcon {
+  0%   { color: #ffffffb3; }
+  20%  { color: #ffffffb3; }
+  40%  { 
+    color: transparent; 
+  }
+  60%  { 
+    color: transparent; 
+  }
+  80%  { color: #ffffffb3; }
+  100% { color: #ffffffb3; }
+}
+
+@keyframes blinkingDarkInputLabel {
+  0%   { color: #ffffffb3; }
+  20%  { color: #ffffffb3; }
+  40%  { 
+    color: transparent; 
+  }
+  60%  { 
+    color: transparent; 
+  }
+  80%  { color: #ffffffb3; }
+  100% { color: #ffffffb3; }
+}
+
+@keyframes blinkingDarkSelectValue {
+  0%   { color: white; }
+  20%  { color: white; }
+  40%  { 
+    color: transparent; 
+  }
+  60%  { 
+    color: transparent; 
+  }
+  80%  { color: white; }
+  100% { color: white; }
+}
+
+.blinking {
+  animation:blinkingBackground 1.2s infinite;
+
+  span.title-card {
+    animation:blinkingTitleCard 1.2s infinite;
+  }
+  
+  ::ng-deep div.mat-form-field-underline {
+    animation:blinkingInput 1.2s infinite;
+  }
+  
+  ::ng-deep div.mat-select-arrow {
+    animation:blinkingSelectInputIcon 1.2s infinite;  
+  }
+  
+  ::ng-deep .mat-select-value {
+    animation:blinkingSelectValue 1.2s infinite;
+  }
+  
+  ::ng-deep .mat-form-field-label {
+    animation:blinkingInputLabel 1.2s infinite;
+  }
+
+  ::ng-deep .mat-form-field-underline {
+    animation:blinkingUnderline 1.2s infinite;
+  }
+}
+
+@keyframes blinkingBackground {
+  0%   { background: #00000008; }
+  20%  { background: #00000008; }
+  40%  { 
+    background: #0000002e; 
+  }
+  60%  { 
+    background: #0000002e; 
+  }
+  80%  { background: #00000008; }
+  100% { background: #00000008; }
+}
+
+@keyframes blinkingTitleCard {
+  0%   { color: #202020; }
+  20%  { color: #202020 }
+  40%  { 
+    color: transparent; 
+  }
+  60%  { 
+    color: transparent; 
+  }
+  80%  { color: #202020; }
+  100% { color: #202020; }
+}
+
+@keyframes blinkingInput {
+  0%   { background-color: #8b8b8b; }
+  20%  { background-color: #8b8b8b; }
+  40%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  60%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  80%  { background-color: #8b8b8b; }
+  100% { background-color: #8b8b8b; }
+}
+
+@keyframes blinkingSelectInputIcon {
+  0%   { color: #6f6f6f; }
+  20%  { color: #6f6f6f; }
+  40%  { 
+    color: transparent; 
+  }
+  60%  { 
+    color: transparent; 
+  }
+  80%  { color: #6f6f6f; }
+  100% { color: #6f6f6f; }
+}
+
+@keyframes blinkingInputLabel {
+  0%   { color: #0000008a; }
+  20%  { color: #0000008a; }
+  40%  { 
+    color: transparent; 
+  }
+  60%  { 
+    color: transparent; 
+  }
+  80%  { color: #0000008a; }
+  100% { color: #0000008a; }
+}
+
+@keyframes blinkingSelectValue {
+  0%   { color: #2d2d2d; }
+  20%  { color: #2d2d2d; }
+  40%  { 
+    color: transparent; 
+  }
+  60%  { 
+    color: transparent; 
+  }
+  80%  { color: #2d2d2d; }
+  100% { color: #2d2d2d; }
+}
+//#0000002e
+
+

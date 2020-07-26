@@ -1,6 +1,8 @@
 .container-cards {
   display: flex; 
-  flex-wrap: wrap;
+  overflow-x: auto;
+  // margin: 0px -16px;
+  margin: 0 -18px;
 
   input {
     display: none
@@ -9,7 +11,7 @@
 
 .div-imagem {
   border-radius: 20px;
-  margin: 10px 4px;
+  margin: 0px 4px;
   display: flex;
   justify-content: flex-end;
   // border: 1px solid white;
@@ -20,13 +22,13 @@
 
 .div-icone-remocao {
   background: #ffffff;
-  position: absolute;
+  // position: absolute;
   z-index:3;
   width: 24px; 
   height: 24px; 
   cursor: pointer;
   border-radius: 50px; 
-  margin: 5px 5px 5px -5px;
+  margin: 10px 15px 5px -5px; // /5px 5px 5px -5px; 
   float: right; 
   user-select: none;
   -webkit-user-select: none;
@@ -50,11 +52,12 @@
 
 .backdrop {
   background: #00000070; //#00000047; light
-  height: 100%; 
   border-radius: 20px; 
   height: 231px;
   width: 130px;
-  position: absolute;
+  // position: absolute;
+  display: flex;
+  flex-direction: column;
   z-index: 2;
 }
 
@@ -83,13 +86,10 @@
 }
 
 .div-botao-add {
-  background: #00000012; // #4b00821a; // transparent; 
   border-radius: 20px; 
-  // border: 1px solid lightgray;
   max-width: 130px; 
   min-width: 130px; 
   height: 231px; 
-  margin: 10px 4px; 
   display: flex;
   justify-content: center;
 

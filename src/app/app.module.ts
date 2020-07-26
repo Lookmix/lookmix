@@ -24,6 +24,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatRippleModule } from '@angular/material/core';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,6 +46,7 @@ import { HttpXsrfTokenExtractorService } from './services/http-xsrf-token-extrac
 import { MenuNavegacaoComponent } from './layout/menu-navegacao/menu-navegacao.component';
 import { ListaGuardaRoupasComponent } from './funcionalidades/guarda-roupa/lista-guarda-roupas/lista-guarda-roupas.component';
 import { AcoesToolbarGuardaRoupaComponent, FormularioNovaPecaDialogComponent } from './layout/toolbar/acoes-toolbar-guarda-roupa/acoes-toolbar-guarda-roupa.component';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 
 export let options: Partial<IConfig> | (() => Partial<IConfig>);
@@ -95,6 +97,8 @@ export let options: Partial<IConfig> | (() => Partial<IConfig>);
     MatStepperModule,
     MatRippleModule,
     MatSelectModule,
+    MatChipsModule,
+    MatButtonToggleModule,
     
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     NgxMaskModule.forRoot(options),
