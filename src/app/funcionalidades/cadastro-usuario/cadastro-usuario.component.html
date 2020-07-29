@@ -163,7 +163,7 @@
   
           <button [color]="shareDataService.temaNoturno ? '' : 'primary'" 
               [disabled]="disableNextButton" [disableRipple]="exibirSpinnerBotaoCriar"
-              mat-stroked-button (click)="criarConta()"
+              mat-stroked-button (click)="abrirDialogConfirmacaoNumero()"
               id="criar-conta">
 
             {{exibirSpinnerBotaoCriar ? 'CRIANDO...' : 'CRIAR'}}

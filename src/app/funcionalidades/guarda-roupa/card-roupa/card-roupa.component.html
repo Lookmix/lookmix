@@ -1,52 +1,56 @@
 <div class="container-cards" 
     [ngStyle]="{'justifyContent': shareDataService.isXSmall && roupas.length > 0 ? 'space-between' : 'unset'}">
+
   <input #campoImagem (change)="readFile($event); campoImagem.value=''" type="file" 
       multiple accept="image/*">
 
-  <div *ngFor="let roupa of roupas; let i = index" class="div-imagem">
+  <div *ngFor="let roupa of roupas; let i = index; let first = first; let last = last;" 
+      (click)="selecionarPeca(roupa);" class="div-imagem" 
+      [ngStyle]="{'marginRight': last ? '8px' : '4px', 'marginLeft': first ? '16px' : '4px'}">
+    <div>
+      <!-- IMAGEM -->
+      <div [ngClass]="{'imagem': true}" 
+          [ngStyle]="{'background': url(roupa.inputFile)}">
+          <!-- [ngStyle]="{'background': url(roupa)}"> -->
 
-    <!--ÍCONE DE REMOÇÃO-->
-    <div class="div-icone-remocao" (click)="excluirImagem(i)">
-      <mat-icon>close</mat-icon>
-    </div>
+        <!-- BACKDROP -->
+        <div [ngClass]="{'backdrop': !roupa.selecionada}">
 
-    <!--IMAGEM-->
-    <div [ngStyle]="{'background': url(roupa.inputFile)}" class="imagem"> <!--'filter': 'blur(2px)',-->
-    </div>
+          <!-- ÍCONE REMOÇÃO -->
+          <div>
+            <div class="div-icone-remocao" (click)="excluirImagem(i)">
+              <mat-icon>close</mat-icon>
+            </div>
+          </div>
 
-    <!--BACKDROP-->
-    <div class="backdrop">
-      <div class="div-opcoes-imagem dark-theme" *ngIf="roupa.uploadCompleto">
-        <span class="clima">Clima</span>
-        <mat-checkbox>Quente</mat-checkbox>
-        <mat-checkbox>Frio</mat-checkbox>
-        <mat-checkbox>Ambiente</mat-checkbox>
-
-        <span>Ocasião</span>
-        <mat-checkbox>Casual</mat-checkbox>
-        <mat-checkbox>Social</mat-checkbox>
-      </div>
-
-      <div class="div-spinner" *ngIf="!roupa.uploadCompleto && !roupa.falhaUpload">
-        <mat-progress-spinner diameter="55" class="spinner-margin" mode="indeterminate" 
-            color="accent">
-        </mat-progress-spinner>
-      </div>
-
-      <div class="div-erro-upload" *ngIf="roupa.falhaUpload">
-        <span>Erro de rede</span>
-      
-        <button type="button" mat-fab (click)="uploadFile(roupa, true)">
-          <mat-icon>refresh</mat-icon>
-        </button>
-
-        <span>Tentar novamente</span>
+          <!-- SPINNER -->
+          <div class="div-spinner" *ngIf="!roupa.uploadCompleto && !roupa.falhaUpload">
+            <mat-progress-spinner diameter="55" class="spinner-margin" 
+                mode="indeterminate" 
+                color="accent"
+                style="margin-top: 50px;">
+            </mat-progress-spinner>
+          </div>
+    
+          <!-- TRATAMENTO DE ERRO -->
+          <div class="div-erro-upload" *ngIf="roupa.falhaUpload">
+            <span>Erro de rede</span>
+          
+            <button type="button" mat-fab (click)="uploadFile(roupa, true)">
+              <mat-icon>refresh</mat-icon>
+            </button>
+    
+            <span>Tentar novamente</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!--BOTÃO ADICIONAR-->
-  <div class="div-botao-add">
+  <!-- BOTÃO ADICIONAR -->
+  <div class="div-botao-add" 
+      [ngStyle]="{'marginLeft': roupas.length < 1 ? '16px' : '0px'}"
+      [style.background]="shareDataService.temaNoturno ? '#00000026' : '#00000008'">
     <div>
       <button type="button" mat-fab (click)="campoImagem.click()">
         <mat-icon>add</mat-icon> 
@@ -55,4 +59,6 @@
       <span>Adicionar</span>
     </div>
   </div>
+
+  <div style="width: 8px; height: 8px; padding: 8px;"> </div>
 </div>

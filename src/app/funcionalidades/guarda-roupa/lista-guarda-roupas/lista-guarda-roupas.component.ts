@@ -15,22 +15,13 @@ export class ListaGuardaRoupasComponent implements OnInit
 
   exibirListaGuardaRoupa = false;
 
-  listaGuardaRoupas = [
-    {
-      id: uuid.v4(), 
-      nome: 'Casual'
-    },
-    {
-      id: uuid.v4(), 
-      nome: 'Social'
-    }
-  ]
+  listaGuardaRoupas = []
 
   constructor(public shareDataService: ShareDataService) 
   {
     //this.shareDataService.tituloBarraSuperior = 'Seus guarda-roupas';
 
-    this.shareDataService.listaGuardaRoupas = this.listaGuardaRoupas;
+    this.listaGuardaRoupas = this.shareDataService.listaGuardaRoupas;
   }
 
   ngOnInit(): void 

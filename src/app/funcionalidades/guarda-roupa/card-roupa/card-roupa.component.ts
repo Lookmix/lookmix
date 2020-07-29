@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { v4 as uuid } from 'uuid';
 import { UploadService } from 'src/app/services/upload.service';
 import { SpinnerComponent } from './../../../layout/spinner/spinner.component';
 import { ShareDataService } from 'src/app/services/share-data.service';
+import { Imagem } from 'src/app/models';
 
 
 @Component({
@@ -15,8 +16,23 @@ import { ShareDataService } from 'src/app/services/share-data.service';
 export class CardRoupaComponent implements OnInit 
 {
   roupas: Imagem[] = [];
+  roupas2 = [
+    '../../../../assets/roupas/1.jpg',
+    '../../../../assets/roupas/2.jpg',
+    '../../../../assets/roupas/3.jpg',
+    '../../../../assets/roupas/4.jpg',
+    '../../../../assets/roupas/5.jpg',
+    '../../../../assets/roupas/6.jpg',
+    '../../../../assets/roupas/7.jpg',
+    '../../../../assets/roupas/8.jpg',
+    '../../../../assets/roupas/9.jpg',
+  ];
   dialogRef: MatDialogRef<SpinnerComponent>;
-  @Output() atualizouGuardaRoupa: EventEmitter<Imagem[]> = new EventEmitter();
+  primeiroCarregamento = true;
+
+  @Output() atualizouGuardaRoupa: EventEmitter<any> = new EventEmitter();
+  @Output() selecionouPeca: EventEmitter<any> = new EventEmitter();
+  @Output() clicouAdicionar: EventEmitter<any> = new EventEmitter();
 
   constructor(private uploadService: UploadService,
       public shareDataService: ShareDataService,
@@ -54,9 +70,20 @@ export class CardRoupaComponent implements OnInit
 
   excluirImagem(indice)
   {
+    if (this.roupas[indice].selecionada && this.roupas.length > 1)
+    {
+      if ((indice + 1) === this.roupas.length)
+      {
+        this.selecionarPeca(this.roupas[indice - 1])
+      }
+      else
+      {
+        this.selecionarPeca(this.roupas[indice + 1])
+      }
+    }
     this.roupas.splice(indice, 1);
 
-    this.atualizouGuardaRoupa.emit(this.roupas);
+    this.atualizouGuardaRoupa.emit({exclusao: true, listaImagens: this.roupas});
   }
 
   url(file)
@@ -87,7 +114,7 @@ export class CardRoupaComponent implements OnInit
 
         this.uploadFile(fileFormData);
 
-        this.atualizouGuardaRoupa.emit(this.roupas);
+        this.atualizouGuardaRoupa.emit({ultimaImagemAdicionada: imagem, listaImagens: this.roupas});
 
         if (this.dialogRef)
         {
@@ -116,10 +143,15 @@ export class CardRoupaComponent implements OnInit
     }
     this.uploadService.uploadFile(fileToUpload)
         .subscribe(
-            response => 
+            () => 
             {
               roupa.uploadCompleto = true;
               roupa.falhaUpload = false;
+
+              if (this.primeiroCarregamento)
+              {
+                this.selecionarPrimeiraPeca();
+              }
             },
             erro => 
             {
@@ -141,13 +173,28 @@ export class CardRoupaComponent implements OnInit
     }
     return true;
   }
-}
 
-export interface Imagem
-{
-  id: any;
-  inputFile?: string|ArrayBuffer;
-  fileFormData: File;
-  uploadCompleto: boolean;
-  falhaUpload: boolean;
+  selecionarPeca(peca: Imagem)
+  {
+    this.desselecionarPecas();
+    
+    peca.selecionada = true;
+
+    this.selecionouPeca.emit(peca);
+  }
+
+  private desselecionarPecas()
+  {
+    for (let peca of this.roupas)
+    {
+      peca.selecionada = false;
+    }
+  }
+
+  private selecionarPrimeiraPeca()
+  {
+    this.primeiroCarregamento = false;
+
+    this.selecionarPeca(this.roupas[0])
+  }
 }

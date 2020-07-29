@@ -72,7 +72,7 @@ export class ToolbarComponent implements OnInit
       minWidth: '200px',
       backdropClass: 'backdrop-dialog',
       data: {
-        titulo: "Carregando..."
+        titulo: "Saindo..."
       }
     });
     const tokenJTI = utils.getTokenJTI('access_token_data');

@@ -14,6 +14,7 @@ export class GuardaRoupaComponent implements OnInit, AfterViewInit
 {
   @ViewChild('tabGroupGuardaRoupa', {static: true}) tabGroupGuardaRoupa: MatTabGroup;
 
+  // deprecated
   guardaRoupa = {
     mangaCurta: [],
     mangaLonga: [],
@@ -67,6 +68,7 @@ export class GuardaRoupaComponent implements OnInit, AfterViewInit
     });
   }
 
+  // deprecated
   atualizarGuardaRoupa(pecas, categoriaPeca, tipoAcessorio?)
   {
     if (tipoAcessorio)
@@ -93,17 +95,4 @@ export class GuardaRoupaComponent implements OnInit, AfterViewInit
   {
     this.tabGroupGuardaRoupa.realignInkBar();
   }
-}
-
-export interface Combinacao
-{
-  roupaCima: Imagem;
-  roupaBaixo: Imagem;
-  calcado: Imagem;
-}
-
-export interface Imagem
-{
-  id: any;
-  file?: string|ArrayBuffer;
 }
