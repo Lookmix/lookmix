@@ -35,34 +35,78 @@
   font-size: 13px !important;
 }
 
-// Categoria
-.dark-theme .blinking {
-  animation:blinkingDarkBackground 1.2s infinite;
 
+
+
+// DARK
+.dark-theme .blinking {
+  animation:blinkingDarkBackground 0.95s infinite;
+  
   span.title-card {
-    animation:blinkingDarkTitleCard 1.2s infinite;
+    animation:blinkingDarkTitleCard 0.95s infinite;
   }
   
+  // Categoria
   ::ng-deep div.mat-form-field-underline {
-    animation:blinkingDarkInput 1.2s infinite;
+    animation:blinkingDarkInput 0.95s infinite;
   }
   
   ::ng-deep div.mat-select-arrow {
-    animation:blinkingDarkSelectInputIcon 1.2s infinite;  
+    animation:blinkingDarkSelectInputIcon 0.95s infinite;  
   }
   
   ::ng-deep .mat-select-value {
-    animation:blinkingDarkSelectValue 1.2s infinite;
+    animation:blinkingDarkSelectValue 0.95s infinite;
   }
   
   ::ng-deep .mat-form-field-label {
-    animation:blinkingDarkInputLabel 1.2s infinite;
+    animation:blinkingDarkInputLabel 0.95s infinite;
   }
 
   ::ng-deep .mat-form-field-underline {
-    animation:blinkingDarkUnderline 1.2s infinite;
+    animation:blinkingDarkUnderline 0.95s infinite;
+  }
+
+  // Ocasião
+  ::ng-deep .mat-chip.mat-standard-chip {
+    animation:blinkingDarkChip 0.95s infinite;
+  }
+
+  ::ng-deep .mat-chip.mat-standard-chip.mat-chip-selected.mat-accent {
+    animation:blinkingDarkSelectedChip 0.95s infinite;
+  }
+
+  // Guarda-roupa
+  ::ng-deep .mat-button-toggle-group-appearance-standard {
+    animation:blinkingDarkButtonToggleGroup 0.95s infinite;
+  }
+  
+  ::ng-deep .mat-button-toggle-checked {
+    animation:blinkingDarkCheckedButtonToggle 0.95s infinite;
+  }
+
+  ::ng-deep .mat-button-toggle-appearance-standard.toggle-standard {
+    animation:blinkingDarkStandardButtonToggle 0.95s infinite;
+  }
+
+  // Estação do ano
+  ::ng-deep .mat-checkbox-frame {
+    animation:blinkingDarkCheckbox 0.95s infinite;
+  }
+
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    animation:blinkingDarkSelectedCheckbox 0.95s infinite;
+  }
+
+  ::ng-deep mat-checkbox > label > div > div.mat-checkbox-background > svg > path {//.mat-checkbox-checkmark-path {
+    stroke: transparent !important;
+  }
+
+  ::ng-deep mat-checkbox > label > span {
+    animation:blinkingDarkCheckboxLabel 0.95s infinite;
   }
 }
+
 
 @keyframes blinkingDarkBackground {
   0%   { background: #00000026; }
@@ -90,6 +134,7 @@
   100% { color: white; }
 }
 
+// Categoria
 @keyframes blinkingDarkInput {
   0%   { background-color: #ffffffb3; }
   20%  { background-color: #ffffffb3; }
@@ -144,31 +189,283 @@
   100% { color: white; }
 }
 
+// Ocasião
+@keyframes blinkingDarkChip {
+  0%   { 
+    background-color: #616161;
+    color: white;
+  }
+  20%  { 
+    background-color: #616161;
+    color: white;
+  }
+  40%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  60%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  80%  { 
+    background-color: #616161;
+    color: white;
+  }
+  100% { 
+    background-color: #616161;
+    color: white;
+  }
+}
+
+@keyframes blinkingDarkSelectedChip {
+  0%   { 
+    background-color: #ff4081;
+    color: white;
+  }
+  20%  { 
+    background-color: #ff4081;
+    color: white;
+  }
+  40%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  60%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  80%  { 
+    background-color: #ff4081;
+    color: white;
+  }
+  100% { 
+    background-color: #ff4081;
+    color: white;
+  }
+}
+
+// Guarda-roupa
+@keyframes blinkingDarkButtonToggleGroup {
+  0%   { 
+    border: solid 1px rgba(255, 255, 255, 0.12);
+  }
+  20%  { 
+    border: solid 1px rgba(255, 255, 255, 0.12);
+  }
+  40%  { 
+    border: solid 1px transparent;
+  }
+  60%  { 
+    border: solid 1px transparent;
+  }
+  80%  { 
+    border: solid 1px rgba(255, 255, 255, 0.12);
+  }
+  100% { 
+    border: solid 1px rgba(255, 255, 255, 0.12);
+  }
+}
+
+@keyframes blinkingDarkCheckedButtonToggle {
+  0%   { 
+    background-color: #212121;
+    // border-left: solid 0px #ffffff1f;
+    color: #ff4081;  
+  }
+  20%  { 
+    background-color: #212121;
+    // border-left: solid 0px #ffffff1f;
+    color: #ff4081;    
+  }
+  40%  { 
+    background-color: transparent;
+    // border-left: solid 1px transparent;
+    color:  transparent;
+  }
+  60%  { 
+    background-color: transparent;
+    // border-left: solid 1px transparent;
+    color:  transparent;
+  }
+  80%  { 
+    background-color: #212121;
+    // border-left: solid 0px #ffffff1f;
+    color: #ff4081;
+  }
+  100% { 
+    background-color: #212121;
+    // border-left: solid 0px #ffffff1f;
+    color: #ff4081;
+  }
+}
+
+@keyframes blinkingDarkStandardButtonToggle {
+  0%   {
+    background-color: #424242;
+    color: white;
+  }
+  20%  { 
+    background-color: #424242;
+    color: white;  
+  }
+  40%  { 
+    background-color: transparent;
+    color:  transparent;
+  }
+  60%  { 
+    background-color: transparent;
+    color:  transparent;
+  }
+  80%  { 
+    background-color: #424242;
+    color: white
+  }
+  100% { 
+    background-color: #424242;
+    color: white
+  }
+}
+
+// Estação do ano
+@keyframes blinkingDarkCheckbox {
+  0%   {
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+  20%  { 
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+  40%  { 
+    border-color: transparent;
+  }
+  60%  { 
+    border-color: transparent;
+  }
+  80%  { 
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+  100% { 
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+@keyframes blinkingDarkSelectedCheckbox {
+  0%   {
+    background-color: #ff4081;
+  }
+  20%  { 
+    background-color: #ff4081;
+  }
+  40%  { 
+    background-color: transparent;
+  }
+  60%  { 
+    background-color: transparent;
+  }
+  80%  { 
+    background-color: #ff4081;
+  }
+  100% { 
+    background-color: #ff4081;
+  }
+}
+
+@keyframes blinkingDarkCheckboxLabel {
+  0%   { 
+    color: white;
+  }
+  20%  { 
+    color: white;
+  }
+  40%  { 
+    color: transparent;
+  }
+  60%  { 
+    color: transparent;
+  }
+  80%  { 
+    color: white;
+  }
+  100% { 
+    color: white;
+  }
+}
+
+
+
+// LIGHT
 .blinking {
-  animation:blinkingBackground 1.2s infinite;
+  animation:blinkingBackground 0.95s infinite;
 
   span.title-card {
-    animation:blinkingTitleCard 1.2s infinite;
+    animation:blinkingTitleCard 0.95s infinite;
   }
   
+  // Categoria
   ::ng-deep div.mat-form-field-underline {
-    animation:blinkingInput 1.2s infinite;
+    animation:blinkingInput 0.95s infinite;
   }
   
   ::ng-deep div.mat-select-arrow {
-    animation:blinkingSelectInputIcon 1.2s infinite;  
+    animation:blinkingSelectInputIcon 0.95s infinite;  
   }
   
   ::ng-deep .mat-select-value {
-    animation:blinkingSelectValue 1.2s infinite;
+    animation:blinkingSelectValue 0.95s infinite;
   }
   
   ::ng-deep .mat-form-field-label {
-    animation:blinkingInputLabel 1.2s infinite;
+    animation:blinkingInputLabel 0.95s infinite;
   }
 
   ::ng-deep .mat-form-field-underline {
-    animation:blinkingUnderline 1.2s infinite;
+    animation:blinkingUnderline 0.95s infinite;
+  }
+
+  // Ocasião
+  ::ng-deep .mat-chip.mat-standard-chip {
+    animation:blinkingChip 0.95s infinite;
+  }
+
+  ::ng-deep .mat-chip.mat-standard-chip.mat-chip-selected.mat-accent {
+    animation:blinkingSelectedChip 0.95s infinite;
+  }
+
+  ::ng-deep #initial-transparent-chip {
+    animation:blinkingInitialTransparentChip 0.95s infinite;
+  }
+
+  ::ng-deep #final-transparent-chip {
+    animation:blinkingFinalTransparentChip 0.95s infinite;
+  }
+
+  // Guarda-roupa
+  ::ng-deep .mat-button-toggle-group-appearance-standard {
+    animation:blinkingButtonToggleGroup 0.95s infinite;
+  }
+  
+  ::ng-deep .mat-button-toggle-checked {
+    animation:blinkingCheckedButtonToggle 0.95s infinite;
+  }
+
+  ::ng-deep .mat-button-toggle-appearance-standard.toggle-standard {
+    animation:blinkingStandardButtonToggle 0.95s infinite;
+  }
+
+  // Estação do ano
+  ::ng-deep .mat-checkbox-frame {
+    animation:blinkingCheckbox 0.95s infinite;
+  }
+
+  ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+    animation:blinkingSelectedCheckbox 0.95s infinite;
+  }
+
+  ::ng-deep mat-checkbox > label > div > div.mat-checkbox-background > svg > path {//.mat-checkbox-checkmark-path {
+    stroke: transparent !important;
+  }
+
+  ::ng-deep mat-checkbox > label > span {
+    animation:blinkingCheckboxLabel 0.95s infinite;
   }
 }
 
@@ -198,6 +495,7 @@
   100% { color: #202020; }
 }
 
+// Categoria
 @keyframes blinkingInput {
   0%   { background-color: #8b8b8b; }
   20%  { background-color: #8b8b8b; }
@@ -251,6 +549,246 @@
   80%  { color: #2d2d2d; }
   100% { color: #2d2d2d; }
 }
-//#0000002e
+
+// Ocasião
+@keyframes blinkingChip {
+  0%   { 
+    background-color: #e0e0e0;
+    color: rgba(0, 0, 0, 0.87); 
+  }
+  20%  { 
+    background-color: #e0e0e0;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  40%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  60%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  80%  { 
+    background-color: #e0e0e0;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  100% { 
+    background-color: #e0e0e0;
+    color: rgba(0, 0, 0, 0.87);
+  }
+}
+
+@keyframes blinkingSelectedChip {
+  0%   { 
+    background-color: #ff4081;
+    color: white;
+  }
+  20%  { 
+    background-color: #ff4081;
+    color: white;
+  }
+  40%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  60%  { 
+    background-color: transparent;
+    color: transparent; 
+  }
+  80%  { 
+    background-color: #ff4081;
+    color: white;
+  }
+  100% { 
+    background-color: #ff4081;
+    color: white;
+  }
+}
+
+@keyframes blinkingInitialTransparentChip {
+  0%   { 
+    background-color: transparent;
+  }
+  20%  { 
+    background-color: transparent;
+  }
+  40%  { 
+    background-color: transparent;
+  }
+  60%  { 
+    background-color: transparent;
+  }
+  80%  { 
+    background-color: transparent;
+  }
+  100% { 
+    background-color: transparent;
+  }
+}
+
+@keyframes blinkingFinalTransparentChip {
+  0%   { 
+    background-color: transparent;
+  }
+  20%  { 
+    background-color: transparent;
+  }
+  40%  { 
+    background-color: transparent;
+  }
+  60%  { 
+    background-color: transparent;
+  }
+  80%  { 
+    background-color: transparent;
+  }
+  100% { 
+    background-color: transparent;
+  }
+}
+
+// Guarda-roupa
+@keyframes blinkingButtonToggleGroup {
+  0%   { 
+    border: solid 1px #0000001f;
+  }
+  20%  { 
+    border: solid 1px #0000001f;
+  }
+  40%  { 
+    border: solid 1px transparent;
+  }
+  60%  { 
+    border: solid 1px transparent;
+  }
+  80%  { 
+    border: solid 1px #0000001f;
+  }
+  100% { 
+    border: solid 1px #0000001f;
+  }
+}
+
+@keyframes blinkingCheckedButtonToggle {
+  0%   { 
+    background-color: #e0e0e0;
+    color: #ff4081;  
+  }
+  20%  { 
+    background-color: #e0e0e0;
+    color: #ff4081;    
+  }
+  40%  { 
+    background-color: transparent;
+    color:  transparent;
+  }
+  60%  { 
+    background-color: transparent;
+    color:  transparent;
+  }
+  80%  { 
+    background-color: #e0e0e0;
+    color: #ff4081;
+  }
+  100% { 
+    background-color: #e0e0e0;
+    color: #ff4081;
+  }
+}
+
+@keyframes blinkingStandardButtonToggle {
+  0%   {
+    background-color: white;
+    color: rgba(0, 0, 0, 0.87);
+  }
+  20%  { 
+    background-color: white;
+    color: rgba(0, 0, 0, 0.87);  
+  }
+  40%  { 
+    background-color: transparent;
+    color:  transparent;
+  }
+  60%  { 
+    background-color: transparent;
+    color:  transparent;
+  }
+  80%  { 
+    background-color: white;
+    color: rgba(0, 0, 0, 0.87)
+  }
+  100% { 
+    background-color: white;
+    color: rgba(0, 0, 0, 0.87)
+  }
+}
+
+// Estação do ano
+@keyframes blinkingCheckbox {
+  0%   {
+    border-color: #0000008a;
+  }
+  20%  { 
+    border-color: #0000008a;
+  }
+  40%  { 
+    border-color: transparent;
+  }
+  60%  { 
+    border-color: transparent;
+  }
+  80%  { 
+    border-color: #0000008a;
+  }
+  100% { 
+    border-color: #0000008a;
+  }
+}
+
+@keyframes blinkingSelectedCheckbox {
+  0%   {
+    background-color: #ff4081;
+  }
+  20%  { 
+    background-color: #ff4081;
+  }
+  40%  { 
+    background-color: transparent;
+  }
+  60%  { 
+    background-color: transparent;
+  }
+  80%  { 
+    background-color: #ff4081;
+  }
+  100% { 
+    background-color: #ff4081;
+  }
+}
+
+@keyframes blinkingCheckboxLabel {
+  0%   { 
+    color: #000000de;
+  }
+  20%  { 
+    color: #000000de;
+  }
+  40%  { 
+    color: transparent;
+  }
+  60%  { 
+    color: transparent;
+  }
+  80%  { 
+    color: #000000de;
+  }
+  100% { 
+    color: #000000de;
+  }
+}
 
 
+
+::ng-deep .mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle {
+  border-left: solid 0px rgb(0 0 0 / 0%) !important;
+}

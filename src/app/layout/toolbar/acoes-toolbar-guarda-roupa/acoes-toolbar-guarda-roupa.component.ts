@@ -141,6 +141,7 @@ export class FormularioNovaPecaDialogComponent
   mudarFormulario(peca)
   {
     console.log(peca);
+    this.piscarFormulario();
   }
 
   setCategoria(event)
@@ -148,10 +149,11 @@ export class FormularioNovaPecaDialogComponent
     this.subcategoriaEscolhida = event.value;
   }
 
-  piscar()
+  private piscarFormulario()
   {
     setTimeout(() => {
       this.blinking = !this.blinking;
-    }, 1200)
+    }, 950)
+    this.blinking = !this.blinking;
   }
 }

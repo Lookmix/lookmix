@@ -11,8 +11,6 @@
     
     <br/>
 
-    <button mat-button (click)="blinking = !blinking; piscar()">PISCAR</button>
-
     <br/>
 
     <div style="display: flex; flex-direction: column;"
@@ -23,9 +21,9 @@
       <mat-form-field class="ocultar-efeito-padrao-clique" id="categoriaRef"
           [ngStyle]="{'marginTop': subcategoriaEscolhida ? '15px' : '0px'}">
 
-        <mat-label>{{subcategoriaEscolhida?.nameGroup}}</mat-label>
+        <mat-label>{{subcategoriaEscolhida ? subcategoriaEscolhida.nameGroup : '--'}}</mat-label>
 
-        <mat-select [value]="subcategoriaEscolhida" (selectionChange)="setCategoria($event)">
+        <mat-select [value]="subcategoriaEscolhida ? subcategoriaEscolhida : 'Escolha'" (selectionChange)="setCategoria($event)">
           <mat-optgroup *ngFor="let subcategoria of categorias"
               [label]="subcategoria.nameGroup">
             <mat-option *ngFor="let itemListGroup of subcategoria.listGroup" 
@@ -42,12 +40,12 @@
     <div [ngClass]="{'blinking': blinking, 'background-elementos-formulario': !shareDataService.temaNoturno,
         'background-noturno-elementos-formulario': shareDataService.temaNoturno}">
       <span style="font-weight: bold;" class="title-card">
-        Ocasião
+        Ocasiões
       </span>
 
       <div style="margin: 0 -12px;" id="div-parent-chip-list">
         <mat-chip-list [multiple]="true">
-          <mat-chip style="background-color: transparent; padding: 5px; margin: 0;" 
+          <mat-chip id="initial-transparent-chip" style="background-color: transparent; padding: 5px; margin: 0;" 
               disableRipple [selectable]="false" disabled>
           </mat-chip>
 
@@ -59,7 +57,7 @@
             {{ocasiao.nome}}
           </mat-chip>
           
-          <mat-chip style="background-color: transparent;" 
+          <mat-chip id="final-transparent-chip" style="background-color: transparent;" 
               disableRipple [selectable]="false" disabled>
           </mat-chip>
         </mat-chip-list>
@@ -78,10 +76,12 @@
       <div id="div-button-toggle-ocasiao">
         <mat-button-toggle-group #toggleGroupOcasiao="matButtonToggleGroup" name="ocasiao">
           <mat-button-toggle value="casual" #toggleButtonCasual="matButtonToggle" 
+              [ngClass]="{'toggle-standard': !toggleButtonCasual.checked}"
               [ngStyle]="{'color': toggleButtonCasual.checked ? '#ff4081' : 'inherit'}">
             Casual
           </mat-button-toggle>
           <mat-button-toggle value="social" #toggleButtonSocial="matButtonToggle"
+              [ngClass]="{'toggle-standard': !toggleButtonSocial.checked, 'toggle-social': true}"
               [ngStyle]="{'color': toggleButtonSocial.checked ? '#ff4081' : 'inherit'}">
             Social
           </mat-button-toggle>
@@ -95,7 +95,7 @@
         [ngClass]="{'blinking': blinking, 'background-elementos-formulario': !shareDataService.temaNoturno,
             'background-noturno-elementos-formulario': shareDataService.temaNoturno}">
       <span style="font-weight: bold; margin-bottom: 5px;" class="title-card">
-        Estação do ano
+        Estações do ano
       </span>
 
       <div style="display: flex; flex-direction: column;">
