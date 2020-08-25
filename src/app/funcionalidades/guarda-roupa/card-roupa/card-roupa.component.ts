@@ -28,7 +28,6 @@ export class CardRoupaComponent implements OnInit
     '../../../../assets/roupas/9.jpg',
   ];
   dialogRef: MatDialogRef<SpinnerComponent>;
-  primeiroCarregamento = true;
 
   @Output() atualizouGuardaRoupa: EventEmitter<any> = new EventEmitter();
   @Output() selecionouPeca: EventEmitter<any> = new EventEmitter();
@@ -58,8 +57,8 @@ export class CardRoupaComponent implements OnInit
               titulo: "Carregando imagens..."
             }
           });
-        }
-        this.prepararImagens(inputFiles);
+        };
+        this.prepararImagens(inputFiles, event);
       }
       else
       {
@@ -68,17 +67,17 @@ export class CardRoupaComponent implements OnInit
     }
   }
 
-  excluirImagem(indice)
+  excluirImagem(indice, cardImagem: HTMLElement)
   {
     if (this.roupas[indice].selecionada && this.roupas.length > 1)
     {
       if ((indice + 1) === this.roupas.length)
       {
-        this.selecionarPeca(this.roupas[indice - 1])
+        this.selecionarPeca(this.roupas[indice - 1], cardImagem)
       }
       else
       {
-        this.selecionarPeca(this.roupas[indice + 1])
+        this.selecionarPeca(this.roupas[indice + 1], cardImagem)
       }
     }
     this.roupas.splice(indice, 1);
@@ -91,7 +90,7 @@ export class CardRoupaComponent implements OnInit
     return 'url('+file+') bottom center / cover no-repeat rgb(60, 60, 60)';
   }
 
-  private prepararImagens(inputFiles: File[])
+  private prepararImagens(inputFiles: File[], event?)
   {
     for (let inputFile of inputFiles)
     {
@@ -112,7 +111,7 @@ export class CardRoupaComponent implements OnInit
         
         this.roupas.push(imagem);
 
-        this.uploadFile(fileFormData);
+        this.uploadFile(fileFormData, event);
 
         this.atualizouGuardaRoupa.emit({ultimaImagemAdicionada: imagem, listaImagens: this.roupas});
 
@@ -125,17 +124,17 @@ export class CardRoupaComponent implements OnInit
     }
   }
 
-  public uploadFile(fileFormData, refresh?: boolean)
+  public uploadFile(fileFormData, event, refresh?: boolean)
   {
-    const roupa = this.roupas.filter(roupa => roupa.id === fileFormData.id)[0];
+    const peca = this.roupas.filter(roupa => roupa.id === fileFormData.id)[0];
     
     let fileToUpload;
 
     if (refresh)
     {
       fileToUpload = fileFormData.fileFormData;
-      roupa.falhaUpload = false;
-      roupa.uploadCompleto = false;
+      peca.falhaUpload = false;
+      peca.uploadCompleto = false;
     }
     else
     {
@@ -145,18 +144,20 @@ export class CardRoupaComponent implements OnInit
         .subscribe(
             () => 
             {
-              roupa.uploadCompleto = true;
-              roupa.falhaUpload = false;
+              peca.uploadCompleto = true;
+              peca.falhaUpload = false;
 
-              if (this.primeiroCarregamento)
+              if (event)
               {
-                this.selecionarPrimeiraPeca();
+                const listaImagens = event.path[1].children;
+                const ultimaPecaAdicionada = listaImagens[listaImagens.length - 3]
+                this.selecionarPeca(peca, ultimaPecaAdicionada);
               }
             },
             erro => 
             {
-              roupa.falhaUpload = true;
-              roupa.uploadCompleto = false;
+              peca.falhaUpload = true;
+              peca.uploadCompleto = false;
 
               console.log(erro)
             });
@@ -174,13 +175,21 @@ export class CardRoupaComponent implements OnInit
     return true;
   }
 
-  selecionarPeca(peca: Imagem)
+  selecionarPeca(peca: Imagem, cardElement: HTMLElement)
   {
-    this.desselecionarPecas();
-    
-    peca.selecionada = true;
-
-    this.selecionouPeca.emit(peca);
+    if (!peca.selecionada)
+    {
+      this.desselecionarPecas();
+      
+      peca.selecionada = true;
+  
+      this.selecionouPeca.emit(peca);
+      
+      if (cardElement)
+      {
+        this.focarPeca(cardElement);
+      }
+    }
   }
 
   private desselecionarPecas()
@@ -191,10 +200,8 @@ export class CardRoupaComponent implements OnInit
     }
   }
 
-  private selecionarPrimeiraPeca()
+  private focarPeca(htmlElement: HTMLElement)
   {
-    this.primeiroCarregamento = false;
-
-    this.selecionarPeca(this.roupas[0])
+    htmlElement.scrollIntoView({block: 'center', inline: 'center'})
   }
 }

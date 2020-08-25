@@ -19,7 +19,7 @@
       <span style="font-weight: bold;" class="title-card">Categoria</span>
 
       <mat-form-field class="ocultar-efeito-padrao-clique" id="categoriaRef"
-          [ngStyle]="{'marginTop': subcategoriaEscolhida ? '15px' : '0px'}">
+          [ngStyle]="{'marginTop': '15px'}" floatLabel="always">
 
         <mat-label>{{subcategoriaEscolhida ? subcategoriaEscolhida.nameGroup : '--'}}</mat-label>
 
@@ -75,12 +75,12 @@
 
       <div id="div-button-toggle-ocasiao">
         <mat-button-toggle-group #toggleGroupOcasiao="matButtonToggleGroup" name="ocasiao">
-          <mat-button-toggle value="casual" #toggleButtonCasual="matButtonToggle" 
+          <mat-button-toggle [checked]="true" value="casual" #toggleButtonCasual="matButtonToggle" 
               [ngClass]="{'toggle-standard': !toggleButtonCasual.checked}"
               [ngStyle]="{'color': toggleButtonCasual.checked ? '#ff4081' : 'inherit'}">
             Casual
           </mat-button-toggle>
-          <mat-button-toggle value="social" #toggleButtonSocial="matButtonToggle"
+          <mat-button-toggle value="social" #toggleButtonSocial="matButtonToggle" 
               [ngClass]="{'toggle-standard': !toggleButtonSocial.checked, 'toggle-social': true}"
               [ngStyle]="{'color': toggleButtonSocial.checked ? '#ff4081' : 'inherit'}">
             Social

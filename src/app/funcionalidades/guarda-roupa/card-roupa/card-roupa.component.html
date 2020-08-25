@@ -4,8 +4,8 @@
   <input #campoImagem (change)="readFile($event); campoImagem.value=''" type="file" 
       multiple accept="image/*">
 
-  <div *ngFor="let roupa of roupas; let i = index; let first = first; let last = last;" 
-      (click)="selecionarPeca(roupa);" class="div-imagem" 
+  <div #cardImagem *ngFor="let roupa of roupas; let i = index; let first = first; let last = last;" 
+      (click)="selecionarPeca(roupa, cardImagem);" class="div-imagem" 
       [ngStyle]="{'marginRight': last ? '8px' : '4px', 'marginLeft': first ? '16px' : '4px'}">
     <div>
       <!-- IMAGEM -->
@@ -14,11 +14,11 @@
           <!-- [ngStyle]="{'background': url(roupa)}"> -->
 
         <!-- BACKDROP -->
-        <div [ngClass]="{'backdrop': !roupa.selecionada}">
+        <div [ngClass]="{'backdrop': !roupa.selecionada || roupa.falhaUpload || !roupa.uploadCompleto}">
 
           <!-- ÍCONE REMOÇÃO -->
           <div>
-            <div class="div-icone-remocao" (click)="excluirImagem(i)">
+            <div class="div-icone-remocao" (click)="excluirImagem(i, cardImagem)">
               <mat-icon>close</mat-icon>
             </div>
           </div>
@@ -36,7 +36,7 @@
           <div class="div-erro-upload" *ngIf="roupa.falhaUpload">
             <span>Erro de rede</span>
           
-            <button type="button" mat-fab (click)="uploadFile(roupa, true)">
+            <button type="button" mat-fab (click)="uploadFile(roupa, undefined, true)">
               <mat-icon>refresh</mat-icon>
             </button>
     

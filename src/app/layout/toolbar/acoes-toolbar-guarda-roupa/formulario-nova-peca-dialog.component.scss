@@ -109,7 +109,7 @@
 
 
 @keyframes blinkingDarkBackground {
-  0%   { background: #00000026; }
+  // 0%   { background: #00000026; }
   20%  { background: #00000026; }
   40%  { 
     background: #ffffff47; 
@@ -122,7 +122,7 @@
 }
 
 @keyframes blinkingDarkTitleCard {
-  0%   { color: white; }
+  // 0%   { color: white; }
   20%  { color: white }
   40%  { 
     color: transparent; 
@@ -136,7 +136,7 @@
 
 // Categoria
 @keyframes blinkingDarkInput {
-  0%   { background-color: #ffffffb3; }
+  // 0%   { background-color: #ffffffb3; }
   20%  { background-color: #ffffffb3; }
   40%  { 
     background-color: transparent;
@@ -151,7 +151,7 @@
 }
 
 @keyframes blinkingDarkSelectInputIcon {
-  0%   { color: #ffffffb3; }
+  // 0%   { color: #ffffffb3; }
   20%  { color: #ffffffb3; }
   40%  { 
     color: transparent; 
@@ -164,7 +164,7 @@
 }
 
 @keyframes blinkingDarkInputLabel {
-  0%   { color: #ffffffb3; }
+  // 0%   { color: #ffffffb3; }
   20%  { color: #ffffffb3; }
   40%  { 
     color: transparent; 
@@ -177,7 +177,7 @@
 }
 
 @keyframes blinkingDarkSelectValue {
-  0%   { color: white; }
+  // 0%   { color: white; }
   20%  { color: white; }
   40%  { 
     color: transparent; 
@@ -191,10 +191,10 @@
 
 // Ocasião
 @keyframes blinkingDarkChip {
-  0%   { 
-    background-color: #616161;
-    color: white;
-  }
+  // 0%   { 
+  //   background-color: #616161;
+  //   color: white;
+  // }
   20%  { 
     background-color: #616161;
     color: white;
@@ -218,10 +218,10 @@
 }
 
 @keyframes blinkingDarkSelectedChip {
-  0%   { 
-    background-color: #ff4081;
-    color: white;
-  }
+  // 0%   { 
+  //   background-color: #ff4081;
+  //   color: white;
+  // }
   20%  { 
     background-color: #ff4081;
     color: white;
@@ -246,9 +246,9 @@
 
 // Guarda-roupa
 @keyframes blinkingDarkButtonToggleGroup {
-  0%   { 
-    border: solid 1px rgba(255, 255, 255, 0.12);
-  }
+  // 0%   { 
+  //   border: solid 1px rgba(255, 255, 255, 0.12);
+  // }
   20%  { 
     border: solid 1px rgba(255, 255, 255, 0.12);
   }
@@ -267,11 +267,10 @@
 }
 
 @keyframes blinkingDarkCheckedButtonToggle {
-  0%   { 
-    background-color: #212121;
-    // border-left: solid 0px #ffffff1f;
-    color: #ff4081;  
-  }
+  // 0%   { 
+  //   background-color: #212121;
+  //   color: #ff4081;  
+  // }
   20%  { 
     background-color: #212121;
     // border-left: solid 0px #ffffff1f;
@@ -300,10 +299,10 @@
 }
 
 @keyframes blinkingDarkStandardButtonToggle {
-  0%   {
-    background-color: #424242;
-    color: white;
-  }
+  // 0%   {
+  //   background-color: #424242;
+  //   color: white;
+  // }
   20%  { 
     background-color: #424242;
     color: white;  
@@ -328,9 +327,9 @@
 
 // Estação do ano
 @keyframes blinkingDarkCheckbox {
-  0%   {
-    border-color: rgba(255, 255, 255, 0.7);
-  }
+  // 0%   {
+  //   border-color: rgba(255, 255, 255, 0.7);
+  // }
   20%  { 
     border-color: rgba(255, 255, 255, 0.7);
   }
@@ -349,9 +348,9 @@
 }
 
 @keyframes blinkingDarkSelectedCheckbox {
-  0%   {
-    background-color: #ff4081;
-  }
+  // 0%   {
+  //   background-color: #ff4081;
+  // }
   20%  { 
     background-color: #ff4081;
   }
@@ -370,9 +369,9 @@
 }
 
 @keyframes blinkingDarkCheckboxLabel {
-  0%   { 
-    color: white;
-  }
+  // 0%   { 
+  //   color: white;
+  // }
   20%  { 
     color: white;
   }
@@ -470,7 +469,7 @@
 }
 
 @keyframes blinkingBackground {
-  0%   { background: #00000008; }
+  // 0%   { background: #00000008; }
   20%  { background: #00000008; }
   40%  { 
     background: #0000002e; 
@@ -483,7 +482,7 @@
 }
 
 @keyframes blinkingTitleCard {
-  0%   { color: #202020; }
+  // 0%   { color: #202020; }
   20%  { color: #202020 }
   40%  { 
     color: transparent; 
@@ -497,7 +496,7 @@
 
 // Categoria
 @keyframes blinkingInput {
-  0%   { background-color: #8b8b8b; }
+  // 0%   { background-color: #8b8b8b; }
   20%  { background-color: #8b8b8b; }
   40%  { 
     background-color: transparent;
@@ -512,7 +511,7 @@
 }
 
 @keyframes blinkingSelectInputIcon {
-  0%   { color: #6f6f6f; }
+  // 0%   { color: #6f6f6f; }
   20%  { color: #6f6f6f; }
   40%  { 
     color: transparent; 
@@ -525,7 +524,7 @@
 }
 
 @keyframes blinkingInputLabel {
-  0%   { color: #0000008a; }
+  // 0%   { color: #0000008a; }
   20%  { color: #0000008a; }
   40%  { 
     color: transparent; 
@@ -538,7 +537,7 @@
 }
 
 @keyframes blinkingSelectValue {
-  0%   { color: #2d2d2d; }
+  // 0%   { color: #2d2d2d; }
   20%  { color: #2d2d2d; }
   40%  { 
     color: transparent; 
@@ -552,10 +551,10 @@
 
 // Ocasião
 @keyframes blinkingChip {
-  0%   { 
-    background-color: #e0e0e0;
-    color: rgba(0, 0, 0, 0.87); 
-  }
+  // 0%   { 
+  //   background-color: #e0e0e0;
+  //   color: rgba(0, 0, 0, 0.87); 
+  // }
   20%  { 
     background-color: #e0e0e0;
     color: rgba(0, 0, 0, 0.87);
@@ -579,10 +578,10 @@
 }
 
 @keyframes blinkingSelectedChip {
-  0%   { 
-    background-color: #ff4081;
-    color: white;
-  }
+  // 0%   { 
+  //   background-color: #ff4081;
+  //   color: white;
+  // }
   20%  { 
     background-color: #ff4081;
     color: white;
@@ -606,9 +605,9 @@
 }
 
 @keyframes blinkingInitialTransparentChip {
-  0%   { 
-    background-color: transparent;
-  }
+  // 0%   { 
+  //   background-color: transparent;
+  // }
   20%  { 
     background-color: transparent;
   }
@@ -627,9 +626,9 @@
 }
 
 @keyframes blinkingFinalTransparentChip {
-  0%   { 
-    background-color: transparent;
-  }
+  // 0%   { 
+  //   background-color: transparent;
+  // }
   20%  { 
     background-color: transparent;
   }
@@ -649,9 +648,9 @@
 
 // Guarda-roupa
 @keyframes blinkingButtonToggleGroup {
-  0%   { 
-    border: solid 1px #0000001f;
-  }
+  // 0%   { 
+  //   border: solid 1px #0000001f;
+  // }
   20%  { 
     border: solid 1px #0000001f;
   }
@@ -670,10 +669,10 @@
 }
 
 @keyframes blinkingCheckedButtonToggle {
-  0%   { 
-    background-color: #e0e0e0;
-    color: #ff4081;  
-  }
+  // 0%   { 
+  //   background-color: #e0e0e0;
+  //   color: #ff4081;  
+  // }
   20%  { 
     background-color: #e0e0e0;
     color: #ff4081;    
@@ -697,10 +696,10 @@
 }
 
 @keyframes blinkingStandardButtonToggle {
-  0%   {
-    background-color: white;
-    color: rgba(0, 0, 0, 0.87);
-  }
+  // 0%   {
+  //   background-color: white;
+  //   color: rgba(0, 0, 0, 0.87);
+  // }
   20%  { 
     background-color: white;
     color: rgba(0, 0, 0, 0.87);  
@@ -725,9 +724,9 @@
 
 // Estação do ano
 @keyframes blinkingCheckbox {
-  0%   {
-    border-color: #0000008a;
-  }
+  // 0%   {
+  //   border-color: #0000008a;
+  // }
   20%  { 
     border-color: #0000008a;
   }
@@ -746,9 +745,9 @@
 }
 
 @keyframes blinkingSelectedCheckbox {
-  0%   {
-    background-color: #ff4081;
-  }
+  // 0%   {
+  //   background-color: #ff4081;
+  // }
   20%  { 
     background-color: #ff4081;
   }
@@ -767,9 +766,9 @@
 }
 
 @keyframes blinkingCheckboxLabel {
-  0%   { 
-    color: #000000de;
-  }
+  // 0%   { 
+  //   color: #000000de;
+  // }
   20%  { 
     color: #000000de;
   }

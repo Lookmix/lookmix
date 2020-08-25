@@ -69,7 +69,15 @@ export class ShareDataService
     },
     {
       id: uuid.v4(), 
-      nome: 'Academia'
+      nome: 'Atividades físicas'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Shopping'
+    },
+    {
+      id: uuid.v4(), 
+      nome: 'Parques e praças'
     },
     {
       id: uuid.v4(), 

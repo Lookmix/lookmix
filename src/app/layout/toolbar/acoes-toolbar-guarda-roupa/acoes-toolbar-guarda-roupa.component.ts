@@ -68,31 +68,31 @@ export class FormularioNovaPecaDialogComponent
   categorias = [
     {
       nameGroup: 'Acessórios cabeça',
-      listGroup: ['Bonés, chapéus, óculos, brincos e laços']
+      listGroup: ['Bonés, chapéus, óculos, brincos ou laços']
     },
     {
       nameGroup: 'Acessórios pescoço',
-      listGroup: ['Colares, correntes, gravatas e cachecóis'],
+      listGroup: ['Colares, correntes, gravatas ou cachecóis'],
     },
     {
       nameGroup: 'Roupas de cima',
-      listGroup: ['Camisas, camisetas, polos, blusas e regatas'],
+      listGroup: ['Camisas, camisetas, polos, blusas ou regatas'],
     },
     {
       nameGroup: 'Peças sobrepostas',
-      listGroup: ['Casacos, jaquetas, moletons e sobretudos'],
+      listGroup: ['Casacos, jaquetas, moletons ou sobretudos'],
     },
     {
       nameGroup: 'Peças únicas',
-      listGroup: ['Vestidos e macacões']
+      listGroup: ['Vestidos ou macacões']
     },
     {
       nameGroup: 'Acessórios braços e mãos',
-      listGroup: ['Bolsas, pulseiras, relógios, anéis e luvas']
+      listGroup: ['Bolsas, pulseiras, relógios, anéis ou luvas']
     },
     {
       nameGroup: 'Pernas',
-      listGroup: ['Calças, shorts, saias e bermudas']
+      listGroup: ['Calças, shorts, saias ou bermudas']
     },
     {
       nameGroup: 'Cintura',
@@ -100,7 +100,7 @@ export class FormularioNovaPecaDialogComponent
     },
     {
       nameGroup: 'Pés',
-      listGroup: ['Calçados e meias']
+      listGroup: ['Calçados ou meias']
     }
   ]
 
@@ -115,7 +115,7 @@ export class FormularioNovaPecaDialogComponent
 
   atualizarGuardaRoupa(imagensCarregadas)
   {
-    // console.log(imagensCarregadas);
+    console.log(imagensCarregadas);
 
     // this.teste.push(imagensCarregadas.ultimaImagemAdicionada)
 
@@ -133,7 +133,14 @@ export class FormularioNovaPecaDialogComponent
     }
     else
     {
-      imagensCarregadas.ultimaImagemAdicionada // get id da imagem e comparar
+    //   const matchPeca = this.pecasRoupa.filter(peca => peca.imagem.id === imagensCarregadas.ultimaImagemAdicionada.id)[0];
+
+    //   if (matchPeca)
+    //   {
+    //     const index = this.pecasRoupa.indexOf(matchPeca); // get id da imagem e comparar
+        
+    //     this.pecasRoupa.splice(index, 1);
+    //   }
     }
     console.log(this.pecasRoupa);
   }
