@@ -3,6 +3,7 @@
   overflow-x: auto;
   // margin: 0px -16px;
   margin: 0 -18px;
+  height: 235px;
 
   input {
     display: none
@@ -48,6 +49,7 @@
   min-width: 130px; 
   z-index: 1;
   height: 231px;
+  // border: 2px solid transparent;
 }
 
 .backdrop {
@@ -92,6 +94,7 @@
   height: 231px; 
   display: flex;
   justify-content: center;
+  border: 1px solid transparent;
 
   div {
     display: flex; 
@@ -133,4 +136,10 @@
     width: 100px;
     color: white;
   }
+}
+.selected {
+  border: 2px solid deeppink;
+  height: 227px !important;
+  min-width: 124px !important;
+  max-width: 124px !important;
 }

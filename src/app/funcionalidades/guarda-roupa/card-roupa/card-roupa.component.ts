@@ -151,7 +151,7 @@ export class CardRoupaComponent implements OnInit
               {
                 const listaImagens = event.path[1].children;
                 const ultimaPecaAdicionada = listaImagens[listaImagens.length - 3]
-                this.selecionarPeca(peca, ultimaPecaAdicionada);
+                this.selecionarPeca(this.roupas[this.roupas.length - 1], ultimaPecaAdicionada);
               }
             },
             erro => 

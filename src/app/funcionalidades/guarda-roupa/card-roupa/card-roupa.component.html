@@ -9,13 +9,17 @@
       [ngStyle]="{'marginRight': last ? '8px' : '4px', 'marginLeft': first ? '16px' : '4px'}">
     <div>
       <!-- IMAGEM -->
-      <div [ngClass]="{'imagem': true}" 
-          [ngStyle]="{'background': url(roupa.inputFile)}">
-          <!-- [ngStyle]="{'background': url(roupa)}"> -->
-
+      <div [ngClass]="{
+          'imagem': true, 
+          'selected': roupa.selecionada
+        }" 
+        [ngStyle]="{'background': url(roupa.inputFile)}"
+      >
         <!-- BACKDROP -->
-        <div [ngClass]="{'backdrop': !roupa.selecionada || roupa.falhaUpload || !roupa.uploadCompleto}">
-
+        <div [ngClass]="{
+          'backdrop': !roupa.selecionada || roupa.falhaUpload || !roupa.uploadCompleto
+        }"
+        >
           <!-- ÍCONE REMOÇÃO -->
           <div>
             <div class="div-icone-remocao" (click)="excluirImagem(i, cardImagem)">
