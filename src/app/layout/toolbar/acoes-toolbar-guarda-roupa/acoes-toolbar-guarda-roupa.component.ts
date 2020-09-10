@@ -43,7 +43,6 @@ export class AcoesToolbarGuardaRoupaComponent implements OnInit
 })
 export class FormularioNovaPecaDialogComponent 
 {
-  private primeiroCarregamento = true;
   blinking = false;
 
   /*guardaRoupa = {
@@ -123,7 +122,7 @@ export class FormularioNovaPecaDialogComponent
     {
       const pecaRoupa: PecaRoupa = {
         categoria: undefined,
-        estacaoAno: undefined,
+        estacoesAno: [],
         guardaRoupa: undefined,
         id: uuid(),
         ocasioes: [],

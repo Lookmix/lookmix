@@ -10,7 +10,6 @@
     </app-card-roupa>
     
     <br/>
-
     <br/>
 
     <div style="display: flex; flex-direction: column;"
@@ -53,7 +52,7 @@
               *ngFor="let ocasiao of shareDataService.listaOcasioes; let last = last; let first = first"
               color="accent" (click)="chipRef.selected = !chipRef.selected" 
               (selectionChange)="escolherOcasiao($event)"
-              [ngStyle]="{'marginLeft': first ? '10px' : '4px'}">
+              [ngStyle]="{'marginLeft': first ? '10px' : '4px', 'minWidth': 'fit-content'}">
             {{ocasiao.nome}}
           </mat-chip>
           

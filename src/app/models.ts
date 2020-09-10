@@ -12,7 +12,7 @@ export interface PecaRoupa {
   id: any;
   ocasioes: string[];
   guardaRoupa: string;
-  estacaoAno: string; 
+  estacoesAno: string[]; 
   categoria: string;
   imagem: Imagem;
 }
