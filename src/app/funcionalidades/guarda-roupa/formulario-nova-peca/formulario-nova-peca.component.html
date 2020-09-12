@@ -1,17 +1,17 @@
 <div [class.dark-theme]="shareDataService.temaNoturno" 
     class="mat-app-background container-formulario-nova-peca">
 
-  <h1 mat-dialog-title>Novas peças de roupa</h1>
-
   <div>
-    <app-card-roupa 
-        (selecionouPeca)="mudarFormulario($event)"
-        (atualizouGuardaRoupa)="atualizarGuardaRoupa($event)">
-    </app-card-roupa>
+    <div style="margin: 0 -10px;">
+      <app-card-roupa 
+          (selecionouPeca)="mudarFormulario($event)"
+          (atualizouGuardaRoupa)="atualizarGuardaRoupa($event)">
+      </app-card-roupa>
+    </div>
     
     <br/>
     <br/>
-
+    
     <div style="display: flex; flex-direction: column;"
         [ngClass]="{'blinking': blinking, 'background-elementos-formulario': !shareDataService.temaNoturno,
             'background-noturno-elementos-formulario': shareDataService.temaNoturno}">

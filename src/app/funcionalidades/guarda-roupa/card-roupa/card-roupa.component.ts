@@ -150,7 +150,9 @@ export class CardRoupaComponent implements OnInit
               if (event)
               {
                 const listaImagens = event.path[1].children;
+                
                 const ultimaPecaAdicionada = listaImagens[listaImagens.length - 3]
+
                 this.selecionarPeca(this.roupas[this.roupas.length - 1], ultimaPecaAdicionada);
               }
             },

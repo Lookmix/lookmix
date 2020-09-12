@@ -7,6 +7,7 @@ import { ConfiguracoesComponent } from './funcionalidades/configuracoes/configur
 import { CadastroUsuarioComponent } from './funcionalidades/cadastro-usuario/cadastro-usuario.component';
 import { AuthGuard } from './guards/auth.guard';
 import { MenuNavegacaoComponent } from './layout/menu-navegacao/menu-navegacao.component';
+import { FormularioNovaPecaComponent } from './funcionalidades/guarda-roupa/formulario-nova-peca/formulario-nova-peca.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,14 @@ const routes: Routes = [
   {
     path: 'home',
     component: MenuNavegacaoComponent,
+    data: {
+      corTema: '#fff'
+    },
+    canActivate: [AuthGuard]
+  },
+  {
+  path: 'nova-peca',
+    component: FormularioNovaPecaComponent,
     data: {
       corTema: '#fff'
     },
