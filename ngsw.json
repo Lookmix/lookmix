@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1591641287438,
+  "timestamp": 1606677490148,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -9,14 +9,14 @@
       "updateMode": "prefetch",
       "urls": [
         "/index.html",
-        "/main-es2015.062f6ea0686d00b103a0.js",
-        "/main-es5.062f6ea0686d00b103a0.js",
+        "/main-es2015.afc8c78a1dbf68b7c63c.js",
+        "/main-es5.afc8c78a1dbf68b7c63c.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.ca64e4516afbb1b890d5.js",
         "/polyfills-es5.ad81c68d1c3d7a0429f1.js",
         "/runtime-es2015.0811dcefd377500b5b1a.js",
         "/runtime-es5.0811dcefd377500b5b1a.js",
-        "/styles.ca00122246c806490cb5.css"
+        "/styles.d380b72d1843e7077c16.css"
       ],
       "patterns": []
     },
@@ -41,7 +41,26 @@
         "/assets/icons/icon-512x512.png",
         "/assets/icons/icon-72x72.png",
         "/assets/icons/icon-96x96.png",
-        "/assets/icons/icon-original.svg"
+        "/assets/icons/icon-original.svg",
+        "/assets/roupas/1.jpg",
+        "/assets/roupas/2.jpg",
+        "/assets/roupas/3.jpg",
+        "/assets/roupas/4.jpg",
+        "/assets/roupas/5.jpg",
+        "/assets/roupas/6.jpg",
+        "/assets/roupas/7.jpg",
+        "/assets/roupas/8.jpg",
+        "/assets/roupas/9.jpg",
+        "/assets/roupas/P_20190908_231613_HDR.jpg",
+        "/assets/roupas/P_20190908_231647_HDR.jpg",
+        "/assets/roupas/P_20190908_231743_HDR.jpg",
+        "/assets/roupas/P_20190908_231814_HDR.jpg",
+        "/assets/roupas/P_20190908_231951_HDR.jpg",
+        "/assets/roupas/P_20190908_232259_HDR.jpg",
+        "/assets/roupas/P_20190908_232528_HDR.jpg",
+        "/assets/roupas/P_20190908_232557_HDR.jpg",
+        "/assets/roupas/P_20190908_232631_HDR.jpg",
+        "/assets/roupas/P_20190908_232703_HDR.jpg"
       ],
       "patterns": []
     }
@@ -65,15 +84,34 @@
     "/assets/icons/icon-72x72.png": "0e03f1f54f5c1c2e905f036c6a4fed165d0c5372",
     "/assets/icons/icon-96x96.png": "726eda70313ff49b993754bbdb9b80705506ed0d",
     "/assets/icons/icon-original.svg": "4d8683cec3f3ddced081bfc1bc44219e20e1f0ff",
-    "/index.html": "596e35a84fd1d9109f56e8d13b4f35022cbbdaab",
-    "/main-es2015.062f6ea0686d00b103a0.js": "8d9fb824468eabb0f2b96909330d9940d6c6f51a",
-    "/main-es5.062f6ea0686d00b103a0.js": "d69446e09d89d5ac62814462b408c9658ee3c419",
+    "/assets/roupas/1.jpg": "a08e642f1ef77af50cbc2b0c1115233217a658a2",
+    "/assets/roupas/2.jpg": "a931865aaaefd969c54ad75f61b5a2088d9f7830",
+    "/assets/roupas/3.jpg": "06c9498772cb8480ae6a6e811b449fa3cf48908f",
+    "/assets/roupas/4.jpg": "d645e78b821086edcaeb64a079b2c05af5308ac3",
+    "/assets/roupas/5.jpg": "48b5fc73f448b6f2ce0943be9656f2d222a13a5e",
+    "/assets/roupas/6.jpg": "d6d380f8582b05562df9927a714403495b996260",
+    "/assets/roupas/7.jpg": "b5839eac9c6c959d18b92c2c6bac125f2bb7be9b",
+    "/assets/roupas/8.jpg": "30aeb392ad2331779410171e168cb8475ed250b0",
+    "/assets/roupas/9.jpg": "20b335d8e4c7a14646441581c7bb35854723a28b",
+    "/assets/roupas/P_20190908_231613_HDR.jpg": "b2b179cc54bd010a73f7761637e78705e0a62189",
+    "/assets/roupas/P_20190908_231647_HDR.jpg": "11add98670e1050298b422110910924a8b5370e7",
+    "/assets/roupas/P_20190908_231743_HDR.jpg": "99ece72822c4745874dc100549cc704c1889b605",
+    "/assets/roupas/P_20190908_231814_HDR.jpg": "984e7a42d0437275ecb6b9fedf4b1fd2aa5a4d3f",
+    "/assets/roupas/P_20190908_231951_HDR.jpg": "6b669c9026a70751ed8984ed149472718ea53c00",
+    "/assets/roupas/P_20190908_232259_HDR.jpg": "ea028e131272a7c1deb9879c30306dace8595dbc",
+    "/assets/roupas/P_20190908_232528_HDR.jpg": "9a66d6b9e60382065b70482c2cb55f51b8eb637e",
+    "/assets/roupas/P_20190908_232557_HDR.jpg": "fe1396265ee20636f14138f30246049277147cd9",
+    "/assets/roupas/P_20190908_232631_HDR.jpg": "9774e88ff446ac968002028c713628238dc787f8",
+    "/assets/roupas/P_20190908_232703_HDR.jpg": "85962b8e8b6481c79e3591233e161724e1e9e1a3",
+    "/index.html": "9bf7f0449fee028a34dc61ac1d39db9346a29a9e",
+    "/main-es2015.afc8c78a1dbf68b7c63c.js": "c91849647609e83f9cc10378c50e32f15abb27ba",
+    "/main-es5.afc8c78a1dbf68b7c63c.js": "deaae820352f0b5ef5896fe0bcdbbb364fde1cdf",
     "/manifest.webmanifest": "72a69bad0254044e4addd7e72fc9ba1db9cfb552",
     "/polyfills-es2015.ca64e4516afbb1b890d5.js": "8779ed8d9bf0580e1b50b352a9b8fd520be24433",
     "/polyfills-es5.ad81c68d1c3d7a0429f1.js": "8d03638471d7374e81cf33adfdea439f84ac3873",
     "/runtime-es2015.0811dcefd377500b5b1a.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
     "/runtime-es5.0811dcefd377500b5b1a.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "/styles.ca00122246c806490cb5.css": "0b86f4d9346e271ebba4e4fc956e0d2db06937b3"
+    "/styles.d380b72d1843e7077c16.css": "f7220b6f12ce92ad59a27c1837f0bb0836997c21"
   },
   "navigationUrls": [
     {
